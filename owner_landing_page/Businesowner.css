@@ -115,24 +115,28 @@ body{
 .dropbtn {
   background-color: transparent;
   color: white;
-  padding: 10px;
+  padding: 0px;
   font-size: 25px;
   border: none;
+  position: absolute;
+  left: 860px;
+  top: -10px;
   cursor: pointer;
 }
 
 .dropdown {
   display: inline-block;
   position: absolute;
-  top: 5px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
+  top: -20px;
+  left: 960px;
+  width: 30px;
+  height: 30px;
 }
 
 .dropdown-content {
   display: none;
-  right: 2px;
+  left: 650px;
+  top: 35px;
   position: absolute;
   background-color: #f1f1f1;
   width: 102px;
