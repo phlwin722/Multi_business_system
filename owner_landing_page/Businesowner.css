@@ -115,25 +115,40 @@ body{
 .dropbtn {
   background-color: transparent;
   color: white;
-  padding: 10px;
+  padding: 0px;
   font-size: 25px;
   border: none;
+  position: absolute;
+  left: 860px;
+  top: -10px;
   cursor: pointer;
 }
 
 .dropdown {
   display: inline-block;
   position: absolute;
+<<<<<<< HEAD
   top: 0px;
   left: 1245px;
   width: 40px;
   height: 40px;
+=======
+  top: -20px;
+  left: 960px;
+  width: 30px;
+  height: 30px;
+>>>>>>> 8f4245b1f009c6b4101f2cf355de2f19f842da87
 }
 
 .dropdown-content {
   display: none;
+<<<<<<< HEAD
   right: 2px;
   top: 45px;
+=======
+  left: 650px;
+  top: 35px;
+>>>>>>> 8f4245b1f009c6b4101f2cf355de2f19f842da87
   position: absolute;
   background-color: #f1f1f1;
   width: 102px;
