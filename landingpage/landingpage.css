@@ -1,0 +1,243 @@
+body{
+    margin: 0px 30% 0px 0px;
+    padding: 0px;
+    border-right:500px solid transparent;
+    border-top: 646px solid #46518D;
+}
+*{
+  font-family: 'Roboto', sans-serif;
+}
+
+.container1{
+    position: absolute;
+    top: 10%;
+    left: 7px;
+    width: 45%;
+    height: 80%;
+    text-align: center;
+}
+.typewrite{
+  text-decoration: none;
+  color: white;
+  font-size: 30px;
+}
+.hh{
+  position: absolute;
+  top: 200px;
+  left: 5px;
+}
+.welcome{
+    display: inline;
+    font-size: 50px;
+    font-weight: bold ;
+    color: white;
+}
+
+.quote{
+  font-size: 25px;
+  color:white;
+  position: absolute;
+  left: 13px;
+  top: 40%;
+}
+
+/**/
+
+.l-form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: absolute;
+  top: 0px;
+  right: 110px;
+}
+.form{
+  width: 360px;
+  padding: 4rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 3px 10px 25px rgba(92, 99, 105, .2);
+}
+.form_title{
+  font-weight: 400;
+  margin-bottom: 3rem;
+}
+.form_div{
+  position: relative;
+  height: 40px;
+  margin-bottom: 1.5rem;
+}
+.form_input{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height:100%;
+  font-size: var(--normal-font-size);
+  border: 1px solid var(--border-color);
+  border-radius: .5rem;
+  outline: none;
+  padding: 1rem;
+  background: none;
+  z-index: 1;
+}
+.form_label{
+  position: absolute;
+  left: 1rem;
+  top: .8rem;
+  padding: 0 .25rem;
+  background-color: white;
+  color: var(--input-color);
+  font-size: var(--normal-font-size);
+  transition: .3s;
+}
+.form_button{
+  display: block;
+  margin-left: auto;
+  padding: .74rem 2rem;
+  margin-top: 20px;
+  outline: none;
+  border: none;
+  background-color: var(--first-color);
+  color: white;
+  font-size: var(--normal-font-size);
+  border-radius: .5rem;
+  cursor: pointer;
+  transition: .3s;
+}
+.form_button:hover{
+  box-shadow: 0 10px 36px rgba(0, 0, 0 , .15);
+  background-color: #388bf8;
+}
+.form_input:focus + .form_label{
+  top: -.5rem;
+  left: .8rem;
+  color: rgb(161, 160, 160);
+  font-size: 15px;
+  font-weight: 500;
+  z-index: 10;
+}
+.form_input:not(:placeholder-shown).form_input:not(:focus)+ .form_label{  
+  top: -.5rem;
+  left: .8rem;
+  color: rgb(161, 160, 160);
+  font-size: 15px;
+  font-weight: 500;
+  z-index: 10;
+}
+a{
+  text-decoration: none;
+  position: relative;
+  color: #1A73E8;
+  top: -10px;
+  font-size: 15px;
+}
+
+
+:root{
+  --first-color:#1A73E8;
+  --input-color:#80868B;
+  --border-color:#DADCE0;
+
+  --normal-font-size:1rem;
+  --small-font-size:.75rem;
+}
+*,::before,::after{
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+@media only screen and (max-width: 425px) {
+  body{
+    margin: 0px 30% 0px 0px;
+    padding: 0px;
+    border:none;
+}
+.quote{
+  font-weight: bold;
+  font-size: 15px;
+    color: black;
+  margin-top: 100px;
+  margin-left: -5px;
+}
+.container1 {
+  position: absolute;
+  top: 10%;
+  left: 49px;
+  width: 60%;
+  height: 150px;
+  text-align: center; 
+}
+.welcome{
+  display: inline;
+  font-size: 50px;
+  font-weight: bold ;
+  color: black;
+}
+
+div.container2 {
+  position: absolute;
+  margin-top: 100px;
+  width: 300px;
+  height: 200px;
+  left: 12px;
+}
+.login{
+  margin-top: 30px;
+  margin-left: 90px;
+  font-size: 20px;
+  font-weight: bold;
+  display: block;
+}
+}
+
+
+
+@media only screen and (max-width: 769px) {
+  div.container2{
+    position: absolute;
+    top: 25%;
+    right:70px;
+    width:350px;
+    height: 200px;
+  }
+  .quote{
+    position: absolute;
+    left: 13px;
+    top: 15%;
+  }
+  body{
+    margin: 0px 30% 0px 0px;
+    padding: 0px;
+    border-right:300px solid transparent;
+}
+} 
+
+
+/*
+@media only screen and (max-width:768px) {
+  div.container2{
+    position: absolute;
+    top: 30%;
+    right: 10px;
+    width:400px;
+    height: 200px;
+  }
+  .quote{
+    font-size: 25px;
+    position: absolute;
+    left: 13px;
+    top: 20%;
+  }
+  body{
+    margin: 0px 30% 0px 0px;
+    padding: 0px;
+    border-right:300px solid transparent;
+    border-top: 646px solid #46518D;
+}
+}
+*/
+
+
+

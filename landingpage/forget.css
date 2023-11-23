@@ -1,0 +1,117 @@
+*{
+    font-family: 'Roboto', sans-serif;
+}
+.l-form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+}
+.form{
+    width: 390px;
+    padding: 20px 2rem;
+    border-radius: 1rem;
+    box-shadow: 3px 10px 25px rgba(92, 99, 105, .2);
+   text-align: center;
+   height: 350px;
+}
+
+*,::before,::after{
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.form_div{
+    position: relative;
+    height: 40px;
+    margin-bottom: 1.5rem;
+}
+.form_input{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height:100%;
+    font-size: 1rem;
+    border: 1px solid #8f8f8f;
+    border-radius: .5rem;
+    outline: none;
+    padding: 1rem;
+    background: none;
+    z-index: 1;
+}
+.form_label{
+    position: absolute;
+    left: 1rem;
+    top: .8rem;
+    padding: 0 .25rem;
+    background-color: white;
+    color: #5f5f5f;
+    font-size: 1rem;
+    transition: .3s;
+}
+.form_button{
+    display: block;
+    margin-left: auto;
+    padding: .74rem 2rem;
+    margin-top: 20px;
+    outline: none;
+    border: none;
+    background-color:#1A73E8;
+    color: white;
+    font-size:1rem;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: .3s;
+}
+.form_button:hover{
+    box-shadow: 0 10px 36px rgba(0, 0, 0 , .15);
+}
+.form_input:focus + .form_label{
+    top: -.5rem;
+    left: .8rem;
+    color: #5f5f5f;
+    font-size: 15px;
+    font-weight: 500;
+    z-index: 10;
+}
+.form_input:not(:placeholder-shown).form_input:not(:focus)+ .form_label{  
+    top: -.5rem;
+    left: .8rem;
+    color: #5f5f5f;
+    font-size: 15px;
+    font-weight: 500;
+    z-index: 10;
+}
+.form_continue{
+    padding: .74rem 8rem;
+    margin-top: 20px;
+    outline: none;
+    border: none;
+    background-color:#1A73E8;
+    color: white;
+    font-size:15px;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: .3s;
+}
+.form_continue:hover{
+    box-shadow: 0 12px 25px rgba(0, 0, 0 , .15);
+}
+.select{
+    text-align: left;
+}
+.choose{
+    font-size: 14px;
+    margin-top: 5px;
+}
+.chose{
+    font-size: 16px;
+    margin-top: 5px;
+    width: 325px;
+    padding: 5px;
+    border: none;
+    border: 1px solid #8f8f8f;
+    border-radius: 5px;
+    height: 40px;
+}
