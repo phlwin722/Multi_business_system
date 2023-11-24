@@ -66,16 +66,15 @@
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <script src="landigpage.js" defer></script>
             <title>Business Monitoring</title>
-            <link rel="icon" type="image/x-icon" href="/Multi_Business_system/picture/logo.png">
+            <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/logo.png">
         </head>
         <body>
             <div class="container1 ">
-                <div class="welcome">Welcome</div>
+                <div class="welcome">Business Monitoring</div>
                         
         <h1 class="hh">
         <a href="" class="typewrite" data-period="2000" data-type='[ "Your Business is my priority", "Your Business is my priority", "Your Business is my priority", "Your Business is my priority" ]'>
             <span class="wrap"></span>
-
         </a>
         </h1>
                    </div>

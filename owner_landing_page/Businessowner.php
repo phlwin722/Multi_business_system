@@ -7,7 +7,7 @@
        <link rel="stylesheet" href="Businesowner.css">
        <link rel="preconnect" href="https://fonts.googleapis.com">
         <title>Business - BUIMO</title>
-        <link rel="icon" type="image/x-icon" href="/Sad-Activity/picture/logo.png">
+        <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/logo.png">
         <script src="Bussineowner.js" defer></script>
 
     </head>
