@@ -27,7 +27,7 @@
         <div class="sidenav" id="a">
             <div class="companyname">Dexter Jamero</div>
                 <div class="owner">Manager</div >
-                   <a href="ownerlandingpage.php" target="_top" class="nav"><i class="fa-solid fa-house"></i> Dash Board</a>
+                   <a href="Dashboardowner.php" target="_top" class="nav"><i class="fa-solid fa-house"></i> Dash Board</a>
                    <a href="Saleowner.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Sales</a>
                    <a href="Businessowner.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Business</a>
                    <a href="product.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Products</a>

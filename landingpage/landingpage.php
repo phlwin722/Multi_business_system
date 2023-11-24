@@ -33,7 +33,7 @@
 
         if ($total > 0) {
             // User found, redirect to a success page
-            header("Location: /Multi_business_system/owner_landing_page/ownerlandingpage.php");
+            header("Location: /Multi_business_system/owner_landing_page/Dashboardowner.php");
         }
         else {
             echo'<!-- Trigger/Open The Modal -->

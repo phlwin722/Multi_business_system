@@ -6,14 +6,14 @@
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
        <link rel="stylesheet" href="Businesowner.css">
        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <title>Home</title>
+        <title>Business - BUIMO</title>
         <link rel="icon" type="image/x-icon" href="/Sad-Activity/picture/logo.png">
         <script src="Bussineowner.js" defer></script>
 
     </head>
     <body>
         <div class="left">
-            <img src="/Sad-Activity/picture/logo.png" class="move" style="width: 30px;margin-top: 10px;margin-left: 20px;" alt="">
+            <img src="/Multi_business_system/picture/logo.png" style="width: 30px;position:absolute; top:10px; left:20px;" alt="">
             <div class="Company">BUIMO</div>
                 <div class="dropdown">
                   <button onclick="myFunction()" class="dropbtn"><i class="fa-solid fa-circle-user"></i></button>
@@ -26,7 +26,7 @@
         <div class="sidenav" id="a">
             <div class="companyname">Dexter Jamero</div>
                 <div class="owner">Owner</div >
-                   <a href="ownerlandingpage.php" target="_top" class="nav"><i class="fa-solid fa-house"></i> Dash Board</a>
+                   <a href="Dashboardowner.php" target="_top" class="nav"><i class="fa-solid fa-house"></i> Dash Board</a>
                    <a href="Saleowner.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Sales</a>
                    <a href="Businessowner.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Business</a>
                    <a href="product.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Products</a>
