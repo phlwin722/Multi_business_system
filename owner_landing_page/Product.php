@@ -19,7 +19,7 @@
                 <div class="dropdown">
                   <button onclick="myFunction()" class="dropbtn"><i class="fa-solid fa-circle-user"></i></button>
                   <div id="myDropdown" class="dropdown-content">
-                  <a href="Myacct.php" target="_top">My account</a>
+                  <a href="Myacctowner.php" target="_top">My account</a>
                  </div>
               </div>
         </div>

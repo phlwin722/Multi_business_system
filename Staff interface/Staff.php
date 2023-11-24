@@ -16,7 +16,7 @@
         <img src="/Sad-Activity/picture/logo.png" class="move" style="width: 40px;margin-top: 10px;margin-left: 20px;" alt="">
             <label class="name_web">BUIMO</label>
             <label class="name_staff">name of staff</label>
-            <a href="/Sad-Activity/landingpage/landingpage.php" class="logut"> Logout</a>
+            <a href="/Multi_business_system/landingpage/landingpage.php" class="logut"> Logout</a>
         </div>
         <div class="container-2">
             <div id="clock-display" class="clock-display"></div>

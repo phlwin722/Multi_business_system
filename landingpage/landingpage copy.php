@@ -29,44 +29,31 @@
             if (isset($_POST["submit"])){
                 $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
 
-              $username = mysqli_real_escape_string($con, $_POST["username"]);
-              $password = mysqli_real_escape_string($con, $_POST["password"]);
-                // SQL injection prevention
-              $sql = "SELECT * FROM employee WHERE Username='".$username."' AND Password='".$password."' ";
-              $result = mysqli_query($con, $sql) or die(mysqli_error($con));
-              $row = mysqli_fetch_array($result);
-              if ($row["Position"] == "Manager"){
-                header ("Location: /Sad-Activity/Manager_landing_page/ManagerDashboard.php");
-              }
-              else if ($row["Position"] == "Staff"){
-                header ("Location: /Sad-Activity/Staff%20interface/Staff.php");
-        }
-        else{
-            $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
+                $username = $_POST['username'];
+                $password = $_POST['password'];
 
-            $username = mysqli_real_escape_string($con, $_POST["username"]);
-            $password = mysqli_real_escape_string($con, $_POST["password"]);
-            $query = "SELECT * FROM owener_acct WHERE Username='$username' AND Password='$password'";
-            $result = $con->query($query);
-            
-            if ($result->num_rows == 0) {
-                // User found, redirect to a success page
-                header("Location: /Sad-Activity/owner_landing_page/ownerlandingpage.php");
-            }else{
-              echo'<!-- Trigger/Open The Modal -->
-<!-- The Modal -->
-<div id="myModal" class="modal">
-<!-- Modal content -->
-<div class="modal-content" >
-   <div style="border: 1px solid red; width:360px; height:50px;padding-left:60px ">
-               <div class="container1-1">
-   <h5>Please Check Username or Password </h5>
-</div>
-</div>';
-          }    
-        }
-    }
-            
+                $sql = "SELECT * FROM owener_acct WHERE Username='$username' AND Password='$password'";
+                $user = $con->query($sql);
+                $row = $user->fetch_assoc();
+                $total  = $user-> num_rows;
+
+                if ($total > 0) {
+                    // User found, redirect to a success page
+                    header("Location: /Multi_business_system/owner_landing_page/ownerlandingpage.php");
+                }    else{
+                        echo'<!-- Trigger/Open The Modal -->
+          <!-- The Modal -->
+          <div id="myModal" class="modal">
+          <!-- Modal content -->
+          <div class="modal-content" >
+             <div style="border: 1px solid red; width:360px; height:50px;padding-left:60px ">
+                         <div class="container1-1">
+             <h5>Please Check Username or Password </h5>
+          </div>
+          </div>';
+                    }
+     
+                    }
             ?>
                     <form action=""
                      method="post" class="form">

@@ -1,6 +1,62 @@
 <?php 
     session_start();
 ?>
+                <?php
+            
+            if (isset($_POST["submit"])){
+                $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
+
+              $username = mysqli_real_escape_string($con, $_POST["username"]);
+              $password = mysqli_real_escape_string($con, $_POST["password"]);
+                // SQL injection prevention
+              $sql = "SELECT * FROM employee WHERE Username='".$username."' AND Password='".$password."' ";
+              $result = mysqli_query($con, $sql) or die(mysqli_error($con));
+              $row = mysqli_fetch_array($result);
+             if ($row){
+                if ($row["Position"] == "Manager"){
+                    header ("Location : /Multi_business_system/Manager_landing_page/ManagerDashboard.php");
+                  }
+                  else if ($row["Position"] == "Staff"){
+                    header ("Location: /Multi_business_system/Staff%20interface/Staff.php");
+            }
+    }
+    else {
+        $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
+
+        $username = mysqli_real_escape_string($con, $_POST["username"]);
+        $password = mysqli_real_escape_string($con, $_POST["password"]);
+
+        $query = "SELECT * FROM owener_acct WHERE Username='$username' AND Password='$password'";
+        $result = $con->query($query);
+        $row = $result->fetch_assoc();
+        $total  = $result-> num_rows;
+
+        if ($total > 0) {
+            // User found, redirect to a success page
+            header("Location: /Multi_business_system/owner_landing_page/ownerlandingpage.php");
+        }
+        else {
+            echo'<!-- Trigger/Open The Modal -->
+               <div style="
+               background: #f9eded;
+               border-radius:5px;
+               color: red;
+                width:320px;
+                 height:50px;
+                 text-align:center;
+                 position:absolute;
+                  top:135px;
+                  right:130px">
+                <script></script>
+               <h5>Please Check Username or Password </h5>
+
+            </div>'; 
+        }    
+    }
+}
+    
+            
+            ?>
 <!DOCTYPE html>
     <html>
         <head>
@@ -9,6 +65,8 @@
             <link rel="stylesheet" href="landingpage.css">
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <script src="landigpage.js" defer></script>
+            <title>Business Monitoring</title>
+            <link rel="icon" type="image/x-icon" href="/Multi_Business_system/picture/logo.png">
         </head>
         <body>
             <div class="container1 ">
@@ -24,47 +82,6 @@
 
                 <div class="l-form">
 
-                <?php
-            
-            include("configdatabase.php");
-            
-            if (isset($_POST["submit"])){
-
-              $username = mysqli_real_escape_string($con, $_POST["username"]);
-              $password = mysqli_real_escape_string($con, $_POST["password"]);
-
-              $result = mysqli_query($con,"SELECT * FROM owener_acct WHERE Username ='$username' AND Password='$password'") or die ("Error");
-              $row = mysqli_fetch_assoc($result);
-              if (is_array($row) && !empty ($row))  {
-                $_SESSION ['valid'] = $row['Username'];
-                $_SESSION ['fname'] = $row['First_name'];
-                $_SESSION ['lname'] = $row['Last_name'];
-    
-            }else{
-                echo'<!-- Trigger/Open The Modal -->
- <!-- The Modal -->
- <div id="myModal" class="modal">
- <!-- Modal content -->
- <div class="modal-content" >
-     <div style="border: 1px solid red; width:360px; height:50px;padding-left:60px ">
-                 <div class="container1-1">
-     <h5>Please Check Username or Password </h5>
- </div>
-</div>';
-             
-                $username = mysqli_real_escape_string($con, $_POST["username"]);
-                $password = mysqli_real_escape_string($con,$_POST["password"]);
-
-
-            }
-            if (isset($_SESSION['valid'])){
-                header ("Location: /Sad-Activity/owner_landing_page/ownerlandingpage.php");
-            }
-            
-        }
-        
-            
-            ?>
                     <form action=""
                      method="post" class="form">
 

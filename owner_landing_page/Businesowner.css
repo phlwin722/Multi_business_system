@@ -127,22 +127,16 @@ body{
 .dropdown {
   display: inline-block;
   position: absolute;
-  top: 0px;
-  left: 1245px;
+  top: 30px;
+  left: 300px;
   width: 40px;
   height: 40px;
-  top: -20px;
-  left: 960px;
-  width: 30px;
-  height: 30px;
 }
 
 .dropdown-content {
   display: none;
   right: 2px;
   top: 45px;
-  left: 650px;
-  top: 35px;
   position: absolute;
   background-color: #f1f1f1;
   width: 102px;
@@ -150,7 +144,6 @@ body{
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
-
 .dropdown-content a {
   color: black;
   padding: 5px 10px;

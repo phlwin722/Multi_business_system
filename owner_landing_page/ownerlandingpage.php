@@ -19,7 +19,7 @@
                 <div class="dropdown">
                   <button onclick="myFunction()" class="dropbtn"><i class="fa-solid fa-circle-user"></i></button>
                   <div id="myDropdown" class="dropdown-content">
-                  <a href="Myacct.php" target="_top">My account</a>
+                  <a href="Myacctowner.php" target="_top">My account</a>
                  </div>
               </div>
         </div>
@@ -41,6 +41,8 @@
                 <div class="addbusines">
                     <div class="product-top">Dashboard</div>
                     </div>
+                      <!--Bootstrap for header css-->
+             <?php include('header.php'); ?> 
                     <div class="busin-right">
                         <div class="sale">
                             <p>Sales</p>
@@ -57,6 +59,8 @@
                             <p>List Of Business</p>
                         </div>
                     </div>
+                       <!--bootstarp js-->
+                       <?php include('footer.php');?>
             </div>
           </div>
     </body>

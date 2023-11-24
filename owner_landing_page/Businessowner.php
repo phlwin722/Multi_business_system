@@ -18,7 +18,7 @@
                 <div class="dropdown">
                   <button onclick="myFunction()" class="dropbtn"><i class="fa-solid fa-circle-user"></i></button>
                   <div id="myDropdown" class="dropdown-content">
-                  <a href="Myacct.php" target="_top">My account</a>
+                  <a href="Myacctowner.php" target="_top">My account</a>
                  </div>
               </div>
         </div>
@@ -32,7 +32,7 @@
                    <a href="product.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Products</a>
                    <a href="employee.php" target="_top" class="nav"><i class="fa-solid fa-users"></i> Employee</a>
                    
-               <a href="/Sad-Activity/landingpage/landingpage.php"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+               <a href="/Multi_business_systemy/landingpage/landingpage.php"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
         </div>
         
           <div class="main" id="a">
