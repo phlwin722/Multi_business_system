@@ -128,6 +128,7 @@
       <div class="list_business"> 
           <div class="card-body">
 
+          
            <!--Bootstrap for header css-->
              <?php include('header.php'); ?> 
 

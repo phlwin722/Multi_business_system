@@ -4,9 +4,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-       <link rel="stylesheet" href="ProductCssowner.css">
+       <link rel="stylesheet" href="Salesowner.css">
        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <title>BUIMO - Dashboard</title>
+        <title>Sales - BUIMO</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="Dashboardowner.js" defer></script>
         <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/logo.png">
@@ -26,7 +26,7 @@
         </div>
 
         <div class="sidenav" id="a">
-            <div class="companyname">Dexter Jamero</div>
+            <div class="companyname">Shirly</div>
                 <div class="owner">Owner</div >
                    <a href="ownerlandingpage.php" target="_top" class="nav"><i class="fa-solid fa-house"></i> Dash Board</a>
                    <a href="Saleowner.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Sales</a>

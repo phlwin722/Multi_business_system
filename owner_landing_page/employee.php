@@ -1,3 +1,8 @@
+<?php 
+ session_start();
+?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,7 +11,7 @@
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
        <link rel="stylesheet" href="employee.css">
        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <title>Home</title>
+        <title>Employee - BUIMO</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="employee.js" defer></script>
         <link rel="icon" type="image/x-icon" href="/Sad-Activity/picture/logo.png">
@@ -51,6 +56,58 @@
                 </button>
                        </div>
                         <label>List of Employee</label>
+   <?php 
+   if (isset($_POST["submit"])) {
+    $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
+
+    $id = mysqli_real_escape_string($con, $_POST["id"]);
+
+    $query = "SELECT * FROM employee WHERE Username='$id'";
+    $result = $con->query($query);
+    $row = $result->fetch_assoc();
+    $total  = $result-> num_rows;
+
+    if ($total > 0) {
+        // User found, redirect to a success page
+        echo '<script>ID was already taken</script>';
+        header('location : employee.php');
+     $con -> close();
+    }
+        
+    else{
+        $localhost = "localhost";
+        $username = "root";
+        $pass = "";
+        $dbname = "multi_bussines_system";
+
+        $id = htmlspecialchars($_POST["id"]);
+        $userrname = htmlspecialchars($_POST["usernaame"]);
+        $password = htmlspecialchars($_POST["password"]);  
+        $branch = htmlspecialchars($_POST["branchh"]);
+        $employee_category = htmlspecialchars($_POST["employee-category"]);
+        $lastname = htmlspecialchars($_POST["Lastname"]);
+        $firstname = htmlspecialchars($_POST["Firstname"]);
+        $middle_name = htmlspecialchars($_POST["middle_name"]);
+    
+              //connection database
+        try {
+            $pdo = new PDO ("mysql:host=$localhost;dbname=$dbname", $username, $pass);
+            // Set the PDO error mode to exception
+            $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+
+                 // // Prepare and execute the SQL query to insert data
+           $stmt = $pdo->prepare("INSERT INTO employee (ID, Username, Password, Branch, Position, Last_name, First_name, Middle_name ) VALUES (?, ? , ? , ? , ? , ? , ?, ?)");
+         $stmt->execute([$id, $userrname,  $password,  $branch,  $employee_category, $lastname,  $firstname, $middle_name  ]);
+            header ("location: employee.php");
+        }
+        catch (PDOException $e){
+            echo "Not inserted". $e->getMessage();
+        }
+        $pdo = null;
+        }
+}
+?>
+
                     <div class="List_of_product">
                     <br>
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -60,7 +117,8 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Add Employee</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="EmoployeeDatabase.php" method="post">
+                    
+                    <form action="" method="post">
                             <div class="modal-body">
                                                <Label for="id">ID</Label>
                                                 <input type="text" name="id"  required class="cc" id="id">
