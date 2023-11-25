@@ -13,24 +13,19 @@ body{
     margin: 0px;
     height: 50px;
 }
+#mooove{
+  position: absolute;
+  right: 10px;
+ }
 .companyname{
     text-align: center;
     font-size: 24px;
-    color: #ffffff;
-}
-.Company{
-  color: white;
-  font-size: 20px;
-  position: absolute;
-  top: 15px;
-  font-weight: bold;
-  font-weight: bold;
-  left: 60px;
+    color: #dadada;
 }
 .owner{
     text-align: center;
     font-size: 14px;
-    color: #ffffff;
+    color: #dadada;
     margin-bottom: 30px;
 }
 /* Fixed sidenav, full height */
@@ -67,7 +62,14 @@ body{
     width: 80%;
     background-color: #f1f1f1;
   }
-  
+  .Company{
+    color: white;
+    font-size: 20px;
+    position: absolute;
+    top: 15px;
+    left: 60px;
+    font-weight: bold;
+  }
   #a{
     float: left;
     height: 610px;
@@ -83,48 +85,15 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
-/*click dropdown to my acct*/
-
-.dropbtn {
-  background-color: transparent;
-  color: white;
-  padding: 10px;
-  font-size: 25px;
-  border: none;
-  cursor: pointer;
+.List_of_product{
+  height: 450px;
+  position: relative;
+}
+.product{
+  border: 1px solid  black;
+  height: 400px;
 }
 
-.dropdown {
-  display: inline-block;
-  position: absolute;
-  top: 5px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
-}
-
-.dropdown-content {
-  display: none;
-  right: 2px;
-  position: absolute;
-  background-color: #f1f1f1;
-  width: 102px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 5px 10px;
-  text-decoration: none;
-  float: center;
-  display: block;
-}
-
-.dropdown a:hover {background-color: #ddd;}
-
-.show {display: block;}
  .frame{
     padding: 8px;
     width: 100%;
@@ -146,9 +115,8 @@ body{
   padding: 10px;
 }
 
-
 .myInput {
-  background-image: url('/picture/searchicon.png');
+  background-image: url('/Sad-Activity/picture/searchicon.png');
   background-position: 10px 10px;
   background-repeat: no-repeat;
   width: 100%;
@@ -179,15 +147,13 @@ div.busin-right{
 }
 
 .business-selection{
-  width: 150px;
-  padding: 11px 5px;
-  text-align: left;
-  font-size: 14px;
+  width: 120px;
+  padding: 10px 5px;
   position: absolute;
   top: 10px;
-  color: #7e7e7edd;
-  left: 10px;
+  left: 20px;
   cursor: pointer;
+  border: 1px solid #ddd;
 }
 
 .search-container{
@@ -218,7 +184,7 @@ div.busin-right{
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
+  overflow: none; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
@@ -241,12 +207,12 @@ div.busin-right{
 .modal-content {
   background-color: #fefefe;
   margin: auto;
-  padding: 10px 15px 0px 60px;
+  padding: 10px 15px 0px 40px;
   border: 1px solid #888;
   width: 30%;
   height: 620px;
   position: relative;
-  top: -70px;
+  top: -100px;
 
 }
 
@@ -258,12 +224,11 @@ div.container1{
  width: 300px;
 position: relative;
 }
-
 .cc{
   display: block;
   font-size: 15px;
   padding: 5px;
-  width: 260px;
+  width: 380px;
   margin-bottom: 10px;
   cursor: pointer;
   
@@ -283,13 +248,6 @@ position: relative;
 .sub:hover, .sub:active{
   background-color: rgb(4, 185, 4);
   color: white;
-}
-.List_of_product{
-  height: 450px;
-}
-.product{
-  border: 1px solid black;
-  height: 400px;
 }
 
 /*

@@ -2,6 +2,7 @@ body{
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
+    height: 650px;
 }
 *{
   font-family: 'Roboto', sans-serif;
@@ -13,7 +14,6 @@ body{
     margin: 0px;
     height: 50px;
 }
-
 .companyname{
     text-align: center;
     font-size: 24px;
@@ -27,10 +27,10 @@ body{
 }
 /* Fixed sidenav, full height */
 .sidenav {
+  height: 200px;
   width: 20%;
-  z-index: 1;
+
   background-color: #333a66;
- overflow-x: hidden;
  padding-top: 20px;
   }
   
@@ -57,16 +57,16 @@ body{
   /* Main content */
   .main {
     width: 80%;
+    height: 650px;
     background-color: #f1f1f1;
   }
   
   #a{
     float: left;
-    height: 610px;
+    height: 650px;
   }
   /* Add an active class to the active dropdown button */
   .active {
-    background-color:#061983;
     color: white;
   }
   
@@ -75,17 +75,7 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
-/*click dropdown to my acct*/
 
-
- .frame{
-    padding: 8px;
-    width: 100%;
-    height: 99%;
-    box-sizing: border-box;
-    border: none;
-  }
-    /*click dropdown to my acct*/
 
 .addbusines{
   background-color: white;
@@ -104,20 +94,26 @@ body{
   padding: 10px;
 }
 
-.busin-left{
-  height: 50px;
-}
+
 div.busin-right{
-  height: 520px;
+  height: 580px;
   background-color: white;
   margin-top: 10px;
   padding: 8px;
   position: relative;
 }
 
-
+.business-selection{
+  width: 120px;
+  padding: 11px 5px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+}
 .myInput {
-  background-image: url('/Multi_business_system/picture/searchicon.png');
+  background-image: url('/Sad-Activity/picture/searchicon.png');
   background-position: 10px 10px;
   background-repeat: no-repeat;
   width: 100%;
@@ -265,19 +261,179 @@ div.container1{
   right: 10px;
   top: 20px;
 }
-label.listt {
+
+/*topsale*/
+.Topsale{
+  padding: 5px;
+  height: 250px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+  width: 400px;
+  position: absolute;
+  top: 20px;
+  left: 40px
+
+}
+.customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 15px;
+    text-align: left;
+    background-color: #1d2f92;;
+    color: white;
+  }
+  th{
+    padding-left: 20px;
+  }
+  .customers {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .topsale{
+    font-size: 20px;
+    margin-top: 10px;
+    margin-left: 180px;
+  }
+  .filter_sale{
+    width: 100px;
+    font-size: 15px;
+    height: 30px;
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    cursor: pointer;
+  }
+  .customers tr:hover {background-color: #ddd;}
+/*topsale*/
+
+
+/*list_business*/
+.list_business{
+  width: 440px;
+  height: 200px;
+  background-color: #fff;
+  box-shadow: 0px 15px 30px rgba(0,0,0,0.12);
+  position: absolute;
+  top:350px;
+  left: 545px;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+/*list business*/
+
+/*calendar css*/
+/* Import Google font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+.wrapper{
+  width: 440px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+  position: absolute;
+  right: 40px;
+  top: 20px;
+  height: 300px;
+}
+.wrapper header{
+  display: flex;
+  align-items: center;
+  padding: 10px 20px 10px;
+  justify-content: space-between;
+}
+header .icons{
+  display: flex;
+}
+header .icons span{
+  height: 38px;
+  width: 38px;
+  margin: 0 1px;
+  cursor: pointer;
+  color: #878787;
+  text-align: center;
+  line-height: 38px;
+  font-size: 1.9rem;
+  user-select: none;
+  border-radius: 50%;
+}
+.icons span:last-child{
+  margin-right: -10px;
+}
+header .icons span:hover{
+  background: #f2f2f2;
+}
+header .current-date{
+  font-size: 20px;
+  font-weight: 500;
+}
+
+ul{
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  text-align: center;
+}
+.calendar .days{
+  margin-bottom: 10px;
+}
+.calendar li{
+  color: #333;
+  width: calc(100% / 7);
+  font-size: 13px;
+}
+.calendar .weeks li{
+  font-weight: 200;
+  cursor: default;
+}
+.calendar .days li{
+  z-index: 1;
+  cursor: pointer;
   position: relative;
-  top: -2px;
-  font-size: 17px;
+  margin-top: 14px;
 }
-.List_of_product {
-  height: 450px;
-  margin-top: 10px;
+.days li.inactive{
+  color: #aaa;
 }
-.product{
-  border: 1px solid black;
-  height: 400px;
+.days li.active{
+  color: #fff;
 }
+.days li::before{
+  position: absolute;
+  content: "";
+  left: 50%;
+  top: 50%;
+  height: 40px;
+  width: 40px;
+  z-index: -1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.days li.active::before{
+  background: #9B59B6;
+}
+.days li:not(.active):hover::before{
+  background: #f2f2f2;
+}
+/*calendar css*/
+
+/*sales*/
+.sales{
+  position: relative;
+  left: 30px;
+  top: 300px;
+  width: 400px;
+  height: 250px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+}
+.topproduct{
+  
+}
+/*sales*/
 /*
 
   /* Some media queries for responsiveness */

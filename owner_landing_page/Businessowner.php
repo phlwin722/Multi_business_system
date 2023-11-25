@@ -6,7 +6,7 @@
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
        <link rel="stylesheet" href="Businesowner.css">
        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <title>Business - BUIMO</title>
+        <title>Business - B-MO</title>
         <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/logo.png">
         <script src="Bussineowner.js" defer></script>
 
@@ -14,7 +14,7 @@
     <body>
         <div class="left">
             <img src="/Multi_business_system/picture/logo.png" style="width: 30px;position:absolute; top:10px; left:20px;" alt="">
-            <div class="Company">BUIMO</div>
+            <div class="Company">B-MO</div>
                 <div class="dropdown">
                   <button onclick="myFunction()" class="dropbtn"><i class="fa-solid fa-circle-user"></i></button>
                   <div id="myDropdown" class="dropdown-content">
@@ -24,10 +24,10 @@
         </div>
 
         <div class="sidenav" id="a">
-            <div class="companyname">Dexter Jamero</div>
+            <div class="companyname">Shirly Bansil</div>
                 <div class="owner">Owner</div >
                    <a href="Dashboardowner.php" target="_top" class="nav"><i class="fa-solid fa-house"></i> Dash Board</a>
-                   <a href="Saleowner.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Sales</a>
+                   <a href="Salesowner.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Sales</a>
                    <a href="Businessowner.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Business</a>
                    <a href="product.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Products</a>
                    <a href="employee.php" target="_top" class="nav"><i class="fa-solid fa-users"></i> Employee</a>

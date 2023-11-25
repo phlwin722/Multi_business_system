@@ -8,18 +8,21 @@
 
               $username = mysqli_real_escape_string($con, $_POST["username"]);
               $password = mysqli_real_escape_string($con, $_POST["password"]);
-                // SQL injection prevention
+                  // SQL injection prevention
               $sql = "SELECT * FROM employee WHERE Username='".$username."' AND Password='".$password."' ";
               $result = mysqli_query($con, $sql) or die(mysqli_error($con));
               $row = mysqli_fetch_array($result);
-             if ($row){
+
+              // eto yon una satement ko
+             if ($row){ 
                 if ($row["Position"] == "Manager"){
-                    header ("Location : /Multi_business_system/Manager_landing_page/ManagerDashboard.php");
+                    header ("Location: /Multi_business_system/Manager_landing_page/DashboardManager.php");
                   }
                   else if ($row["Position"] == "Staff"){
                     header ("Location: /Multi_business_system/Staff%20interface/Staff.php");
             }
     }
+    // ETO NAMAN YON kapag ndi nadetect yon manager or staff
     else {
         $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
 

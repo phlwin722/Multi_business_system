@@ -6,7 +6,7 @@
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
        <link rel="stylesheet" href="Myacctowner.css">
        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <title>Product</title>
+        <title>My Account - B-Mo</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="Myacctowner.js" defer></script>
         <link rel="icon" type="image/x-icon" href="/Sad-Activity/picture/logo.png">
@@ -15,7 +15,7 @@
     <body>
         <div class="left">
         <img src="/Sad-Activity/picture/logo.png" class="move" style="width: 30px;margin-top: 10px;margin-left: 20px;" alt="">
-            <div class="Company">BUIMO</div>
+            <div class="Company">B-MO</div>
                 <div class="dropdown">
                   <button onclick="myFunction()" class="dropbtn"><i class="fa-solid fa-circle-user"></i></button>
                   <div id="myDropdown" class="dropdown-content">
@@ -25,10 +25,10 @@
         </div>
 
         <div class="sidenav" id="a">
-            <div class="companyname">Dexter Jamero</div>
+            <div class="companyname">Shirly Bansil</div>
                 <div class="owner">Manager</div >
                    <a href="Dashboardowner.php" target="_top" class="nav"><i class="fa-solid fa-house"></i> Dash Board</a>
-                   <a href="Saleowner.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Sales</a>
+                   <a href="Salesowner.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Sales</a>
                    <a href="Businessowner.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Business</a>
                    <a href="product.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Products</a>
                    <a href="employee.php" target="_top" class="nav"><i class="fa-solid fa-users"></i> Employee</a>
