@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,13 +25,23 @@
         </div>
 
         <div class="sidenav" id="a">
-            <div class="companyname">Shirly Bansil</div>
-                <div class="owner">Manager</div >
+          <?php 
+           $middlename = $_SESSION['middlename'];
+            $lastname = $_SESSION['lastname'];
+            $branch = $_SESSION ['branch'];
+            $fname = $_SESSION ["fname"];
+             $position = $_SESSION['position'];
+          ?>
+            <div class="companyname"> <?php echo $branch?> </div>
+            <div class="owner">
+              <h6>  <?php echo $fname ." ". $middlename ." ". $lastname ?> </h6>
+              <h6><?php echo $position;?></h6>
+            </div >
                 <a href="DashboardManager.php" target="_top" class="nav"><i class="fa-solid fa-house"></i> Dash Board</a>
                    <a href="SalesManager.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Sales</a>
                    <a href="ProductManager.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Products</a>
                    <a href="StaffAcctManager.php" target="_top" class="nav"><i class="fa-solid fa-users"></i> Staff</a>
-                  <a href="/Multi_business_system/landingpage/landingpage.php" target="_top" ><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+                  <a href="/Multi_business_system/landingpage/logout.php" target="_top" ><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
       </div>
         
           <div class="main" id="a">

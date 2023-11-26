@@ -138,8 +138,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Business name</th>
                             <th scope="col">Address</th>
-                            <th scope="col">Edit</th>
-                            <th scope="col">Delete</th>
+                            <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -170,11 +169,10 @@
                                         <td><?= $row['Business_name']?></td>
                                         <td><?= $row['location']?></td>
                                         <td>
-                                            <a href="#" class="btn btn-success btn-sm edit-data">Edit Data</a>
+                                            <a href="#" class="btn btn-success btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i> </a>
+                                            <a href="#" class="btn btn-danger btn-sm delete-data"> <i class="fa-solid fa-trash" style="color: #ffffff;"></i> </a>
                                         </td>
-                                        <td>
-                                            <a href="#" class="btn btn-danger btn-sm delete-data">Delete Data</a>
-                                        </td>
+                                   
                                     </tr>
                                     <?php
                                 }

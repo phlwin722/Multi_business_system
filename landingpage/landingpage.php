@@ -13,16 +13,25 @@
               $result = mysqli_query($con, $sql) or die(mysqli_error($con));
               $row = mysqli_fetch_array($result);
 
-              // eto yon una satement ko
              if ($row){ 
+                // this code is display the information of user manager in another page
                 if ($row["Position"] == "Manager"){
+                    $_SESSION ['id'] = $row['ID'];
+                    $_SESSION ['fname'] = $row['First_name'];
+                    $_SESSION ['middlename'] = $row['Middle_name'];
+                    $_SESSION ['lastname'] = $row ['Last_name'];
+                    $_SESSION ['branch'] = $row ['Branch'];
+                    $_SESSION ['position'] = $row ['Position'];
+
                     header ("Location: /Multi_business_system/Manager_landing_page/DashboardManager.php");
                   }
+                    // this code is display the information of user staff in another page
+             
                   else if ($row["Position"] == "Staff"){
+                    $_SESSION ["id"] = $row["ID"];
                     header ("Location: /Multi_business_system/Staff%20interface/Staff.php");
             }
     }
-    // ETO NAMAN YON kapag ndi nadetect yon manager or staff
     else {
         $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
 

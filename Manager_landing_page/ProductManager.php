@@ -1,3 +1,104 @@
+<?php 
+    session_start();
+?>
+
+<?php 
+   $middlename = $_SESSION['middlename'];
+   $lastname = $_SESSION['lastname'];
+   $branch = $_SESSION ['branch'];
+   $fname = $_SESSION ["fname"];
+   $position = $_SESSION['position'];
+?>
+
+<?php 
+  // Validate form data
+  $errors = [];
+  // insert data
+  if (isset($_POST["upload"])) {     
+          $productcode = htmlspecialchars($_POST["productcode"]);
+          $nameproduct = htmlspecialchars($_POST["nameproduct"]);
+        $priceproduct = htmlspecialchars($_POST["priceproduct"]);
+     $businessname = htmlspecialchars($_POST["businessname"]);
+     $quantity = htmlspecialchars($_POST["quantity"]);
+          $host = "localhost";
+          $dbname = "multi_bussines_system";
+          $username = "root";
+          $password = "";
+  
+          try {
+              // Create a PDO instance
+              $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+              
+              // Set the PDO error mode to exception
+              $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  
+              // Prepare and execute the SQL query to insert data
+              $stmt = $pdo->prepare("INSERT INTO product (Product_code	, Product_name, Price, Quantity, Branch) VALUES (?, ?, ?, ? ,?)");
+              $stmt->execute([$productcode, $nameproduct, $priceproduct, $quantity, $businessname]);
+  
+              header ('Location: ProductManager.php');
+          } catch (PDOException $e) {
+              echo "Error inserting data: " . $e->getMessage();
+          }
+          // Close the database connection
+          $pdo = null;
+      }
+  //insert data
+
+  //edit data
+  if (isset($_POST["savechanges"])) {
+   $product = htmlspecialchars($_POST['productcode']);
+   $productname = htmlspecialchars    ($_POST['nameproduct']);
+   $price= htmlspecialchars ($_POST['priceproduct']);
+   $quantity = htmlspecialchars  ($_POST['quantity']);
+   $branch = htmlspecialchars($_POST['businessname']);
+   
+      // Database connection settings
+      $host = "localhost";
+      $dbname = "multi_bussines_system";
+      $username = "root";
+      $password = "";
+
+      try {
+          // Create a PDO instance
+          $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+          
+          // Set the PDO error mode to exception
+          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+           $stmt = $pdo->prepare("UPDATE product SET Product_name= ?, Price= ? , Quantity = ? ,Branch = ?  WHERE Product_code=?");
+           $stmt->execute ([$productname, $price, $quantity ,$branch, $product]);
+
+          header ('Location: ProductManager.php');
+      } catch (PDOException $e) {
+          echo "Error inserting data: " . $e->getMessage();
+      }
+
+      // Close the database connection
+      $pdo = null;
+}
+  // edit data
+
+  if (isset($_POST["delete_employee"])){
+   $local ="localhost";
+   $username = "root";
+   $pass ="";
+     $dbnamee = "multi_bussines_system";
+   $ID = htmlspecialchars($_POST["ID"]);
+
+   try{
+       $pdo = new PDO("mysql:host=$local;dbname=$dbnamee", $username, $pass);
+       $pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       $sql = "DELETE FROM product WHERE Product_code = :ID";
+           $stmt = $pdo->prepare($sql);
+           $stmt->bindParam(':ID', $ID);
+           $stmt->execute();
+           header ('Location: ProductManager.php');
+   }catch (PDOException $e) {
+       echo " ". $e->getMessage();
+   }
+   $pdo = null;
+} //////delete data  product
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,14 +122,18 @@
         </div>
 
         <div class="sidenav" id="a">
-            <div class="companyname">Shirly Bansil</div>
-                <div class="owner">Manager</div >
+
+             <div class="companyname"> <?php echo $branch?> </div>
+            <div class="owner">
+              <h6>  <?php echo $fname ." ". $middlename ." ". $lastname ?> </h6>
+              <h6><?php echo $position;?></h6>
+            </div >
                 <a href="DashboardManager.php" target="_top" class="nav"><i class="fa-solid fa-house"></i> Dash Board</a>
                    <a href="SalesManager.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Sales</a>
                    <a href="ProductManager.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Products</a>
                    <a href="StaffAcctManager.php" target="_top" class="nav"><i class="fa-solid fa-users"></i> Staff</a>
-                  <a href="/Multi_business_system/landingpage/landingpage.php" target="_top" ><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
-        </div>
+                   <a href="/Multi_business_system/landingpage/logout.php" target="_top" ><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+    </div>
         
           <div class="main" id="a">
 
@@ -59,7 +164,7 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Add Product</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="ProductDataBase.php" method="post">
+                    <form action="" method="post">
                             <div class="modal-body">
                              <label for="product_code" class="small">Product Code</label>
                              <input type="text" name="productcode" id="product_code" class="nameofproduct" required placeholder="Product Code">
@@ -80,7 +185,7 @@
                                        $dbname = 'multi_bussines_system';
 
                                                     $con = mysqli_connect($server, $usner, $pass,$dbname);
-                                                    $category = mysqli_query($con,'SELECT * FROM business');
+                                                    $category = mysqli_query($con,"SELECT * FROM business WHERE Business_name='$branch'");
                                                     while ($c = mysqli_fetch_array($category)) {
                                                 ?>
                                                     <option value="<?php echo $c ['Business_name']?>"><?php echo $c['Business_name']?></option>
@@ -113,7 +218,7 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Product</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="ProductDatabase.php" method="post">
+                    <form action="" method="post">
                             <div class="modal-body">
                             <label for="product_code" class="small">Product Code</label>
                                                 <input type="text"  name="productcode" id="productcode" class="nameofproduct" required placeholder="Product Code">
@@ -133,9 +238,10 @@
                                                     $usner = 'root';
                                                     $pass= '';
                                                     $dbname = 'multi_bussines_system';
-
+                                                    $query = " SELECT * FROM product WHERE Branch = '$branch'";
+               
                                                     $con = mysqli_connect($server, $usner, $pass,$dbname);
-                                                    $category = mysqli_query($con,'SELECT * FROM business');
+                                                    $category = mysqli_query($con,"SELECT * FROM business WHERE Business_name = '$branch'");
                                                     while ($c = mysqli_fetch_array($category)) {
                                                 ?>
                                           <option value="<?php echo $c ['Business_name']?>"><?php echo $c['Business_name']?></option>
@@ -167,7 +273,7 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Business</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="ProductDataBase.php" method="post">
+                    <form action="" method="post">
                             <div class="modal-body">
                                 <h5>Are you sure Do you want delete</h5>
                                 <input hidden id="product_codee" name="ID"></input>                
@@ -194,8 +300,8 @@
               <th scope="col">Price</th>
               <th scope="col">Quantity</th>
               <th scope="col">Branch</th>
-              <th scope="col">Edit</th>
-              <th scope="col">Delete</th>
+              <th scope="col">Action</th>
+            
               </tr>
           </thead>
           <tbody>
@@ -210,8 +316,8 @@
                   $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
                    $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
                   // prepare and execute a query
-                 $query = " SELECT * FROM product";
-                 $statement = $pdo->prepare($query);
+                  $query = " SELECT * FROM product WHERE Branch = '$branch'";
+                  $statement = $pdo->prepare($query);
                  $statement->execute();
 
                  // to desplay fetch all of data
@@ -227,11 +333,9 @@
                           <td><?= $row['Quantity']?></td>
                           <td><?= $row['Branch']?></td>
                           <td>
-                              <a href="#" class="btn btn-success btn-sm edit-data">Edit Data</a>
-                          </td>
-                          <td>
-                              <a href="#" class="btn btn-danger btn-sm delete-data">Delete Data</a>
-                          </td>
+                           <a href="#" class="btn btn-success btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i> </a>
+                           <a href="#" class="btn btn-danger btn-sm delete-data"> <i class="fa-solid fa-trash" style="color: #ffffff;"></i> </a>
+                      </td>
                       </tr>
                       <?php
                   }

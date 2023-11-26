@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,8 +19,26 @@
         <div class="container-1">
         <img src="/Sad-Activity/picture/logo.png" class="move" style="width: 40px;margin-top: 10px;margin-left: 20px;" alt="">
             <label class="name_web">BUIMO</label>
-            <label class="name_staff">name of staff</label>
-            <a href="/Multi_business_system/landingpage/landingpage.php" class="logut"> Logout</a>
+
+            <?php
+               $localhost ="localhost";
+               $user = "root";
+               $pass="";    
+               $dbname = "multi_bussines_system";
+
+               $id = $_SESSION ["id"];
+                
+                $con = mysqli_connect($localhost,$user,$pass,$dbname) or die("Error");
+               $query = mysqli_query ($con,"SELECT * FROM employee WHERE ID= $id") or die("");
+               while ($result = mysqli_fetch_assoc($query)) {
+                    $res_firtname = $result ["First_name"];
+                    $res_lastname = $result ["Last_name"];
+                    $res_Branch = $result ["Branch"];
+               }
+
+            ?>
+            <label class="name_staff"><?php echo $res_firtname ." ". $res_lastname  ?></label>
+            <a href="/Multi_business_system/landingpage/logout.php" class="logut"> Logout</a>
         </div>
         <div class="container-2">
             <div id="clock-display" class="clock-display"></div>

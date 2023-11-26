@@ -1,37 +1,4 @@
 <?php
-    /// insert
-    if (isset($_POST["submit"])) {
-        $id = htmlspecialchars($_POST["id"]);
-        $userrname = htmlspecialchars($_POST["usernaame"]);
-        $password = htmlspecialchars($_POST["password"]);  
-        $branch = htmlspecialchars($_POST["branchh"]);
-        $employee_category = htmlspecialchars($_POST["employee-category"]);
-        $lastname = htmlspecialchars($_POST["Lastname"]);
-        $firstname = htmlspecialchars($_POST["Firstname"]);
-        $middle_name = htmlspecialchars($_POST["middle_name"]);
-       
-        $localhost = "localhost";
-        $username = "root";
-        $pass = "";
-        $dbname = "multi_bussines_system";
-
-        try{
-            //connection database
-            $pdo = new PDO ("mysql:host=$localhost;dbname=$dbname", $username, $pass);
-            // Set the PDO error mode to exception
-            $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
-            // // Prepare and execute the SQL query to insert data
-           $stmt = $pdo->prepare("INSERT INTO employee (ID, Username, Password, Branch, Position, Last_name, First_name, Middle_name ) VALUES (?, ? , ? , ? , ? , ? , ?, ?)");
-           $stmt->execute([$id, $userrname,  $password,  $branch,  $employee_category, $lastname,  $firstname, $middle_name  ]);
-            header ("location: employee.php");
-        }catch  (PDOException $e){
-            echo "Not inserted". $e->getMessage();
-        }
-        $pdo = null;
-    }
-    ////inserrt
-
      // editdata
      if (isset($_POST['savechnge'])){
         $id = htmlspecialchars($_POST['id']);

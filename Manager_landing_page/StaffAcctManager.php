@@ -1,57 +1,16 @@
 <?php 
  session_start();
 ?>
+<?php 
+    $middlename = $_SESSION ['middlename'];
+    $lastname = $_SESSION ['lastname'];
+    $fname = $_SESSION ['fname'];
+    $branch = $_SESSION ['branch'];
+    $position =$_SESSION ['position'];
+?>
 
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta charset="utf-8">
-        <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-       <link rel="stylesheet" href="StaffAcctManager.css">
-       <link rel="preconnect" href="https://fonts.googleapis.com">
-        <title>Employee - B-MO</title>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="StaffAcctManager.js" defer></script>
-        <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/logo.png">
-    </head>
-    <body>
-        <div class="left">
-        <img src="/Multi_business_system/picture/logo.png" style="width: 30px;position:absolute; top:10px; left:20px;" alt="">
-                 <div class="Company">B-MO</div>
-                  </div>
-              </div>
-        </div>
-
-        <div class="sidenav" id="a">
-            
-            <div class="companyname">Shirly Bansil</div>
-                <div class="owner">Manager</div >
-                   <a href="DashboardManager.php" target="_top" class="nav"><i class="fa-solid fa-house"></i> Dash Board</a>
-                   <a href="SalesManager.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Sales</a>
-                   <a href="ProductManager.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Products</a>
-                   <a href="StaffAcctManager.php" target="_top" class="nav"><i class="fa-solid fa-users"></i> Staff</a>
-                  <a href="/Multi_business_system/landingpage/landingpage.php" target="_top" ><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
-        </div>
-        
-          <div class="main" id="a">
-
-            <div class="frame" src="" name="iframe">
-                <div class="addbusines">
-                    <div class="product-top">Staff Account</div>
-                    </div>
-                 
-                    <div class="busin-right">
-                        <div class="busin-left">
-                        <div id="mooove">
-                             <!--------------------Insert modal---------------------->
-                       <button type="button"  class="btn btn-primary " data-bs-toggle="modal"  data-bs-target="#exampleModal">
-                New Employee
-                </button>
-                       </div>
-                        <label>List of Employee</label>
-   <?php 
+<?php 
+   // insert data
    if (isset($_POST["submit"])) {
     $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
 
@@ -65,7 +24,7 @@
     if ($total > 0) {
         // User found, redirect to a success page
         echo '<script>ID was already taken</script>';
-        header('location : employee.php');
+        header('location : StaffAcctManager.php');
      $con -> close();
     }
         
@@ -93,15 +52,128 @@
                  // // Prepare and execute the SQL query to insert data
            $stmt = $pdo->prepare("INSERT INTO employee (ID, Username, Password, Branch, Position, Last_name, First_name, Middle_name ) VALUES (?, ? , ? , ? , ? , ? , ?, ?)");
          $stmt->execute([$id, $userrname,  $password,  $branch,  $employee_category, $lastname,  $firstname, $middle_name  ]);
-            header ("location: employee.php");
+            header ("location: StaffAcctManager.php");
         }
         catch (PDOException $e){
             echo "Not inserted". $e->getMessage();
         }
         $pdo = null;
         }
+        // insert data 
+
+         // editdata
+     if (isset($_POST['savechnge'])){
+        $id = htmlspecialchars($_POST['id']);
+        $usern = htmlspecialchars    ($_POST['username']);
+        $passw= htmlspecialchars ($_POST['password']);
+        $branche = htmlspecialchars  ($_POST['branchp']);
+        $employeecategory = htmlspecialchars($_POST['employee_category']);
+        $lastname = htmlspecialchars($_POST['lastname']);
+        $firstname = htmlspecialchars($_POST['firstname']);
+        $middle_name = htmlspecialchars($_POST['middle_name']);
+        
+           // Database connection settings
+           $host = "localhost";
+           $dbname = "multi_bussines_system";
+           $username = "root";
+           $password = "";
+   
+           try {
+               // Create a PDO instance
+               $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+               
+               // Set the PDO error mode to exception
+               $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $stmt = $pdo->prepare("UPDATE employee SET Username= ?, Password= ? , Branch = ? ,Position = ? ,Last_name = ?,First_name= ? ,Middle_name = ?  WHERE ID=?");
+                $stmt->execute ([$usern, $passw, $branche ,$employeecategory ,$lastname , $firstname , $middle_name, $id]);
+
+               header ('Location: StaffAcctManager.php');
+           } catch (PDOException $e) {
+               echo "Error inserting data: " . $e->getMessage();
+           }
+   
+           // Close the database connection
+           $pdo = null;
+    }
+      // editdata
+
+      // delete employee
+      if (isset($_POST["delete_employee"])){
+        $local ="localhost";
+        $username = "root";
+        $pass ="";
+          $dbnamee = "multi_bussines_system";
+        $ID = htmlspecialchars($_POST["ID"]);
+
+        try{
+            $pdo = new PDO("mysql:host=$local;dbname=$dbnamee", $username, $pass);
+            $pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = "DELETE FROM employee WHERE ID = :ID";
+                $stmt = $pdo->prepare($sql);
+                $stmt->bindParam(':ID', $ID);
+                $stmt->execute();
+                header ('Location: StaffAcctManager.php');
+        }catch (PDOException $e) {
+            echo " ". $e->getMessage();
+        }
+        $pdo = null;
+    }
+ //delete data
+      //delete employee
 }
 ?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
+       <link rel="stylesheet" href="StaffAcctManager.css">
+       <link rel="preconnect" href="https://fonts.googleapis.com">
+        <title>Staff - B-MO</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="StaffAcctManager.js" defer></script>
+        <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/logo.png">
+    </head>
+    <body>
+        <div class="left">
+        <img src="/Multi_business_system/picture/logo.png" style="width: 30px;position:absolute; top:10px; left:20px;" alt="">
+                 <div class="Company">B-MO</div>
+                  </div>
+              </div>
+        </div>
+
+        <div class="sidenav" id="a">
+            
+            <div class="companyname"><?php echo $branch ?></div>
+                <div class="owner">
+                    <h6><?php echo $fname ." ". $middlename ." ". $lastname ?></h6>
+                    <h6><?php echo $position?></h6>
+                </div >
+                   <a href="DashboardManager.php" target="_top" class="nav"><i class="fa-solid fa-house"></i> Dash Board</a>
+                   <a href="SalesManager.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Sales</a>
+                   <a href="ProductManager.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Products</a>
+                   <a href="StaffAcctManager.php" target="_top" class="nav"><i class="fa-solid fa-users"></i> Staff</a>
+                  <a href="/Multi_business_system/landingpage/landingpage.php" target="_top" ><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+        </div>
+        
+          <div class="main" id="a">
+
+            <div class="frame" src="" name="iframe">
+                <div class="addbusines">
+                    <div class="product-top">Staff Account</div>
+                    </div>
+                 
+                    <div class="busin-right">
+                        <div class="busin-left">
+                        <div id="mooove">
+                             <!--------------------Insert modal---------------------->
+                       <button type="button"  class="btn btn-primary " data-bs-toggle="modal"  data-bs-target="#exampleModal">
+                New Staff
+                </button>
+                       </div>
+                        <label>List of Staff</label>
 
                     <div class="List_of_product">
                     <br>
@@ -109,13 +181,13 @@
                 <div class="modal-dialog " >
                     <div class="modal-content  modal-dialog-scrollable" >
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Employee</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Staff</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     
                     <form action="" method="post">
                             <div class="modal-body">
-                                               <Label for="id">ID</Label>
+                            <Label for="id">ID</Label>
                                                 <input type="text" name="id"  required class="cc" id="id">
                                     
                                                 <Label for="lastname">Last Name</Label>
@@ -145,7 +217,7 @@
                                                     $dbname = 'multi_bussines_system';
 
                                                     $con = mysqli_connect($server, $usner, $pass,$dbname);
-                                                    $category = mysqli_query($con,'SELECT * FROM business');
+                                                    $category = mysqli_query($con,"SELECT * FROM business WHERE Business_name = '$branch'");
                                                     while ($c = mysqli_fetch_array($category)) {
                                                 ?>
                                                     <option value="<?php echo $c ['Business_name']?>"><?php echo $c['Business_name']?></option>
@@ -179,7 +251,7 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Employee</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="EmoployeeDatabase.php" method="post">
+                    <form action="" method="post">
                             <div class="modal-body">
                                                     <Label for="id">ID</Label>
                                                 <input type="text" name="id" id="idd" required readonly class="cc" id="id">
@@ -210,7 +282,7 @@
                                                     $dbname = 'multi_bussines_system';
 
                                                     $con = mysqli_connect($server, $usner, $pass,$dbname);
-                                                    $category = mysqli_query($con,'SELECT * FROM business');
+                                                    $category = mysqli_query($con,"SELECT * FROM business WHERE Business_name='$branch'");
                                                     while ($c = mysqli_fetch_array($category)) {
                                                 ?>
                                                     <option value="<?php echo $c ['Business_name']?>"><?php echo $c['Business_name']?></option>
@@ -223,7 +295,7 @@
                                                 <select class="cc" name="employee_category" id="employee_category" >
                                                     <option hidden>Select Position</option>
                                                     <option value="Staff">Staff</option>
-                                                  </select>       
+                                                  </select>        
                                                         
                                             </div>
                                             <div class="modal-footer">
@@ -245,7 +317,7 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Business</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="EmoployeeDatabase.php" method="post">
+                    <form action="" method="post">
                             <div class="modal-body">
                                 <h5>Are you sure Do you want delete</h5>
                                 <input hidden id="employee_id" name="ID"></input>
@@ -275,8 +347,8 @@
                             <th scope="col">Lastname</th>
                             <th scope="col">Firstname</th>
                             <th scope="col">Middle initial</th>
-                            <th scope="col">Edit</th>
-                            <th scope="col">Delete</th>
+                            <th scope="col">Action</th>
+                          
                             </tr>
                         </thead>
                         <tbody>
@@ -291,7 +363,7 @@
                                 $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
                                  $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
                                 // prepare and execute a query
-                               $query = " SELECT * FROM employee";
+                               $query = " SELECT * FROM employee WHERE Branch = '$branch'";
                                $statement = $pdo->prepare($query);
                                $statement->execute();
 
@@ -311,11 +383,9 @@
                                         <td><?= $row['First_name']?></td>
                                         <td><?= $row['Middle_name']?></td>
                                         <td>
-                                            <a href="#" class="btn btn-success btn-sm edit-data">Edit Data</a>
-                                        </td>
-                                        <td>
-                                            <a href="#" class="btn btn-danger btn-sm delete-data">Delete Data</a>
-                                        </td>
+                           <a href="#" class="btn btn-success btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i> </a>
+                           <a href="#" class="btn btn-danger btn-sm delete-data"> <i class="fa-solid fa-trash" style="color: #ffffff;"></i> </a>
+                      </td>
                                     </tr>
                                     <?php
                                 }

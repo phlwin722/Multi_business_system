@@ -59,52 +59,90 @@
    <?php 
    if (isset($_POST["submit"])) {
     $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
-
-    $id = mysqli_real_escape_string($con, $_POST["id"]);
-
-    $query = "SELECT * FROM employee WHERE Username='$id'";
-    $result = $con->query($query);
-    $row = $result->fetch_assoc();
-    $total  = $result-> num_rows;
-
-    if ($total > 0) {
+ 
+        $id = htmlspecialchars($_POST["id"]);
+       
+    /* this code is check if ID was existing*/
+        $verify_query = mysqli_query($con,"SELECT ID FROM employee WHERE ID='$id'");
+    if (mysqli_num_rows( $verify_query ) != 0) {
         // User found, redirect to a success page
-        echo '<script>ID was already taken</script>';
-        header('location : employee.php');
-     $con -> close();
+        echo'<!-- Trigger/Open The Modal -->
+               <div style="
+               background: #f9eded;
+               border-radius:5px;
+               color: red;
+                width:320px;
+                 height:40px;
+                 padding-top:10px;
+                 text-align:center;
+                 position:absolute;
+                  top:5px;
+                  left:390px">
+                  
+               <h6>The ID was already taken  </h6>
+
+            </div>'; 
+            $con -> close();
     }
+   
         
     else{
-        $localhost = "localhost";
-        $username = "root";
-        $pass = "";
-        $dbname = "multi_bussines_system";
-
-        $id = htmlspecialchars($_POST["id"]);
-        $userrname = htmlspecialchars($_POST["usernaame"]);
-        $password = htmlspecialchars($_POST["password"]);  
-        $branch = htmlspecialchars($_POST["branchh"]);
-        $employee_category = htmlspecialchars($_POST["employee-category"]);
-        $lastname = htmlspecialchars($_POST["Lastname"]);
-        $firstname = htmlspecialchars($_POST["Firstname"]);
-        $middle_name = htmlspecialchars($_POST["middle_name"]);
-    
-              //connection database
-        try {
-            $pdo = new PDO ("mysql:host=$localhost;dbname=$dbname", $username, $pass);
-            // Set the PDO error mode to exception
-            $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
-                 // // Prepare and execute the SQL query to insert data
-           $stmt = $pdo->prepare("INSERT INTO employee (ID, Username, Password, Branch, Position, Last_name, First_name, Middle_name ) VALUES (?, ? , ? , ? , ? , ? , ?, ?)");
-         $stmt->execute([$id, $userrname,  $password,  $branch,  $employee_category, $lastname,  $firstname, $middle_name  ]);
-            header ("location: employee.php");
+        /* this code is check if user name was existing*/
+        $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
+        $username = htmlspecialchars($_POST["usernaame"]);
+            $verify_username = mysqli_query($con,"SELECT Username FROM employee WHERE Username ='$username'");
+         if(mysqli_num_rows( $verify_username ) != 0) {
+                echo'<!-- Trigger/Open The Modal -->
+                       <div style="
+                       background: #f9eded;
+                       border-radius:5px;
+                       color: red;
+                        width:320px;
+                         height:40px;
+                         padding-top:10px;
+                         text-align:center;
+                         position:absolute;
+                          top:5px;
+                          left:390px">
+                          
+                       <h6>The Username was already taken  </h6>
+        
+                    </div>'; 
+                    $con -> close();
+            }else{
+                /* this code not detect the existing id and username will be insert in database*/
+                $localhost = "localhost";
+                $username = "root";
+                $pass = "";
+                $dbname = "multi_bussines_system";
+        
+                $id = htmlspecialchars($_POST["id"]);
+                $userrname = htmlspecialchars($_POST["usernaame"]);
+                $password = htmlspecialchars($_POST["password"]);  
+                $branch = htmlspecialchars($_POST["branchh"]);
+                $employee_category = htmlspecialchars($_POST["employee-category"]);
+                $lastname = htmlspecialchars($_POST["Lastname"]);
+                $firstname = htmlspecialchars($_POST["Firstname"]);
+                $middle_name = htmlspecialchars($_POST["middle_name"]);
+            
+                      //connection database
+                try {
+                    $pdo = new PDO ("mysql:host=$localhost;dbname=$dbname", $username, $pass);
+                    // Set the PDO error mode to exception
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+        
+                         // // Prepare and execute the SQL query to insert data
+                   $stmt = $pdo->prepare("INSERT INTO employee (ID, Username, Password, Branch, Position, Last_name, First_name, Middle_name ) VALUES (?, ? , ? , ? , ? , ? , ?, ?)");
+                 $stmt->execute([$id, $userrname,  $password,  $branch,  $employee_category, $lastname,  $firstname, $middle_name  ]);
+                    header ("location: employee.php");
+                }
+                catch (PDOException $e){
+                    echo "Not inserted". $e->getMessage();
+                }
+            }
+            $pdo = null;
         }
-        catch (PDOException $e){
-            echo "Not inserted". $e->getMessage();
-        }
-        $pdo = null;
-        }
+       
 }
 ?>
 
@@ -282,8 +320,7 @@
                             <th scope="col">Lastname</th>
                             <th scope="col">Firstname</th>
                             <th scope="col">Middle initial</th>
-                            <th scope="col">Edit</th>
-                            <th scope="col">Delete</th>
+                            <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -317,12 +354,12 @@
                                         <td><?= $row['Last_name']?></td>
                                         <td><?= $row['First_name']?></td>
                                         <td><?= $row['Middle_name']?></td>
-                                        <td>
-                                            <a href="#" class="btn btn-success btn-sm edit-data">Edit Data</a>
+                                        <td>  
+                                            <a href="#" class="btn btn-success btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i> </a>
+                                            <a href="#" class="btn btn-danger btn-sm delete-data"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></a>
+                                        
                                         </td>
-                                        <td>
-                                            <a href="#" class="btn btn-danger btn-sm delete-data">Delete Data</a>
-                                        </td>
+                                        
                                     </tr>
                                     <?php
                                 }
