@@ -85,7 +85,6 @@
             $con -> close();
     }
    
-        
     else{
         /* this code is check if user name was existing*/
         $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");

@@ -2,6 +2,10 @@
 session_start();
 ?>
 
+<?php 
+     $branch = $_SESSION ["branch"];
+      $id = $_SESSION ["id"];
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,8 +29,6 @@ session_start();
                $user = "root";
                $pass="";    
                $dbname = "multi_bussines_system";
-
-               $id = $_SESSION ["id"];
                 
                 $con = mysqli_connect($localhost,$user,$pass,$dbname) or die("Error");
                $query = mysqli_query ($con,"SELECT * FROM employee WHERE ID= $id") or die("");
@@ -41,8 +43,19 @@ session_start();
             <a href="/Multi_business_system/landingpage/logout.php" class="logut"> Logout</a>
         </div>
         <div class="container-2">
+            <table class="table">
+                <tr>
+                    <td>hello</td>
+                    <td>hello</td>
+                    <td>hello</td>
+                    <td>hello</td>
+                </tr>
+            </table>
             <div id="clock-display" class="clock-display"></div>
         </div>
+
+
+
         <div class="container-3">
             <table>
                 <tr>

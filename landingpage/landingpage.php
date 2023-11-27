@@ -28,6 +28,7 @@
                     // this code is display the information of user staff in another page
              
                   else if ($row["Position"] == "Staff"){
+                    $_SESSION ['$branch'] = $row['Branch'];
                     $_SESSION ["id"] = $row["ID"];
                     header ("Location: /Multi_business_system/Staff%20interface/Staff.php");
             }
@@ -45,6 +46,11 @@
 
         if ($total > 0) {
             // User found, redirect to a success page
+            $_SESSION ["fname"] = $row ['Fisrst_name'];
+            $_SESSION ['lname'] = $row ['Last_name'];
+            $_SESSION ['lname'] = $row ['Secret_Question'];
+            $_SESSION ['lname'] = $row ['Ans_Sec_Quertion'];
+            $_SESSION ['lname'] = $row ['Image'];
             header("Location: /Multi_business_system/owner_landing_page/Dashboardowner.php");
         }
         else {

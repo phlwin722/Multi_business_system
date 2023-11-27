@@ -9,7 +9,99 @@
     $position =$_SESSION ['position'];
 ?>
 
-<?php 
+
+
+  <!----------------------------------------------------------------------------------------------------------------------->
+    <?php 
+    if (isset($_POST["submit"])) {
+     $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
+  
+         $id = htmlspecialchars($_POST["id"]);
+        
+     /* this code is check if ID was existing*/
+         $verify_query = mysqli_query($con,"SELECT ID FROM employee WHERE ID='$id'");
+     if (mysqli_num_rows( $verify_query ) != 0) {
+         // User found, redirect to a success page
+         echo'<!-- Trigger/Open The Modal -->
+                <div style="
+                background: #f9eded;
+                border-radius:5px;
+                color: red;
+                 width:320px;
+                  height:40px;
+                  padding-top:10px;
+                  text-align:center;
+                  position:absolute;
+                   top:5px;
+                   left:390px">
+                   
+                <h6>The ID was already taken  </h6>
+ 
+             </div>'; 
+             $con -> close();
+     }
+    
+     else{
+         /* this code is check if user name was existing*/
+         $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
+         $username = htmlspecialchars($_POST["usernaame"]);
+             $verify_username = mysqli_query($con,"SELECT Username FROM employee WHERE Username ='$username'");
+          if(mysqli_num_rows( $verify_username ) != 0) {
+                 echo'<!-- Trigger/Open The Modal -->
+                        <div style="
+                        background: #f9eded;
+                        border-radius:5px;
+                        color: red;
+                         width:320px;
+                          height:40px;
+                          padding-top:10px;
+                          text-align:center;
+                          position:absolute;
+                           top:5px;
+                           left:390px">
+                           
+                        <h6>The Username was already taken  </h6>
+         
+                     </div>'; 
+                     $con -> close();
+             }else{
+                 /* this code not detect the existing id and username will be insert in database*/
+                 $localhost = "localhost";
+                 $username = "root";
+                 $pass = "";
+                 $dbname = "multi_bussines_system";
+         
+                 $id = htmlspecialchars($_POST["id"]);
+                 $userrname = htmlspecialchars($_POST["usernaame"]);
+                 $password = htmlspecialchars($_POST["password"]);  
+                 $branch = htmlspecialchars($_POST["branchh"]);
+                 $employee_category = htmlspecialchars($_POST["employee-category"]);
+                 $lastname = htmlspecialchars($_POST["Lastname"]);
+                 $firstname = htmlspecialchars($_POST["Firstname"]);
+                 $middle_name = htmlspecialchars($_POST["middle_name"]);
+             
+                       //connection database
+        try {
+            $pdo = new PDO ("mysql:host=$localhost;dbname=$dbname", $username, $pass);
+            // Set the PDO error mode to exception
+            $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+
+                 // // Prepare and execute the SQL query to insert data
+           $stmt = $pdo->prepare("INSERT INTO employee (ID, Username, Password, Branch, Position, Last_name, First_name, Middle_name ) VALUES (?, ? , ? , ? , ? , ? , ?, ?)");
+         $stmt->execute([$id, $userrname,  $password,  $branch,  $employee_category, $lastname,  $firstname, $middle_name  ]);
+            header ("location: StaffAcctManager.php");
+        }
+        catch (PDOException $e){
+            echo "Not inserted". $e->getMessage();
+        }
+             }
+             $pdo = null;
+         }
+         
+ }?>
+  <!----------------------------------------------------------------------------------------------------------------------->
+
+    <?php 
    // insert data
    if (isset($_POST["submit"])) {
     $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
@@ -59,7 +151,9 @@
         }
         $pdo = null;
         }
-        // insert data 
+        // //////////////////////////////////////////////////////////////////////insert data 
+
+
 
          // editdata
      if (isset($_POST['savechnge'])){
@@ -352,50 +446,49 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php 
-                             $host = "localhost";
-                             $dbname = "multi_bussines_system";
-                             $username = "root";
-                             $password = "";
-                          
+                        <?php
+$host = "localhost";
+$dbname = "multi_bussines_system";
+$username = "root";
+$password = "";
+$staff = "Staff";
 
-                            try{
-                                $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-                                 $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-                                // prepare and execute a query
-                               $query = " SELECT * FROM employee WHERE Branch = '$branch'";
-                               $statement = $pdo->prepare($query);
-                               $statement->execute();
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                               // to desplay fetch all of data
-                               $result = $statement->fetchALL(PDO::FETCH_ASSOC);
+    // prepare and execute a query
+    $sql = "SELECT * FROM employee WHERE Branch = :branch AND Position = :position";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(":branch", $branch);
+    $stmt->bindParam(":position", $staff);
+    $stmt->execute();
 
-                               if( $result){
-                                foreach ($result as $row){
-                                    ?>
-                                    <tr>
-                                        <td class="user_id"><?= $row['ID'];?></td>
-                                        <td><?= $row['Username']?></td>
-                                        <td><?= $row['Password']?></td>
-                                        <td><?= $row['Branch']?></td>
-                                        <td><?= $row['Position']?></td>
-                                        <td><?= $row['Last_name']?></td>
-                                        <td><?= $row['First_name']?></td>
-                                        <td><?= $row['Middle_name']?></td>
-                                        <td>
-                           <a href="#" class="btn btn-success btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i> </a>
-                           <a href="#" class="btn btn-danger btn-sm delete-data"> <i class="fa-solid fa-trash" style="color: #ffffff;"></i> </a>
-                      </td>
-                                    </tr>
-                                    <?php
-                                }
-                               }
+    // to display fetch all of the data
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        ?>
+        <tr>
+            <td class="user_id"><?= $row['ID']; ?></td>
+            <td><?= $row['Username'] ?></td>
+            <td><?= $row['Password'] ?></td>
+            <td><?= $row['Branch'] ?></td>
+            <td><?= $row['Position'] ?></td>
+            <td><?= $row['Last_name'] ?></td>
+            <td><?= $row['First_name'] ?></td>
+            <td><?= $row['Middle_name'] ?></td>
+            <td>
+                <a href="#" class="btn btn-success btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i> </a>
+                <a href="#" class="btn btn-danger btn-sm delete-data"> <i class="fa-solid fa-trash" style="color: #ffffff;"></i> </a>
+            </td>
+        </tr>
+        <?php
+    }
+} catch (PDOException $e) {
+    echo $e->getMessage();
+}
 
-                            }catch(PDOException $e){
-                                echo $e->getMessage();
-                            }
-                            $pdo=null;
-                            ?>
+$pdo = null;
+?>
                           
                         </tbody>
             

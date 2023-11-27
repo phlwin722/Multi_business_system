@@ -48,8 +48,9 @@ border-radius: 5px;
 }
 .container-2{
     width: 60%;
-    background-color: rgb(184, 184, 184);
+    background-color: rgb(255, 255, 255);
     position: relative;
+    padding: 10px;
 }
 .clock-display{
     position: absolute;
@@ -60,7 +61,7 @@ border-radius: 5px;
     color: white;
 }
 .container-3{
-    background-color: rgb(214, 214, 214);
+    background-color: rgb(243, 241, 241);
     width: 40%;
     position: relative;
     padding: 5px;
@@ -100,4 +101,12 @@ table {
     position: absolute;
     bottom: 1%;
     width:98% ;
+}
+.table {
+    text-align: center;
+    border-collapse: collapse;
+}
+td{
+    border-collapse: collapse;
+    padding: 10px;
 }
