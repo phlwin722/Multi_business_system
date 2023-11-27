@@ -52,8 +52,8 @@
                          padding-top:10px;
                          text-align:center;
                          position:absolute;
-                          top:5px;
-                          left:390px">
+                         top:63px;
+                         left:650px">
                           
                        <h6>The Username was already taken  </h6>
         

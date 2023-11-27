@@ -28,7 +28,7 @@
                     // this code is display the information of user staff in another page
              
                   else if ($row["Position"] == "Staff"){
-                    $_SESSION ['$branch'] = $row['Branch'];
+                    $_SESSION ['$branche'] = $row['Branch'];
                     $_SESSION ["id"] = $row["ID"];
                     header ("Location: /Multi_business_system/Staff%20interface/Staff.php");
             }

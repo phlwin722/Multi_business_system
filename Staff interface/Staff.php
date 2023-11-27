@@ -1,9 +1,7 @@
 <?php
 session_start();
 ?>
-
 <?php 
-     $branch = $_SESSION ["branch"];
       $id = $_SESSION ["id"];
 ?>
 <!DOCTYPE html>
@@ -43,35 +41,85 @@ session_start();
             <a href="/Multi_business_system/landingpage/logout.php" class="logut"> Logout</a>
         </div>
         <div class="container-2">
-            <table class="table">
-                <tr>
-                    <td>hello</td>
-                    <td>hello</td>
-                    <td>hello</td>
-                    <td>hello</td>
-                </tr>
-            </table>
+         <label for="">Enter Product Code</label>
+         <input type="search" name="" id="search">
+
+         <div class="salestable">
+         <?php include ('header.php')?>
+         
+         <table class="table table-bordered table-hover">          
+                        <thead>
+                            <tr>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Product Code</th>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Unit Price</th>
+                            <th scope="col">#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                             $host = "localhost";
+                             $dbname = "multi_bussines_system";
+                             $username = "root";
+                             $password = "";
+                          
+
+                            try{
+                                $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                                 $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+                                // prepare and execute a query
+                               $query = " SELECT * FROM employee";
+                               $statement = $pdo->prepare($query);
+                               $statement->execute();
+
+                               // to desplay fetch all of data
+                               $result = $statement->fetchALL(PDO::FETCH_ASSOC);
+
+                               if( $result){
+                                foreach ($result as $row){
+                                    ?>
+                                    <tr>
+                                        <td class="user_id"><?= $row['ID'];?></td>
+                                        <td><?= $row['Position']?></td>
+                                        <td><?= $row['Last_name']?></td>
+                                        <td><?= $row['First_name']?></td>
+                                        <td><?= $row['Middle_name']?></td>
+                                        <td>  
+                                       <a href="#" class="btn btn-danger btn-sm delete-data"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></a>
+                                        
+                                        </td>
+                                        
+                                    </tr>
+                                    <?php
+                                }
+                               }
+
+                            }catch(PDOException $e){
+                                echo $e->getMessage();
+                            }
+                            $pdo=null;
+                            ?>
+                          
+                        </tbody>
+            
+                      </div>
+                    </table>
+
+         <?php include ('footer.php')?>
+         </div>
             <div id="clock-display" class="clock-display"></div>
         </div>
 
 
 
         <div class="container-3">
-            <table>
-                <tr>
-                    <th>Quantity</th>
-                    <th>Name Product</th>
-                    <th>Price</th>
-                </tr>
-              
-            </table>
-            <div class="foot">
-               <div class="footer_color">
-                <label for="" class="tot">Total</label>
-                <label for="" class="total">Total</label>
-                <input class="submit" type="submit" value="Pay">
-               </div>
-            </div>
+          <img class="logo_business" src="/Multi_business_system/picture/logo.png" alt="">
+         <div class="tot">
+            <label class="total_label" for="">Total</label>
+            <input class="total_input" type="text" readonly>
+           <button> <input type="submit"value="Purchase"></button>
+         </div>
         </div>
     </body>
 </html>
