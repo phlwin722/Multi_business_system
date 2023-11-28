@@ -3,6 +3,7 @@ session_start();
 ?>
 <?php 
       $id = $_SESSION ["id"];
+      $Branhh = $_SESSION["branche"];
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,12 +15,13 @@ session_start();
         <script src="staff.js" defer></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <link rel="icon" type="image/x-icon" href="/Sad-Activity/picture/logo.png">
        
     </head>
     <body onload="renderTime();">
         <div class="container-1">
-        <img src="/Sad-Activity/picture/logo.png" class="move" style="width: 40px;margin-top: 10px;margin-left: 20px;" alt="">
+        <img src="/Multi_business_system/picture/logo.png" class="move" style="width: 40px;margin-top: 10px;margin-left: 20px;" alt="">
             <label class="name_web">BUIMO</label>
 
             <?php
@@ -40,71 +42,103 @@ session_start();
             <label class="name_staff"><?php echo $res_firtname ." ". $res_lastname  ?></label>
             <a href="/Multi_business_system/landingpage/logout.php" class="logut"> Logout</a>
         </div>
-        <div class="container-2">
-         <label for="">Enter Product Code</label>
-         <input type="search" name="" id="search">
 
+
+        <div class="container-2">
+            <form action="" method="post">
+         <label for="">Enter Product Code </label>
+         <input type="text" id="search" placeholder="Search for a product or name">
+         <div id="search-results"></div>
+         </form>
          <div class="salestable">
          <?php include ('header.php')?>
          
-         <table class="table table-bordered table-hover">          
+         <table class="table table-bordered table-hover" id="product-table">          
                         <thead>
                             <tr>
                             <th scope="col">Quantity</th>
                             <th scope="col">Product Code</th>
                             <th scope="col">Product Name</th>
                             <th scope="col">Unit Price</th>
-                            <th scope="col">#</th>
+                            <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php 
-                             $host = "localhost";
-                             $dbname = "multi_bussines_system";
-                             $username = "root";
-                             $password = "";
-                          
-
-                            try{
-                                $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-                                 $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-                                // prepare and execute a query
-                               $query = " SELECT * FROM employee";
-                               $statement = $pdo->prepare($query);
-                               $statement->execute();
-
-                               // to desplay fetch all of data
-                               $result = $statement->fetchALL(PDO::FETCH_ASSOC);
-
-                               if( $result){
-                                foreach ($result as $row){
-                                    ?>
-                                    <tr>
-                                        <td class="user_id"><?= $row['ID'];?></td>
-                                        <td><?= $row['Position']?></td>
-                                        <td><?= $row['Last_name']?></td>
-                                        <td><?= $row['First_name']?></td>
-                                        <td><?= $row['Middle_name']?></td>
-                                        <td>  
-                                       <a href="#" class="btn btn-danger btn-sm delete-data"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></a>
-                                        
-                                        </td>
-                                        
-                                    </tr>
-                                    <?php
-                                }
-                               }
-
-                            }catch(PDOException $e){
-                                echo $e->getMessage();
-                            }
-                            $pdo=null;
-                            ?>
                           
                         </tbody>
             
                       </div>
                     </table>
+                    <script>
+        $(document).ready(function () {
+            $("#search").on("input", function () {
+                var searchTerm = $(this).val();
+                $.ajax({
+                    type: "GET",
+                    url: "search_product.php",
+                    data: { term: searchTerm },
+                    success: function (data) {
+                        $("#search-results").html(data);
+                        $("#search-results").show();
+                    }
+                });
+            });
+
+            $(document).on("click", ".result-item", function () {
+                var selectedProduct = $(this).data("product");
+                $("#search-results").hide();
+                $("#product-table tbody").append(selectedProduct);
+
+                // Clear input after clicking
+                $("#search").val("");
+
+                // Update total price
+                updateTotalPrice();
+            });
+
+            // Hide suggestions when clicking outside the search box
+            $(document).on("click", function (e) {
+                if (!$(e.target).closest("#search-results").length && !$(e.target).is("#search")) {
+                    $("#search-results").hide();
+                }
+            });
+
+             // Delete row when delete button is clicked
+             $(document).on("click", ".delete-btn", function () {
+                $(this).closest("tr").remove();
+                updateTotalPrice();
+            });
+
+          // Form submission to save sales
+$("#sales-form").submit(function (e) {
+    e.preventDefault();
+
+    var totalSales = $("#total-price").val();
+
+    // Perform Ajax request to save sales in the "salee" table
+    $.ajax({
+        type: "POST",
+        url: "save_sale.php",
+        data: { totalSales: totalSales },
+        success: function (response) {
+            console.log(response);
+        }
+    });
+});
+
+
+            
+
+            function updateTotalPrice() {
+                var totalPrice = 0;
+                $("#product-table tbody tr").each(function () {
+                    var price = parseFloat($(this).find("td:eq(3)").text());
+                    totalPrice += isNaN(price) ? 0 : price;
+                });
+                $("#total-price").val(totalPrice.toFixed(2));
+            }
+        });
+    </script>
 
          <?php include ('footer.php')?>
          </div>
@@ -117,9 +151,12 @@ session_start();
           <img class="logo_business" src="/Multi_business_system/picture/logo.png" alt="">
          <div class="tot">
             <label class="total_label" for="">Total</label>
-            <input class="total_input" type="text" readonly>
-           <button> <input type="submit"value="Purchase"></button>
+            <input class="total_input" type="text" id="total-price" readonly>
+            <form id="sales-form">
+        <input type="submit" value="Purchase">
+    </form>
          </div>
         </div>
+
     </body>
 </html>
