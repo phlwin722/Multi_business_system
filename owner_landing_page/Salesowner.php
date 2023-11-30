@@ -70,14 +70,46 @@
 
         <table class="topproduct">
            <tr>
-            <th>#</th>
-            <th>Product name</th>
             <th>Branch</th>
-            <th>Sold</th>
+            <th>Product name</th>
+            <th>Quantity</th>
           </tr>
-          <tr>
-            <td></td>
-          </tr>
+          <?php 
+                $host = "localhost";
+                $dbname = "multi_bussines_system";
+                $username = "root";
+                $password = "";
+
+                try {
+                    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    
+                    // SQL query with GROUP BY and SUM
+                    $query = "SELECT branch, product_name, SUM(quantity_sold) AS total_quantity_sold FROM top_product GROUP BY branch, product_name";
+                    $statement = $pdo->prepare($query);
+                    $statement->execute();
+
+                    // Fetch all rows
+                    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                    if ($result) {
+                        foreach ($result as $row) {
+                            ?>
+                            <tr>
+                                <td class="user_id"><?= $row['branch']; ?></td>
+                                <td><?= $row['product_name']; ?></td>
+                                <td><?= $row['total_quantity_sold']; ?></td>
+                            </tr>
+                            <?php
+                        }
+                    }
+
+                } catch (PDOException $e) {
+                    echo $e->getMessage();
+                }
+
+                $pdo = null;
+            ?>
         </table>
       </div>
       <!--top sale-->

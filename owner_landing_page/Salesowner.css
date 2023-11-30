@@ -387,7 +387,7 @@ div.container1{
 }
 /*sales*/
 /*top prudcu*/
-.topproduct {
+.topproduct ,td{
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;

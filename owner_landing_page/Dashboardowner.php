@@ -8,6 +8,8 @@
        <link rel="preconnect" href="https://fonts.googleapis.com">
         <title>Dashboard - B-MO</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
         <script src="Dashboardowner.js" defer></script>
         <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/logo.png">
                                          <!-- Google Font Link for Icons -->
@@ -104,18 +106,70 @@
     </div>
     <!--Calendar-->
     <?php include('header.php'); ?> 
-       <!--top sale-->
-      <div class="Topsale">
-        <caption>Top Product</caption>
-      <table class="table table-bordered table-hover">          
-          <thead>
-              <tr>
-              <th scope="col">#</th>
-              <th scope="col">Product name</th>
-              <th scope="col">Sold</th>
-              </tr>
-          </thead>
-          <tbody>
+       <!---------------------------top sale------------------------------------------------->
+     <div class="Topsale" id="scrollableDiv">
+    <caption>Top Product</caption>
+    <table class="table table-bordered table-hover">          
+        <thead>
+            <tr>
+                <th scope="col">Branch</th>
+                <th scope="col">Product name</th>
+                <th scope="col">Quantity Sold</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+                $host = "localhost";
+                $dbname = "multi_bussines_system";
+                $username = "root";
+                $password = "";
+
+                try {
+                    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    
+                    // SQL query with GROUP BY and SUM
+                    $query = "SELECT branch, product_name, SUM(quantity_sold) AS total_quantity_sold FROM top_product GROUP BY branch, product_name";
+                    $statement = $pdo->prepare($query);
+                    $statement->execute();
+
+                    // Fetch all rows
+                    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                    if ($result) {
+                        foreach ($result as $row) {
+                            ?>
+                            <tr>
+                                <td class="user_id"><?= $row['branch']; ?></td>
+                                <td><?= $row['product_name']; ?></td>
+                                <td><?= $row['total_quantity_sold']; ?></td>
+                            </tr>
+                            <?php
+                        }
+                    }
+
+                } catch (PDOException $e) {
+                    echo $e->getMessage();
+                }
+
+                $pdo = null;
+            ?>
+        </tbody>
+    </table>
+</div>
+
+
+      <!--------------------------------------------------------sales------------------------------------->
+      <div class="sales" id="scrollableDiv">
+      <caption class="topsale">Sales</caption>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+              <th scope="col">Branch</th>
+              <th scope="col">Sales</th>
+          </tr>
+        </thead>
+        <tbody>
               <?php 
                $host = "localhost";
                $dbname = "multi_bussines_system";
@@ -127,7 +181,7 @@
                   $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
                    $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
                   // prepare and execute a query
-                 $query = " SELECT * FROM product";
+                 $query = " SELECT * FROM sales";
                  $statement = $pdo->prepare($query);
                  $statement->execute();
 
@@ -138,9 +192,8 @@
                   foreach ($result as $row){
                       ?>
                       <tr>
-                          <td class="user_id"><?= $row['Product_code'];?></td>
-                          <td><?= $row['Product_name']?></td>
-                          <td><?= $row['Price']?></td>
+                          <td class="user_id"><?= $row['branch'];?></td>
+                          <td><?= $row['sales']?></td>
                           
                       </tr>
                       <?php
@@ -154,27 +207,11 @@
               ?>
             
           </tbody>
-
-        </div>
-      </table>
-
-      </div>
-
-      <!--sales-->
-      <div class="sales">
-        <table class="customers">
-          <caption class="topsale">Sales</caption>
-          <tr>
-            <th>Branch</th>
-            <th>Total Sale</th>
-          </tr>
-          <tr>
-            <td></td>
-          </tr>
+          
         </table>
        </div>
-      <!--sales-->
-   <!--topsale-->
+      <!--------------------------------sales--=====0--------------------------------------->
+   <!--list business=========================================================-->
 
    <div class="list_business">
     <caption>List Branch</caption>
@@ -247,7 +284,19 @@
       <!--bootstarp js-->
       <?php include('footer.php');?>
 
-   
+      <script>
+    $(document).ready(function () {
+        // Get references to your scrollable div and the div to be synchronized
+        var scrollableDiv = $("#scrollableDiv");
+        var topSaleDiv = $("#topSale");
+
+        // Bind the scroll event on the scrollable div
+        scrollableDiv.on("scroll", function () {
+            // Set the scrollTop of the topSale div to match the scroll position of the scrollable div
+            topSaleDiv.scrollTop(scrollableDiv.scrollTop());
+        });
+    });
+</script>
                         </div>
                     </div>
                     </div>
