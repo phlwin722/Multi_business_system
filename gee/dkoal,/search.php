@@ -1,0 +1,34 @@
+<?php
+
+// Establish a database connection using PDO
+$dsn = 'mysql:host=localhost;dbname=multi_bussines_system';
+$username = 'root';
+$password = '';
+
+try {
+    $pdo = new PDO($dsn, $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die('Connection failed: ' . $e->getMessage());
+}
+// Assume you have a connection to the database established
+
+// Get the search query from the POST request
+$query = $_POST['query'];
+
+// Perform a search query based on the product code or name
+$sql = "SELECT product_id, product_name FROM products WHERE product_id LIKE :query OR product_name LIKE :query";
+$stmt = $pdo->prepare($sql);
+$stmt->bindValue(':query', "%$query%", PDO::PARAM_STR);
+$stmt->execute();
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Display search results in HTML format
+if ($results) {
+    foreach ($results as $row) {
+        echo '<div class="search-result select-product" data-id="' . $row['product_id'] . '">' . $row['product_name'] . '</div>';
+    }
+} else {
+    echo '<div class="search-result">No results found</div>';
+}
+?>

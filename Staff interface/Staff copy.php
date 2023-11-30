@@ -62,16 +62,11 @@ session_start();
                             <th scope="col">Unit Price</th>
                             <th scope="col">Action</th>
                             </tr>
-                    
                         </thead>
-                            <tbody id="selected-products-body"></tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="4"></td>
-                                    
-                                </tr>
-                            </tfoot>
-                                    
+                        <tbody>
+                          
+                        </tbody>
+            
                       </div>
                     </table>
                     <script>
@@ -156,9 +151,9 @@ $("#sales-form").submit(function (e) {
           <img class="logo_business" src="/Multi_business_system/picture/logo.png" alt="">
          <div class="tot">
             <label class="total_label" for="">Total</label>
-            <input class="total_input"  type="text" id="total-price"  readonly>
+            <input class="total_input" type="text" id="total-price" readonly>
             <form id="sales-form">
-            <button id="purchase-btn">Purchase</button>
+        <input type="submit" value="Purchase">
     </form>
          </div>
         </div>
