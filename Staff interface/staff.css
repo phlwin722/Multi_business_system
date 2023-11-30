@@ -63,16 +63,24 @@ border-radius: 5px;
 .clock-display{
     position: absolute;
     bottom: 0px;
+    left: 0px;
     background-color: rgb(49, 49, 49);
     font-size: 17px;
     width: 100%;
     color: white;
 }
 .container-3{
-    background-color: rgb(104, 104, 104);
+    background-color: rgb(204, 200, 200);
     width: 40%;
     position: relative;
-    padding: 10px;
+    padding: 10px; 
+    text-align: center;
+}
+.Branchname{
+    color: black;
+    font-size: 40px;
+  
+    font-weight: bold;
 }
 .container-3,.container-2{
     float: left;
@@ -96,17 +104,32 @@ table {
 
 .logo_business{
     position: absolute;
-    left: 33%;
+    left: 36%;
     top: 20px;
-    width: 200px;
+    width: 170px;
 }
 .total_label{
-    color: white;
+    color: rgb(29, 29, 29);
+    font-weight: bold;
     font-size: 20px;
+}
+.purchase{
+    margin-top: 15px;
+    font-size: 20px;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    color: rgb(238, 238, 238);
+    font-weight: bold;
+    background-color: rgba(0, 206, 0, 0.719);
+}
+.purchase:hover, .purchase:active.fa-cart:hover{
+    background-color: rgb(14, 233, 14);
+    color: white;
 }
 .tot{
     position: absolute;
-    bottom: 20px;
+    bottom: 180px;
     width: 96%;
 }
 

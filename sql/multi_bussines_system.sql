@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2023 at 04:49 PM
+-- Generation Time: Nov 30, 2023 at 05:10 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -38,8 +38,9 @@ CREATE TABLE `business` (
 --
 
 INSERT INTO `business` (`Business_ID`, `Business_name`, `location`) VALUES
-(216, 'onti', 'fanifa'),
-(217, 'fanwia', 'fanwifawiwn');
+(220, 'Motor shop', 'fvr norzagaray '),
+(221, 'ph care', 'san jose  del monte bulacan'),
+(222, '7-11', 'san jose  del monte bulacan');
 
 -- --------------------------------------------------------
 
@@ -57,6 +58,16 @@ CREATE TABLE `employee` (
   `First_name` varchar(30) NOT NULL,
   `Middle_name` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`ID`, `Username`, `Password`, `Branch`, `Position`, `Last_name`, `First_name`, `Middle_name`) VALUES
+('190', 'bobo', 'bobo', 'Motor shop', 'Staff', 'gois', 'dexter', 'nk'),
+('2020', 'dexter', 'jamero', 'ph care', 'Manager', 'jamero', 'dexter', 'patan'),
+('2021', 'rhea', 'bacus', 'Motor shop', 'Staff', 'bacus', 'rhea', 'marie'),
+('6', '6', '6', '7-11', 'Staff', '6', '6', '6');
 
 -- --------------------------------------------------------
 
@@ -93,16 +104,17 @@ CREATE TABLE `product` (
   `Product_name` varchar(255) NOT NULL,
   `Price` varchar(255) NOT NULL,
   `Quantity` varchar(255) NOT NULL,
-  `Business_name` varchar(255) NOT NULL
+  `Branch` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`Product_code`, `Product_name`, `Price`, `Quantity`, `Business_name`) VALUES
-('2020', 'jo', 'joj', '2020', 'maiden name'),
-('hh', 'mkgs', 'niges', '212', 'va');
+INSERT INTO `product` (`Product_code`, `Product_name`, `Price`, `Quantity`, `Branch`) VALUES
+('2', 'dexter', '20', '20', 'ph care'),
+('2003', 'bearing', '200', '183', 'Motor shop'),
+('300', 'manibela', '200', '8', 'Motor shop');
 
 -- --------------------------------------------------------
 
@@ -111,12 +123,55 @@ INSERT INTO `product` (`Product_code`, `Product_name`, `Price`, `Quantity`, `Bus
 --
 
 CREATE TABLE `sales` (
-  `Branch_name` varchar(255) NOT NULL,
-  `Sales` varchar(255) NOT NULL,
-  `Date` varchar(255) NOT NULL,
-  `Top_sale_product` varchar(255) NOT NULL,
-  `Quantity` varchar(255) NOT NULL
+  `branch` varchar(50) DEFAULT NULL,
+  `sales` decimal(10,2) DEFAULT NULL,
+  `sale_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sales`
+--
+
+INSERT INTO `sales` (`branch`, `sales`, `sale_date`) VALUES
+(NULL, 1.00, '2023-11-30'),
+(NULL, 1.00, '2023-11-30'),
+(NULL, 1.00, '2023-11-30'),
+(NULL, 0.00, '2023-11-30'),
+(NULL, 0.00, '2023-11-30'),
+(NULL, 4.00, '2023-11-30'),
+(NULL, 1200.00, '2023-11-30'),
+(NULL, 4400.00, '2023-11-30'),
+('<?php echo $Branhh ?>', 200.00, '2023-11-30'),
+('Motor shop', 200.00, '2023-11-30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `top_product`
+--
+
+CREATE TABLE `top_product` (
+  `branch` varchar(50) DEFAULT NULL,
+  `product_name` varchar(255) DEFAULT NULL,
+  `quantity_sold` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `top_product`
+--
+
+INSERT INTO `top_product` (`branch`, `product_name`, `quantity_sold`) VALUES
+(NULL, 'manibela', 1),
+(NULL, 'manibela', 1),
+(NULL, 'manibela', 1),
+(NULL, 'manibela', 1),
+(NULL, 'manibela', 1),
+(NULL, 'manibela', 4),
+(NULL, 'manibela', 6),
+(NULL, 'manibela', 5),
+(NULL, 'bearing', 17),
+('<?php echo $Branhh ?>', 'manibela', 1),
+('Motor shop', 'manibela', 1);
 
 --
 -- Indexes for dumped tables
@@ -154,7 +209,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `business`
 --
 ALTER TABLE `business`
-  MODIFY `Business_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=218;
+  MODIFY `Business_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=223;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -43,7 +43,8 @@ function renderTime (){
 renderTime();
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////sales ///////////////////////////////////////////////////////////////////.................
+
 
 $(document).ready(function() {
     var timeout; // Timeout variable to delay AJAX calls
@@ -99,10 +100,11 @@ $(document).ready(function() {
     });
 
     $("#purchase-btn").on("click", function() {
+        var totalPrice = $("#total-price").val();
         $.ajax({
             url: "purchase.php",
             method: "POST",
-            data: { selectedProducts: getSelectedProducts() },
+            data: { selectedProducts: getSelectedProducts(), totalPrice: totalPrice },
             success: function() {
                 $("#selected-products-body").html("");
                 updateTotalPrice();
