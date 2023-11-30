@@ -29,12 +29,12 @@
     <tfoot>
         <tr>
             <td colspan="4"></td>
-            <td>Total Price:</td>
-            <td><input type="text" id="total-price" readonly></td>
+        
         </tr>
     </tfoot>
 </table>
-
+<label>Total Price:</label>
+            <input type="text" id="total-price" readonly>
 <button id="purchase-btn">Purchase</button>
 
 </body>

@@ -47,19 +47,20 @@ session_start();
         <div class="container-2">
             <form action="" method="post">
          <label for="">Enter Product Code </label>
-         <input type="text" id="search" placeholder="Search for a product or name">
+         <input type="text" id="search" placeholder="Search product code or name" autocomplete="off">
          <div id="search-results"></div>
          </form>
          <div class="salestable">
          <?php include ('header.php')?>
          
-         <table class="table table-bordered table-hover" id="product-table">          
+         <table class="table table-bordered table-hover" id="selected-products">          
                         <thead>
                             <tr>
                             <th scope="col">Quantity</th>
                             <th scope="col">Product Code</th>
                             <th scope="col">Product Name</th>
                             <th scope="col">Unit Price</th>
+                            <th scope="col">Price</th>
                             <th scope="col">Action</th>
                             </tr>
                     
