@@ -11,13 +11,13 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
         <script src="Dashboardowner.js" defer></script>
-        <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/logo.png">
+        <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/logosystem.png">
                                          <!-- Google Font Link for Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     </head>
     <body>
         <div class="left">
-        <img src="/Multi_business_system/picture/logo.png" style="width: 30px;position:absolute; top:10px; left:20px;" alt="">
+        <img src="/Multi_business_system/picture/logosystem.png" style="width: 30px;position:absolute; top:10px; left:20px;" alt="">
                 <div class="Company">B-MO</div>
                 <div class="dropdown">
                   <button onclick="myFunction()" class="dropbtn"><i class="fa-solid fa-circle-user"></i></button>
@@ -31,7 +31,7 @@
             <div class="companyname">Shirly Bansil</div>
                 <div class="owner">Owner</div >
                    <a href="Dashboardowner.php" target="_top" class="nav"><i class="fa-solid fa-house"></i> Dash Board</a>
-                   <a href="Salesowner.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Sales</a>
+                   <a href="Ownersale.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Sales</a>
                    <a href="Businessowner.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Business</a>
                    <a href="product.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Products</a>
                    <a href="employee.php" target="_top" class="nav"><i class="fa-solid fa-users"></i> Employee</a>
@@ -157,7 +157,8 @@
         </tbody>
     </table>
 </div>
-
+    <!---------------------------top sale product------------------------------------------------->
+  
 
       <!--------------------------------------------------------sales------------------------------------->
       <div class="sales" id="scrollableDiv">
@@ -166,7 +167,8 @@
         <thead>
           <tr>
               <th scope="col">Branch</th>
-              <th scope="col">Sales</th>
+              <th scope="col">Sale</th>
+              <th scope="col">Date</th>
           </tr>
         </thead>
         <tbody>
@@ -194,7 +196,7 @@
                       <tr>
                           <td class="user_id"><?= $row['branch'];?></td>
                           <td><?= $row['sales']?></td>
-                          
+                          <td><?= $row['sale_date']?></td>
                       </tr>
                       <?php
                   }

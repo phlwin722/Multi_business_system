@@ -8,6 +8,7 @@
        <link rel="preconnect" href="https://fonts.googleapis.com">
         <title>Product</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        
         <script src="product.js" defer></script>
         <title>Product - B-MO</title>
         <link rel="icon" type="image/x-icon" href="/Sad-Activity/picture/logo.png">
@@ -29,7 +30,7 @@
             <div class="companyname">Shirly Bansil</div>
                 <div class="owner">Owner</div >
                    <a href="Dashboardowner.php" target="_top" class="nav"><i class="fa-solid fa-house"></i> Dash Board</a>
-                   <a href="Salesowner.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Sales</a>
+                   <a href="ownersale.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Sales</a>
                    <a href="Businessowner.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Business</a>
                    <a href="product.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Products</a>
                    <a href="employee.php" target="_top" class="nav"><i class="fa-solid fa-users"></i> Employee</a>
@@ -45,21 +46,22 @@
                  
                     <div class="busin-right">
                         <div class="busin-left">
-                            <select class="business-selection" name=""businessname id="category-business">
-                                <option value="allproducts">All</option>
-                                       <?php
-                                           $server = 'localhost';
-                                            $usner = 'root';
-                                            $pass= '';
-                                            $dbname = 'multi_bussines_system';
-                                            $con = mysqli_connect($server, $usner, $pass,$dbname);
-                                            $category = mysqli_query($con,'SELECT * FROM business');
-                                             while ($c = mysqli_fetch_array($category)) {
-                                                ?>
-                                           <option value="<?php echo $c ['Business_name']?>"><?php echo $c['Business_name']?></option>
-                                            $con->close();
-                                                    <?php }?>
-                                                </select>
+                        <select class="business-selection" name="businessname" id="branchSelection">
+                            <option value="allproducts">All</option>
+                            <?php
+                                $server = 'localhost';
+                                $user = 'root';
+                                $pass = '';
+                                $dbname = 'multi_bussines_system';
+                                $con = mysqli_connect($server, $user, $pass, $dbname);
+                                $category = mysqli_query($con, 'SELECT * FROM business');
+                                while ($c = mysqli_fetch_array($category)) {
+                                    ?>
+                                    <option value="<?php echo $c['Business_name'] ?>"><?php echo $c['Business_name'] ?></option>
+                                <?php }
+                                $con->close();
+                            ?>
+                        </select>
 
                             <div class="search-container">
                                 <input type="text" class="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
@@ -207,7 +209,7 @@
                         <div class="product">
                         <?php include('header.php'); ?> 
 
-     <table class="table table-bordered table-hover">          
+     <table class="table table-bordered table-hover" id="productTable">          
           <thead>
               <tr>
               <th scope="col">Product code</th>
@@ -305,7 +307,28 @@
                         });
                     });
                     // delete data /edit data display modal
-                </script> 
+
+                    </script> 
+                <script>
+                    
+        // filter option on select option branch
+        // Add an event listener to the business-selection dropdown
+$('.business-selection').change(function () {
+    var selectedBranch = $(this).val();
+
+    // Send an AJAX request to fetch products based on the selected branch
+    $.ajax({
+        url: 'fetch_products.php', // Replace with the actual filename
+        method: 'POST',
+        data: { selectedBranch: selectedBranch },
+        success: function (response) {
+            // Update the productTable with the fetched data
+            $('#productTable tbody').html(response);
+        }
+    });
+});
+
+    </script>
                         </div>
                     </div>
                     </div>
