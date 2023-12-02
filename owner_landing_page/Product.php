@@ -4,7 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-       <link rel="stylesheet" href="Product.css">
+       <link rel="stylesheet" href="product.css">
        <link rel="preconnect" href="https://fonts.googleapis.com">
         <title>Product</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -40,7 +40,7 @@
 
             <div class="frame" src="" name="iframe">
                 <div class="addbusines">
-                    <div class="product-top">Products</div>
+                    <div class="product-top" id="scrollableDiv" id="tableee">Product</div>
                     </div>
                  
                     <div class="busin-right">
@@ -326,25 +326,27 @@
         }
     });
 });
-
-function searchFunction() {
-    var input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("myinput");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("productTable");
-    tr = table.getElementsByTagName("tr");
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[1];
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
+            // search in table from input searcj
+            function searchFunction() {
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("myinput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("productTable");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[1];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
             }
-        }
-    }
-}
+
+            
     </script>
                         </div>
                     </div>

@@ -316,9 +316,8 @@ div.container1{
   height: 450px;
 }
 .product{
-  border: 1px solid #d1d1d1;
+  border: 1px solid black;
   height: 400px;
-  overflow-y: auto;
 }
 /*
 

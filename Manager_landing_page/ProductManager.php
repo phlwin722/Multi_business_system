@@ -99,31 +99,31 @@
    $pdo = null;
 } //////delete data  product
 ?>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-       <link rel="stylesheet" href="ProductManager.css">
+       <link rel="stylesheet" href="productManage.css">
        <link rel="preconnect" href="https://fonts.googleapis.com">
         <title>Product</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="ProductManager.js" defer></script>
+        
+        <script src="product.js" defer></script>
         <title>Product - B-MO</title>
-        <link rel="icon" type="image/x-icon" href="/Sad-Activity/picture/logo.png">
-       
+        <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/sts.png">
+  
     </head>
     <body>
         <div class="left">
-        <img src="/Multi_business_system/picture/logo.png" style="width: 30px;position:absolute; top:10px; left:20px;" alt="">
-                 <div class="Company">B-MO</div>
-             
+        <img src="/Multi_business_system/picture/sts.png" style="height:60px; width: 80px;position:absolute; top:-4px; left:50px;" alt="">
+            
         </div>
 
         <div class="sidenav" id="a">
-
-             <div class="companyname"> <?php echo $branch?> </div>
+        <div class="companyname"> <?php echo $branch?> </div>
             <div class="owner">
               <h6>  <?php echo $fname ." ". $middlename ." ". $lastname ?> </h6>
               <h6><?php echo $position;?></h6>
@@ -134,25 +134,30 @@
                    <a href="StaffAcctManager.php" target="_top" class="nav"><i class="fa-solid fa-users"></i> Staff</a>
                    <a href="/Multi_business_system/landingpage/logout.php" target="_top" ><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
     </div>
-        
           <div class="main" id="a">
 
             <div class="frame" src="" name="iframe">
                 <div class="addbusines">
-                    <div class="product-top">Products</div>
+                    <div class="product-top">Product</div>
+                    
                     </div>
                  
                     <div class="busin-right">
+
+                        <h6 class="prud">List of Product</h6>
+                          
                         <div class="busin-left">
-                        <label class="listt">List of Product</label>
+    
+
                             <div class="search-container">
-                                <input type="text" class="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+                                <input type="text" id="myinput" class="myInput" onkeyup="searchFunction()" placeholder="Search for names.." title="Type in a name">
                             </div>
 
                          </div>
 
                             <!-- Button trigger modal -->   
                             <!--Insert------------------------>
+                    <!--Insert------------------------>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="moove" data-bs-target="#exampleModal">
                 Add Product
                 </button>
@@ -166,20 +171,18 @@
                     </div>
                     <form action="" method="post">
                             <div class="modal-body">
-                             <label for="product_code" class="small">Product Code</label>
-                             <input type="text" name="productcode" id="product_code" class="nameofproduct" required placeholder="Product Code">
-                                 <br>
+                            
                              <label for="" class="small">Product name  </liabel>
                              <input type="text" name="nameproduct" id="product_name" class="nameofproduct" required placeholder="Name of Product">
                                                 <br>
                            <label for="" class="small">Price: </label>
-                           <input type="text" name="priceproduct" id="price" class="nameofproduct" required placeholder="Price of Product">
-                             <label for="" class="small">Choose Branch: </label>
+                           <input type="text" name="priceproduct" id="price" value="0.00" class="nameofproduct" required placeholder="Price of Product">
+                             <label for="" class="small">Branch: </label>
 
                            <!--Chose business name-->
-                             <select class="nameofproduct" name="businessname" id="category-business">]
-                              <option hidden>Select Branch</option>
+                    
                                 <?php
+                                      $server ="localhost";
                                        $usner = 'root';
                                        $pass= '';
                                        $dbname = 'multi_bussines_system';
@@ -188,15 +191,15 @@
                                                     $category = mysqli_query($con,"SELECT * FROM business WHERE Business_name='$branch'");
                                                     while ($c = mysqli_fetch_array($category)) {
                                                 ?>
-                                                    <option value="<?php echo $c ['Business_name']?>"><?php echo $c['Business_name']?></option>
-                                                    $con->close();
-                                                    <?php }?>
-                                                </select>
+                                                        <input type="text" class="nameofproduct" readonly  name="businessname" id="category-business" value="<?php echo $c ['Business_name']?>">
+                                  
+                                                    <?php } $con->close();?>
+                                               
                                                        <!--Chose business name-->
 
                 
                                                     <label for="" class="">Quantity: </label>
-                                                    <input class="nameofproduct" name="quantity" required type="number">
+                                                    <input class="nameofproduct" name="quantity" value="1" required type="number">
                                                 <br>
                                                   
                     </div>
@@ -220,19 +223,16 @@
                     </div>
                     <form action="" method="post">
                             <div class="modal-body">
-                            <label for="product_code" class="small">Product Code</label>
-                                                <input type="text"  name="productcode" id="productcode" class="nameofproduct" required placeholder="Product Code">
-                                                <br>
-                                                <label for="" class="small">Product name</label>
+                                                <input type="text" hidden name="productcode" id="productcode" class="nameofproduct" required placeholder="Product Code">
+                                              
+                                                <label for="" class="">Product name</label>
                                                 <input type="text" name="nameproduct" id="productname" class="nameofproduct" required placeholder="Name of Product">
                                                 <br>
-                                                <label for="" class="small">Price: </label>
+                                                <label for="" class=""  id="quantity">Price</label>
+                          
                                                 <input type="text" id="pricee" name="priceproduct" class="nameofproduct" required placeholder="Price of Product">
-                                                 
-                                                <label for="" class="small" >Choose Branch: </label>
+                                                <label for="" class=""  id="quantity">Branch</label>
                                                   <!--Chose business name-->
-                                                  <select class="nameofproduct" id="branchh" name="businessname" >]
-                                                <option hidden>Select Branch</option>
                                                 <?php
                                                     $server = 'localhost';
                                                     $usner = 'root';
@@ -244,13 +244,13 @@
                                                     $category = mysqli_query($con,"SELECT * FROM business WHERE Business_name = '$branch'");
                                                     while ($c = mysqli_fetch_array($category)) {
                                                 ?>
-                                          <option value="<?php echo $c ['Business_name']?>"><?php echo $c['Business_name']?></option>
-                                         $con->close();
-                                 <?php }?>
+                                          <input class="nameofproduct" id="branchh" name="businessname" required type="text" readonly value="<?php echo $c ['Business_name']?>">
+                        
+                                 <?php } $con->close();?>
                          </select>
                                    <!--Chose business name-->
 
-                          <label for="" class=""  id="quantity">Quantity: </label>
+                          <label for="" class=""  id="quantity">Quantity</label>
                         <input class="nameofproduct" name="quantity" id="quantityy" required type="number">
                                            
                                 
@@ -273,7 +273,7 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Business</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="" method="post">
+                    <form action="ProductDataBase.php" method="post">
                             <div class="modal-body">
                                 <h5>Are you sure Do you want delete</h5>
                                 <input hidden id="product_codee" name="ID"></input>                
@@ -289,10 +289,10 @@
                    <!----- delete Modal ------->
                                 <div class="List_of_product">
                        
-                        <div class="product">
+                        <div class="product" id="scrollableDiv" id="tableee">
                         <?php include('header.php'); ?> 
 
-     <table id="am" class=" table table-bordered table-hover">          
+     <table class="table table-bordered table-hover" id="productTable">          
           <thead>
               <tr>
               <th scope="col">Product code</th>
@@ -301,7 +301,6 @@
               <th scope="col">Quantity</th>
               <th scope="col">Branch</th>
               <th scope="col">Action</th>
-            
               </tr>
           </thead>
           <tbody>
@@ -333,9 +332,11 @@
                           <td><?= $row['Quantity']?></td>
                           <td><?= $row['Branch']?></td>
                           <td>
-                           <a href="#" class="btn btn-success btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i> </a>
-                           <a href="#" class="btn btn-danger btn-sm delete-data"> <i class="fa-solid fa-trash" style="color: #ffffff;"></i> </a>
-                      </td>
+                              <a href="#" class="btn btn-success btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i> </a>
+                              <a href="#" class="btn btn-danger btn-sm delete-data"><i class="fa-solid fa-trash" style="color: #ffffff;"></i></a>
+                        
+                          </td>
+                        
                       </tr>
                       <?php
                   }
@@ -376,6 +377,20 @@
                 </script> 
 
        <script> 
+            
+                                $(document).ready(function () {
+                                    // Get references to your scrollable div and the div to be synchronized
+                                    var scrollableDiv = $("#scrollableDiv");
+                                    var topSaleDiv = $("#tableee");
+
+                                    // Bind the scroll event on the scrollable div
+                                    scrollableDiv.on("scroll", function () {
+                                        // Set the scrollTop of the topSale div to match the scroll position of the scrollable div
+                                        topSaleDiv.scrollTop(scrollableDiv.scrollTop());
+                                    });
+                                });
+
+
                     //delete data display modal
                     $(document).ready(function() {
                         $('.delete-data').on ('click',function(){
@@ -389,7 +404,48 @@
                         });
                     });
                     // delete data /edit data display modal
-                </script> 
+
+                    </script> 
+                <script>
+                    
+        // filter option on select option branch
+        // Add an event listener to the business-selection dropdown
+        $('.business-selection').change(function () {
+    var selectedBranch = $(this).val();
+
+    // Send an AJAX request to fetch products based on the selected branch
+    $.ajax({
+        url: 'fetch_products.php', // Replace with the actual filename
+        method: 'POST',
+        data: { selectedBranch: selectedBranch },
+        success: function (response) {
+            // Update the productTable with the fetched data
+            $('#productTable tbody').html(response);
+        }
+    });
+});
+            // search in table from input searcj
+            function searchFunction() {
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("myinput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("productTable");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[1];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+
+            
+    </script>
                         </div>
                     </div>
                     </div>

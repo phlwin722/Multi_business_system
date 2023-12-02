@@ -86,12 +86,20 @@ body{
 }
 
 .List_of_product{
+  margin-top: 20px;
   height: 450px;
   position: relative;
+
+}
+.listemplo{
+  position: absolute;
+  top: 13px;
 }
 .product{
-  border: 1px solid  black;
-  height: 400px;
+    border: 1px solid #d1d1d1;
+    height: 400px;
+    overflow-y: auto;
+    margin-top: 20px;
 }
 
 /*click dropdown to my acct*/
@@ -172,7 +180,9 @@ body{
   height: 50px;
 }
 div.busin-right{
+ 
   height: 520px;
+   
   background-color: white;
   margin-top: 10px;
   padding: 8px;

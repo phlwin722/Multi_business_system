@@ -20,12 +20,13 @@ body{
 .companyname{
     text-align: center;
     font-size: 24px;
-    color: #dadada;
+    color: #ffffff;
+    font-weight: bolder;
 }
 .owner{
     text-align: center;
     font-size: 14px;
-    color: #dadada;
+    color: #fffbfb;
     margin-bottom: 30px;
 }
 /* Fixed sidenav, full height */
@@ -90,7 +91,8 @@ body{
   position: relative;
 }
 .product{
-  border: 1px solid  black;
+  border: 1px solid #d1d1d1;
+  overflow-y: auto;
   height: 400px;
 }
 

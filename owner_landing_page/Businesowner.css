@@ -252,9 +252,10 @@ label{
   cursor: pointer;
 }
 .list_business{
-  margin-top: 5px;
-  border: 1px solid black;
+  border: 1px solid #d1d1d1;
+  overflow-y: auto;
   height: 450px;
+  margin-top: 10px;
   box-sizing: border-box;
 }
     /*click dropdown to my acct*/

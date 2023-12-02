@@ -18,10 +18,11 @@ body{
     text-align: center;
     font-size: 24px;
     color: #ffffff;
+    font-weight: bolder;
 }
 .owner{
     text-align: center;
-    font-size: 14px;
+    font-size: 13px;
     color: #fffbfb;
     margin-bottom: 30px;
 }

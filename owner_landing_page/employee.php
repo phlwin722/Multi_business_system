@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-       <link rel="stylesheet" href="employee.css">
+       <link rel="stylesheet" href="employeee.css">
        <link rel="preconnect" href="https://fonts.googleapis.com">
         <title>Employee - B-MO</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -47,7 +47,7 @@
                     <div class="product-top">Employee</div>
                     </div>
                  
-                    <div class="busin-right">
+                    <div class="busin-right" id="">
                         <div class="busin-left">
                         <div id="mooove">
                              <!--------------------Insert modal---------------------->
@@ -55,7 +55,7 @@
                 New Employee
                 </button>
                        </div>
-                        <label>List of Employee</label>
+                        <label class="listemplo">List of Employee</label>
    <?php 
    if (isset($_POST["submit"])) {
     $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
@@ -145,7 +145,7 @@
 }
 ?>
 
-                    <div class="List_of_product">
+                    <div class="List_of_product" id=""  id="">
                     <br>
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog " >
@@ -303,10 +303,10 @@
                 </div>
                    <!----- delete Modal ------->
 
-                        <div class="product">
+                        <div class="product"  id="scrollableDiv" id="tableee">
                               <!--bootstarp table html-->
                         <?php include('header.php'); ?> 
-                        <table class="table table-bordered table-hover">          
+                        <table class="table table-bordered table-hover" >          
                         <thead>
                             <tr>
                             <th scope="col">ID</th>
@@ -375,6 +375,20 @@
                          <!--bootstarp table js-->
                     <?php include('footer.php');?>
                     <script> 
+
+                                   $(document).ready(function () {
+                                    // Get references to your scrollable div and the div to be synchronized
+                                    var scrollableDiv = $("#scrollableDiv");
+                                    var topSaleDiv = $("#tableee");
+
+                                    // Bind the scroll event on the scrollable div
+                                    scrollableDiv.on("scroll", function () {
+                                        // Set the scrollTop of the topSale div to match the scroll position of the scrollable div
+                                        topSaleDiv.scrollTop(scrollableDiv.scrollTop());
+                                    });
+                                });
+
+
                     //.....edit update data display modal/////
                     $(document).ready(function() {
                         $('.edit-data').on ('click',function(){

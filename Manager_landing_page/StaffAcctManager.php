@@ -7,36 +7,11 @@
     $fname = $_SESSION ['fname'];
     $branch = $_SESSION ['branch'];
     $position =$_SESSION ['position'];
+    $id = $_SESSION ['id'];
 ?>
     <?php 
  if (isset($_POST["submit"])) {
-    $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
- 
-        $id = htmlspecialchars($_POST["id"]);
-       
-    /* this code is check if ID was existing*/
-        $verify_query = mysqli_query($con,"SELECT ID FROM employee WHERE ID='$id'");
-    if (mysqli_num_rows( $verify_query ) != 0) {
-        // User found, redirect to a success page
-        echo'<!-- Trigger/Open The Modal -->
-               <div style="
-               background: #f9eded;
-               border-radius:5px;
-               color: red;
-                width:320px;
-                 height:40px;
-                 padding-top:10px;
-                 text-align:center;
-                 position:absolute;
-                  top:63px;
-                  left:650px">
-                  
-               <h6>The ID was already taken  </h6>
-
-            </div>'; 
-            $con -> close();
-    }
-    else{
+    
         /* this code is check if user name was existing*/
         $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
         $username = htmlspecialchars($_POST["usernaame"]);
@@ -65,7 +40,6 @@
                 $username = "root";
                 $pass = "";
                 $dbname = "multi_bussines_system";
-        
                 $userrname = htmlspecialchars($_POST["usernaame"]);
                 $password = htmlspecialchars($_POST["password"]);  
                 $branch = htmlspecialchars($_POST["branchh"]);
@@ -81,8 +55,8 @@
            $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
                 // // Prepare and execute the SQL query to insert data
-          $stmt = $pdo->prepare("INSERT INTO employee (ID, Username, Password, Branch, Position, Last_name, First_name, Middle_name ) VALUES (?, ? , ? , ? , ? , ? , ?, ?)");
-        $stmt->execute([$id, $userrname,  $password,  $branch,  $employee_category, $lastname,  $firstname, $middle_name  ]);
+          $stmt = $pdo->prepare("INSERT INTO employee ( Username, Password, Branch, Position, Last_name, First_name, Middle_name ) VALUES ( ? , ? , ? , ? , ? , ?, ?)");
+        $stmt->execute([ $userrname,  $password,  $branch,  $employee_category, $lastname,  $firstname, $middle_name  ]);
            header ("location: StaffAcctManager.php");
        }
        catch (PDOException $e){
@@ -92,7 +66,6 @@
             $pdo = null;
         }
         
-}
 
 ////////////////////////////////////////////////////// Insert //////////////////////////////////////////
          // editdata
@@ -162,7 +135,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-       <link rel="stylesheet" href="StaffAcctManager.css">
+       <link rel="stylesheet" href="staffacctmanager.css">
        <link rel="preconnect" href="https://fonts.googleapis.com">
         <title>Staff - B-MO</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -171,9 +144,8 @@
     </head>
     <body>
         <div class="left">
-        <img src="/Multi_business_system/picture/logo.png" style="width: 30px;position:absolute; top:10px; left:20px;" alt="">
-                 <div class="Company">B-MO</div>
-                  </div>
+        <img src="/Multi_business_system/picture/sts.png" style="height:60px; width: 80px;position:absolute; top:-4px; left:50px;" alt="">
+               </div>
               </div>
         </div>
 
@@ -220,7 +192,6 @@
                     
                     <form action="" method="post">
                             <div class="modal-body">
-                        
                                                 <Label for="lastname">Last Name</Label>
                                                 <input type="text" name="Lastname" required class="cc" id="lastname">
                                                
@@ -254,8 +225,7 @@
                                                        <!--Chose business name-->
 
                                                 <label for="">Position</label>
-                                                <input type="text" name="employee-category" readonly class="cc" value="Staff">
-                                                  
+                                                <input type="text" name="employee-category" readonly class="cc" value="Staff">                           
                                                        
                     </div>
                     <div class="modal-footer">
@@ -278,10 +248,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="" method="post">
-                            <div class="modal-body">
-                                                   
-                                                <input type="text" hidden name="id" id="idd" required readonly class="cc" id="id">
-                                    
+                            <div class="modal-body">  
                                                 <Label for="lastname">Last Name</Label>
                                                 <input type="text" name="lastname" id="lname" class="cc"required>
                                                
@@ -319,7 +286,8 @@
                                                        
                                                 <label for="">Position</label>
                                                     <input type="text" class="cc" readonly name="employee_category" id="employee_category" value="Staff">
-                                                  
+                                                    <input type="text" hidden name="id" id="idd" required readonly class="cc" id="id">
+                                    
                  
                                             </div>
                                             <div class="modal-footer">
@@ -357,7 +325,7 @@
                 </div>
                    <!----- delete Modal ------->
 
-                        <div class="product">
+                        <div class="product"  id="scrollableDiv" id="tableee">
                               <!--bootstarp table html-->
                         <?php include('header.php'); ?> 
                         <table class="table table-bordered table-hover">          
@@ -427,6 +395,19 @@ $pdo = null;
                          <!--bootstarp table js-->
                     <?php include('footer.php');?>
                     <script> 
+
+                                $(document).ready(function () {
+                                    // Get references to your scrollable div and the div to be synchronized
+                                    var scrollableDiv = $("#scrollableDiv");
+                                    var topSaleDiv = $("#tableee");
+
+                                    // Bind the scroll event on the scrollable div
+                                    scrollableDiv.on("scroll", function () {
+                                        // Set the scrollTop of the topSale div to match the scroll position of the scrollable div
+                                        topSaleDiv.scrollTop(scrollableDiv.scrollTop());
+                                    });
+                                });
+
                     //.....edit update data display modal/////
                     $(document).ready(function() {
                         $('.edit-data').on ('click',function(){

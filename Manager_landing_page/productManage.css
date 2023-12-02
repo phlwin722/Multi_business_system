@@ -18,11 +18,13 @@ body{
     text-align: center;
     font-size: 24px;
     color: #ffffff;
+    font-weight: bolder;
 }
 .owner{
     text-align: center;
     font-size: 14px;
     color: #fffbfb;
+    margin-bottom: 30px;
 }
 /* Fixed sidenav, full height */
 .sidenav {
@@ -243,7 +245,7 @@ div.container1{
 }
 
 .small{
-  font-size: 14px;
+  font-size: 17px;
   margin-left:0px;
 }
 .add-product{
@@ -264,9 +266,18 @@ div.container1{
   right: 10px;
   top: 20px;
 }
-label.listt {
-  position: relative;
-  top: -2px;
+h5{
+  position: absolute;
+  top: 20px;
+}
+.ayawlost {
+  position: absolute;
+  top: 2px;
+  font-size: 20px;
+}
+.prud{
+  position: absolute;
+  top: 20px;
   font-size: 17px;
 }
 .List_of_product {
@@ -274,8 +285,9 @@ label.listt {
   margin-top: 10px;
 }
 .product{
-  border: 1px solid black;
+  border: 1px solid #d1d1d1;
   height: 400px;
+  overflow-y: auto;
 }
 /*
 

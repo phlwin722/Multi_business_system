@@ -1,23 +1,5 @@
 
-// Search function
-function searchFunction() {
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myinput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("productTable");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-      td = tr[i].getElementsByTagName("td")[1];
-      if (td) {
-          txtValue = td.textContent || td.innerText;
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              tr[i].style.display = "";
-          } else {
-              tr[i].style.display = "none";
-          }
-      }
-  }
-}
+
 // my acct
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
@@ -66,6 +48,7 @@ window.onclick = function(event) {
   }
 }
 
+
 /*upload image
 $(document).ready(function() {
     // Listen for changes in the file input
@@ -82,3 +65,5 @@ $(document).ready(function() {
     });
 });
 //upload image*/
+
+////// search funtion /
