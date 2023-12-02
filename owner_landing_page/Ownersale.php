@@ -120,11 +120,7 @@
                 <div class="sales" id="scrollableDiv">
                     <label class="topprod">Sales</label>
                     <table class="customers">
-                        <select class="filter_sale">
-                            <option value="">Daily</option>
-                            <option value="">Month</option>
-                            <option value="">Year</option>
-                        </select>
+                
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>

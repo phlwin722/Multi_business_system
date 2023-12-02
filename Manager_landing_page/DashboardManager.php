@@ -115,17 +115,68 @@ session_start();
     <!--Calendar-->
     <?php include('header.php'); ?> 
        <!--top sale-->
-      <div class="Topsale">
-        <label class="topproduct">Top Product</label>
-      <table class="table table-bordered table-hover">          
-          <thead>
-              <tr>
-              <th scope="col">#</th>
-              <th scope="col">Product name</th>
-              <th scope="col">Sold</th>
-              </tr>
-          </thead>
-          <tbody>
+       <div class="Topsale" id="scrollableDiv">
+    <caption>Top Product</caption>
+    <table class="table table-bordered table-hover">          
+        <thead>
+            <tr>
+                <th scope="col">Branch</th>
+                <th scope="col">Product name</th>
+                <th scope="col">Quantity Sold</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+                $host = "localhost";
+                $dbname = "multi_bussines_system";
+                $username = "root";
+                $password = "";
+
+                try {
+                    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    
+                    // SQL query with GROUP BY and SUM
+                    $query = "SELECT branch, product_name, SUM(quantity_sold) AS total_quantity_sold FROM top_product GROUP BY branch, product_name";
+                    $statement = $pdo->prepare($query);
+                    $statement->execute();
+
+                    // Fetch all rows
+                    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                    if ($result) {
+                        foreach ($result as $row) {
+                            ?>
+                            <tr>
+                                <td class="user_id"><?= $row['branch']; ?></td>
+                                <td><?= $row['product_name']; ?></td>
+                                <td><?= $row['total_quantity_sold']; ?></td>
+                            </tr>
+                            <?php
+                        }
+                    }
+
+                } catch (PDOException $e) {
+                    echo $e->getMessage();
+                }
+
+                $pdo = null;
+            ?>
+        </tbody>
+    </table>
+</div>
+      <!--sales-->
+      <div class="sales" id="scrollableDiv">
+      <caption class="topsale">Sales</caption>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+              <th scope="col">Branch</th>
+              <th scope="col">Sale</th>
+              <th scope="col">Date</th>
+          </tr>
+        </thead>
+        <tbody>
               <?php 
                $host = "localhost";
                $dbname = "multi_bussines_system";
@@ -137,7 +188,7 @@ session_start();
                   $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
                    $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
                   // prepare and execute a query
-                 $query = " SELECT * FROM product";
+                 $query = " SELECT * FROM sales";
                  $statement = $pdo->prepare($query);
                  $statement->execute();
 
@@ -148,10 +199,9 @@ session_start();
                   foreach ($result as $row){
                       ?>
                       <tr>
-                          <td class="user_id"><?= $row['Product_code'];?></td>
-                          <td><?= $row['Product_name']?></td>
-                          <td><?= $row['Price']?></td>
-                          
+                          <td class="user_id"><?= $row['branch'];?></td>
+                          <td><?= $row['sales']?></td>
+                          <td><?= $row['sale_date']?></td>
                       </tr>
                       <?php
                   }
@@ -164,21 +214,8 @@ session_start();
               ?>
             
           </tbody>
-
-        </div>
-      </table>
-
-      </div>
-
-      <!--sales-->
-      <div class="sales">
-          <label class="topsale">Sale</label>
-          <Select class="filter_sale">
-            <option value="">Daily</option>
-            <option value="">Month</option>
-            <option value="">Year</option>
-        </Select>
-     
+          
+        </table>
        </div>
       <!--sales-->
 
@@ -195,5 +232,19 @@ session_start();
                     </div>
             </div>
           </div>
+          <script>
+    $(document).ready(function () {
+        // Get references to your scrollable div and the div to be synchronized
+        var scrollableDiv = $("#scrollableDiv");
+        var topSaleDiv = $("#topSale");
+
+        // Bind the scroll event on the scrollable div
+        scrollableDiv.on("scroll", function () {
+            // Set the scrollTop of the topSale div to match the scroll position of the scrollable div
+            topSaleDiv.scrollTop(scrollableDiv.scrollTop());
+        });
+    });
+</script>
+            
     </body>
 </html>
