@@ -84,7 +84,7 @@
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <script src="landigpage.js" defer></script>
             <title>Business Monitoring</title>
-            <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/logo.png">
+            <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/sts.png">
         </head>
         <body>
             <div class="container1 ">

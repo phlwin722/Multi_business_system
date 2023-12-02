@@ -10,8 +10,8 @@ session_start();
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
-        <link rel="icon" type="image/x-icon" href="/Sad-Activity/picture/logo.png">
-        <link rel="stylesheet" href="staff.css">
+        <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/sts.png">
+        <link rel="stylesheet" href="sstaff.css">
         <script src="staff.js" defer></script>
         <title>Cashier - B-MO</title>
          <!--------------------This is for------------------->
@@ -24,8 +24,6 @@ session_start();
     </head>
     <body onload="renderTime();">
         <div class="container-1">
-    <label class="name_web">B-MO</label>
-
             <?php
                $localhost ="localhost";
                $user = "root";
@@ -85,7 +83,7 @@ session_start();
 
 
         <div class="container-3">
-          <img class="logo_business" src="/Multi_business_system/picture/logo.png" alt="">
+          <img class="logo_business" src="/Multi_business_system/picture/sts.png" alt="">
           <div class="Branchname" ><?php echo $Branhh?></div>
          <div class="tot">
             <div class="total_label">Total</div>

@@ -140,7 +140,7 @@
         <title>Staff - B-MO</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="StaffAcctManager.js" defer></script>
-        <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/logo.png">
+        <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/sts.png">
     </head>
     <body>
         <div class="left">
