@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-       <link rel="stylesheet" href="employeee.css">
+       <link rel="stylesheet" href="employeeee.css">
        <link rel="preconnect" href="https://fonts.googleapis.com">
         <title>Employee - B-MO</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -49,64 +49,31 @@
                  
                     <div class="busin-right" id="">
                         <div class="busin-left">
+                            
                         <div id="mooove">
                              <!--------------------Insert modal---------------------->
-                       <button type="button"  class="btn btn-primary " data-bs-toggle="modal"  data-bs-target="#exampleModal">
+                     
+                       </div>
+                       <div id="bot">
+                             <!--------------------Insert modal---------------------->
+                       <button type="button"  class="btn btn-primary move " data-bs-toggle="modal"  data-bs-target="#exampleModal">
                 New Employee
                 </button>
-                       </div>
                         <label class="listemplo">List of Employee</label>
    <?php 
    if (isset($_POST["submit"])) {
     $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
  
-        $id = htmlspecialchars($_POST["id"]);
-       
-    /* this code is check if ID was existing*/
-        $verify_query = mysqli_query($con,"SELECT ID FROM employee WHERE ID='$id'");
-    if (mysqli_num_rows( $verify_query ) != 0) {
-        // User found, redirect to a success page
-        echo'<!-- Trigger/Open The Modal -->
-               <div style="
-               background: #f9eded;
-               border-radius:5px;
-               color: red;
-                width:320px;
-                 height:40px;
-                 padding-top:10px;
-                 text-align:center;
-                 position:absolute;
-                  top:5px;
-                  left:390px">
-                  
-               <h6>The ID was already taken  </h6>
-
-            </div>'; 
-            $con -> close();
-    }
-   
-    else{
         /* this code is check if user name was existing*/
         $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
         $username = htmlspecialchars($_POST["usernaame"]);
             $verify_username = mysqli_query($con,"SELECT Username FROM employee WHERE Username ='$username'");
          if(mysqli_num_rows( $verify_username ) != 0) {
-                echo'<!-- Trigger/Open The Modal -->
-                       <div style="
-                       background: #f9eded;
-                       border-radius:5px;
-                       color: red;
-                        width:320px;
-                         height:40px;
-                         padding-top:10px;
-                         text-align:center;
-                         position:absolute;
-                          top:5px;
-                          left:390px">
-                          
-                       <h6>The Username was already taken  </h6>
-        
-                    </div>'; 
+            echo '<div style="postion:absolute; top:50px; padding:5px; height:40px" class="alert alert-danger" role="alert">
+            The Username was already taken
+            <button style="margin-left:760px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    
+          </div>';
                     $con -> close();
             }else{
                 /* this code not detect the existing id and username will be insert in database*/
@@ -141,11 +108,9 @@
             }
             $pdo = null;
         }
-       
-}
 ?>
 
-                    <div class="List_of_product" id=""  id="">
+                    <div class="List_of_product" id="List_of_product"  id="">
                     <br>
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog " >
@@ -374,7 +339,35 @@
                     </table>
                          <!--bootstarp table js-->
                     <?php include('footer.php');?>
+                    <div id="liveAlertPlaceholder"></div>
+    <script>
+        const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+
+        <?php
+        if (isset($_POST["submit"])) {
+            // Check if ID or username messages were set in PHP
+            if (mysqli_num_rows($verify_query) != 0 || mysqli_num_rows($verify_username) != 0) {
+                echo 'appendAlert("The ID or Username was already taken", "danger");';
+            }
+        }
+        ?>
+
+        const appendAlert = (message, type) => {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = [
+                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                `   <div>${message}</div>`,
+                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                '</div>'
+            ].join('');
+
+            alertPlaceholder.append(wrapper);
+        };</script>
+
                     <script> 
+                    
+
+
 
                                    $(document).ready(function () {
                                     // Get references to your scrollable div and the div to be synchronized
