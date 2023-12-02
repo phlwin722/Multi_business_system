@@ -11,14 +11,13 @@
         
         <script src="product.js" defer></script>
         <title>Product - B-MO</title>
-        <link rel="icon" type="image/x-icon" href="/Sad-Activity/picture/logo.png">
-       
+        <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/sts.png">
+  
     </head>
     <body>
         <div class="left">
-        <img src="/Multi_business_system/picture/logo.png" style="width: 30px;position:absolute; top:10px; left:20px;" alt="">
-                 <div class="Company">B-MO</div>
-                <div class="dropdown">
+        <img src="/Multi_business_system/picture/sts.png" style="height:60px; width: 80px;position:absolute; top:-4px; left:50px;" alt="">
+             <div class="dropdown">
                   <button onclick="myFunction()" class="dropbtn"><i class="fa-solid fa-circle-user"></i></button>
                   <div id="myDropdown" class="dropdown-content">
                   <a href="Myacctowner.php" target="_top">My account</a>
@@ -64,7 +63,7 @@
                         </select>
 
                             <div class="search-container">
-                                <input type="text" class="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+                                <input type="text" id="myinput" class="myInput" onkeyup="searchFunction()" placeholder="Search for names.." title="Type in a name">
                             </div>
 
                          </div>
@@ -313,7 +312,7 @@
                     
         // filter option on select option branch
         // Add an event listener to the business-selection dropdown
-$('.business-selection').change(function () {
+        $('.business-selection').change(function () {
     var selectedBranch = $(this).val();
 
     // Send an AJAX request to fetch products based on the selected branch
@@ -328,6 +327,24 @@ $('.business-selection').change(function () {
     });
 });
 
+function searchFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myinput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("productTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
     </script>
                         </div>
                     </div>

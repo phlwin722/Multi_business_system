@@ -11,16 +11,15 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="Ownersale.js" defer></script>
-    <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/logo.png">
+    <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/sts.png">
     <!-- Google Font Link for Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
 </head>
 
 <body>
     <div class="left">
-        <img src="/Multi_business_system/picture/logo.png" style="width: 30px; position: absolute; top: 10px; left: 20px;" alt="">
-        <div class="Company">B-MO</div>
-        <div class="dropdown">
+    <img src="/Multi_business_system/picture/sts.png" style="height:60px; width: 80px;position:absolute; top:-4px; left:50px;" alt="">
+            <div class="dropdown">
             <button onclick="myFunction()" class="dropbtn"><i class="fa-solid fa-circle-user"></i></button>
             <div id="myDropdown" class="dropdown-content">
                 <a href="Myacct.php" target="_top">My account</a>

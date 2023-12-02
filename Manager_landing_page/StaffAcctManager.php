@@ -66,7 +66,6 @@
                 $pass = "";
                 $dbname = "multi_bussines_system";
         
-                $id = htmlspecialchars($_POST["id"]);
                 $userrname = htmlspecialchars($_POST["usernaame"]);
                 $password = htmlspecialchars($_POST["password"]);  
                 $branch = htmlspecialchars($_POST["branchh"]);
@@ -221,9 +220,7 @@
                     
                     <form action="" method="post">
                             <div class="modal-body">
-                            <Label for="id">ID</Label>
-                                                <input type="text" name="id"  required class="cc" id="id">
-                                    
+                        
                                                 <Label for="lastname">Last Name</Label>
                                                 <input type="text" name="Lastname" required class="cc" id="lastname">
                                                
@@ -239,10 +236,8 @@
                                                 <Label for="">Password</Label>
                                                 <input type="text" name="password" class="cc">
                                         
-                                                <label for="category-business">Choose Branch</label>
+                                                <label for="category-business">Branch</label>
                                             <!--Chose business name-->
-                                                <select class="cc" name="branchh" id="category-business">]
-                                                <option hidden>Select Branch</option>
                                                 
                                                 <?php
                                                     $server = 'localhost';
@@ -254,17 +249,14 @@
                                                     $category = mysqli_query($con,"SELECT * FROM business WHERE Business_name = '$branch'");
                                                     while ($c = mysqli_fetch_array($category)) {
                                                 ?>
-                                                    <option value="<?php echo $c ['Business_name']?>"><?php echo $c['Business_name']?></option>
-                                                   
+                                                    <input type="text" readonly name="branchh" class="cc" value="<?php echo $c ['Business_name']?>">
                                                     <?php } $con->close();?>
-                                                </select>
                                                        <!--Chose business name-->
 
-                                                <label for="">Select Position</label>
-                                                <select class="cc" name="employee-category" id="category-business" >
-                                                    <option hidden>Select Position</option>
-                                                    <option value="Staff">Staff</option>
-                                                  </select>                 
+                                                <label for="">Position</label>
+                                                <input type="text" name="employee-category" readonly class="cc" value="Staff">
+                                                  
+                                                       
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -287,8 +279,8 @@
                     </div>
                     <form action="" method="post">
                             <div class="modal-body">
-                                                    <Label for="id">ID</Label>
-                                                <input type="text" name="id" id="idd" required readonly class="cc" id="id">
+                                                   
+                                                <input type="text" hidden name="id" id="idd" required readonly class="cc" id="id">
                                     
                                                 <Label for="lastname">Last Name</Label>
                                                 <input type="text" name="lastname" id="lname" class="cc"required>
@@ -305,10 +297,9 @@
                                                 <Label for="">Password</Label>
                                                 <input type="text" name="password" id="password" class="cc">
                                         
-                                                <label for="category-business">Choose Branch</label>
+                                                <label for="category-business">Branch</label>
                                                  <!--Chose business name fetchbusiness -->
-                                                 <select class="cc" name="branchp" id="branchh">]
-                                                <option hidden>Select Branch</option>
+                                                
                                                 <?php
                                                     $server = 'localhost';
                                                     $usner = 'root';
@@ -319,18 +310,17 @@
                                                     $category = mysqli_query($con,"SELECT * FROM business WHERE Business_name='$branch'");
                                                     while ($c = mysqli_fetch_array($category)) {
                                                 ?>
-                                                    <option value="<?php echo $c ['Business_name']?>"><?php echo $c['Business_name']?></option>
-                                                    $con->close();
-                                                    <?php }?>
-                                                </select>
+                                                    <input type="text" class="cc" readonly  name="branchp" id="branchh" value="<?php echo $c ['Business_name']?>">
+                                
+                                                    <?php }$con->close();?>
+                                               
                                                        <!--Chose business name-->
 
-                                                <label for="">Select Position</label>
-                                                <select class="cc" name="employee_category" id="employee_category" >
-                                                    <option hidden>Select Position</option>
-                                                    <option value="Staff">Staff</option>
-                                                  </select>        
-                                                        
+                                                       
+                                                <label for="">Position</label>
+                                                    <input type="text" class="cc" readonly name="employee_category" id="employee_category" value="Staff">
+                                                  
+                 
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

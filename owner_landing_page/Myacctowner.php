@@ -9,14 +9,13 @@
         <title>My Account - B-Mo</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="Myacctowner.js" defer></script>
-        <link rel="icon" type="image/x-icon" href="/Sad-Activity/picture/logo.png">
-       
+        <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/sts.png">
+     
     </head>
     <body>
         <div class="left">
-        <img src="/Sad-Activity/picture/logo.png" class="move" style="width: 30px;margin-top: 10px;margin-left: 20px;" alt="">
-            <div class="Company">B-MO</div>
-                <div class="dropdown">
+        <img src="/Multi_business_system/picture/sts.png" style="height:60px; width: 80px;position:absolute; top:-4px; left:50px;" alt="">
+             <div class="dropdown">
                   <button onclick="myFunction()" class="dropbtn"><i class="fa-solid fa-circle-user"></i></button>
                   <div id="myDropdown" class="dropdown-content">
                   <a href="Myacctowner.php" target="_top">My account</a>

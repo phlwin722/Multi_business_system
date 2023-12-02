@@ -114,7 +114,7 @@ session_start();
     </div>
     <!--Calendar-->
     <?php include('header.php'); ?> 
-       <!--top sale-->
+       <!------------------------------top sale---------------------------->
        <div class="Topsale" id="scrollableDiv">
     <caption>Top Product</caption>
     <table class="table table-bordered table-hover">          
@@ -137,9 +137,9 @@ session_start();
                     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     
                     // SQL query with GROUP BY and SUM
-                    $query = "SELECT branch, product_name, SUM(quantity_sold) AS total_quantity_sold FROM top_product GROUP BY branch, product_name";
+                    $query = " SELECT * FROM top_product WHERE branch = '$branch'";
                     $statement = $pdo->prepare($query);
-                    $statement->execute();
+                   $statement->execute();
 
                     // Fetch all rows
                     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -150,7 +150,7 @@ session_start();
                             <tr>
                                 <td class="user_id"><?= $row['branch']; ?></td>
                                 <td><?= $row['product_name']; ?></td>
-                                <td><?= $row['total_quantity_sold']; ?></td>
+                                <td><?= $row['quantity_sold']; ?></td>
                             </tr>
                             <?php
                         }
@@ -188,7 +188,9 @@ session_start();
                   $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
                    $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
                   // prepare and execute a query
-                 $query = " SELECT * FROM sales";
+
+                 $statement->execute();
+                 $query = " SELECT * FROM sales WHERE branch ='$branch'";
                  $statement = $pdo->prepare($query);
                  $statement->execute();
 
