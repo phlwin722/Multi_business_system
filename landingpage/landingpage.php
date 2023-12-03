@@ -46,11 +46,9 @@
 
         if ($total > 0) {
             // User found, redirect to a success page
-            $_SESSION ["fname"] = $row ['Fisrst_name'];
+            $_SESSION ['ffname'] = $row ['First_name'];
             $_SESSION ['lname'] = $row ['Last_name'];
-            $_SESSION ['lname'] = $row ['Secret_Question'];
-            $_SESSION ['lname'] = $row ['Ans_Sec_Quertion'];
-            $_SESSION ['lname'] = $row ['Image'];
+            
             header("Location: /Multi_business_system/owner_landing_page/Dashboardowner.php");
         }
         else {

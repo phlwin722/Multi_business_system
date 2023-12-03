@@ -41,7 +41,7 @@
                    <a href="SalesManager.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Sales</a>
                    <a href="ProductManager.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Products</a>
                    <a href="StaffAcctManager.php" target="_top" class="nav"><i class="fa-solid fa-users"></i> Staff</a>
-                  <a href="/Multi_business_system/landingpage/landingpage.php" target="_top" ><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+                  <a href="/Multi_business_system/landingpage/logout.php" target="_top" ><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
         </div>
         
           <div class="main" id="a">
@@ -403,17 +403,17 @@ if (isset($_POST["submit"])) {
 }
 ?>
 
-const appendAlert = (message, type) => {
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = [
-        `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-        `   <div>${message}</div>`,
-        '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-        '</div>'
-    ].join('');
+                        const appendAlert = (message, type) => {
+                            const wrapper = document.createElement('div');
+                            wrapper.innerHTML = [
+                                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                                `   <div>${message}</div>`,
+                                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                                '</div>'
+                            ].join('');
 
-    alertPlaceholder.append(wrapper);
-};
+                            alertPlaceholder.append(wrapper);
+                        };
 
                                 $(document).ready(function () {
                                     // Get references to your scrollable div and the div to be synchronized

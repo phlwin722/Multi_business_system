@@ -1,10 +1,19 @@
+<?php
+ session_start();
+ ?>
+
+<?php 
+  $fname = $_SESSION ["ffname"];
+  $lname = $_SESSION ["lname"];
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-       <link rel="stylesheet" href="Myacctowner.css">
+       <link rel="stylesheet" href="myacctowner.css">
        <link rel="preconnect" href="https://fonts.googleapis.com">
         <title>My Account - B-Mo</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -24,14 +33,14 @@
         </div>
 
         <div class="sidenav" id="a">
-            <div class="companyname">Shirly Bansil</div>
-                <div class="owner">Manager</div >
+            <div class="companyname"><?php echo $fname ." ". $lname?></div>
+                <div class="owner">Owner</div >
                    <a href="Dashboardowner.php" target="_top" class="nav"><i class="fa-solid fa-house"></i> Dash Board</a>
                    <a href="Ownersale.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Sales</a>
                    <a href="Businessowner.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Business</a>
                    <a href="product.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Products</a>
                    <a href="employee.php" target="_top" class="nav"><i class="fa-solid fa-users"></i> Employee</a>
-                  <a href="/Multi_business_system/landingpage/landingpage.php" target="_top"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+                  <a href="/Multi_business_system/landingpage/logout.php" target="_top"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
         </div>
         
           <div class="main" id="a">
@@ -46,77 +55,221 @@
                          
                     <div class="busin-right">
                         <div class="myprofile">
-                            <img class="picture" src="/Multi_business_system/picture/no-image-icon-md.png" alt="">
-                            <h1>name</h1>
+                            <?php 
+                                $server = "localhost";
+                                $user = "root";
+                                $pass = "";
+                                $dname ="multi_bussines_system";
+ 
+                                $con = mysqli_connect($server, $user, $pass, $dname);
+                                $category = mysqli_query($con,"SELECT * FROM owener_acct");
+                                while ( $c = mysqli_fetch_array($category)){
+                                    $imageData = $c['Image']; //  'Image' is the column name in your database
+
+                                    //  the image data is stored as a base64-encoded string in the database
+                                    $imageSrc = 'data:image/jpeg;base64,' . base64_encode($imageData);
+                            ?>
+                            <img class="picture" src="<?php echo  $imageSrc; ?>" alt="">
+                            <?php } $con->close()?>
+                            <h1><?php echo $fname ." ". $lname?></h1>
                             <h4>Owner</h4>
                         </div>
                         <div class="container-accountsetting">
+           
                             <div class="w3-black">
                                 <button class="tabpane-button" onclick="myaccount('User-account')">User Account Info</button>
                                 <button class="tabpane-button avatar" onclick="myaccount('Change-Avatar')">Change Avatar</button>
                                 <button class="tabpane-button password" onclick="myaccount('Change-Password')">Change Password</button>
                             </div>
-                              
+
                               <div id="User-account" class="acctinfo">
-                                 <form action="">
+                                 <form action="macctdatabase.php" method="post">
                                     <div class="user-acct">
-                                       <label for="lastname">Lastname</label>
-                                       <input type="text" class="user" id="lastname">
+                                       <label for="lastname">Last name</label>
+
+                                       <?php
+                                                    $server = 'localhost';
+                                                    $usner = 'root';
+                                                    $pass= '';
+                                                    $dbname = 'multi_bussines_system';
+    
+                                                    $con = mysqli_connect($server, $usner, $pass,$dbname);
+                                                    $category = mysqli_query($con,"SELECT * FROM owener_acct ");
+                                                    while ($c = mysqli_fetch_array($category)) {
+                                                ?>
+                                       <input type="text" name="lname" class="user" id="lastname" value="<?php  echo $c ['Last_name']?>">
                                        
                                    </div>
                                     <div class="user-acct comname" >
-                                       <label for="firstname">Firstname</label>
-                                       <input type="text"  class="user" id="firstname">
+                                       <label for="firstname">First name</label>
+                                       <input type="text" name="fname" class="user" value="<?php  echo $c ['First_name']?>" id="firstname">
                                     </div>
                                     <div class="user-acct middle" >
                                         <label for="mi">Middle Initial</label>
-                                        <input type="text"  class="middlee" id="mi">
+                                        <input type="text" name="mi"  class="middlee" value="<?php  echo $c ['Mi']?>" id="mi">
                                      </div>
+                                     
                                      <div class="secret_quest">
                                         <label for="">Secret Question</label>
-                                        <Select class="secret_questt">
-                                            <option value="">What is your first pet name</option>
-                                            <option value="">Who is your first love</option>
+                                        <Select class="secret_questt" name="sec">
+                                        <option hidden value="<?php  echo $c ['Secret_Question']?>"> <?php  echo $c ['Secret_Question']?></option>
+                                            <option value="First pet name">First pet name</option>
+                                            <option value="First pet name">First love</option>
                                         </Select>
-                                        <input type="text" class="userr" placeholder="">
+                                        <input type="text" class="userr" name ="ans" placeholder=""  value="<?php  echo $c ['Ans_Sec_Question']?> ">
+                                      
+                                       
                                      </div>
-                                        <input class="submit-useracct" type="submit" value="Save Changes">
+                                     <div class="user-acct middle" >
+                                      
+                                        <input type="text" hidden name="usernameee"  class="middlee" value="<?php  echo $c ['Username']?>" id="mi">
+                                     </div>
+                                    
+                                        <input class="submit-useracct" name="savechanges" type="submit" value="Save Changes">
                                  </form>
                               </div>
-                              
+    
                               <div id="Change-Avatar" class="acctinfo" style="display:none" >
+                            
                                <img class="addpicture" id="imagePreview" src="/picture/dropimage.png" alt=""  >
-                                      <form action="">
+                                      <form action="#" method="post" enctype="multipart/form-data">
+                                      <input type="text" name="we" hidden class="middlee" value="<?php  echo $c ['Username']?>" id="mi">
+                           
                                         <label for="fileInput" class="labelchoosefile">Choose File</label>
-                                        <input  class="file" type="file" id="fileInput">
+                                        <input  class="file" name="pic" type="file" id="fileInput">
                                          <br>
-                                         <input class="submit-useracct" type="submit" value="Save Changes">
+                                         <input class="submit-useracct" name="picture_submit"type="submit" value="Save Changes">
                                       </form>
                                       <div>NOTE! Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only</div>
                               </div>
                               
                               <div id="Change-Password" class="acctinfo" style="display:none">
-                                <form action="">
-                                    <div class="container-password">
-                                        <label for="password_change">Current Password</label>
-                                        <input type="password" class="password-change" id="password_change">
-                                    </div>
-                                    <div class="container-password">
-                                        <label for="new_passwordchange">New Password</label>
-                                        <input type="password" class="password-change" id="new_passwordchange">
-                                    </div>
-                                    <div class="container-password">
-                                        <label for="re_typepassword">Re-tpye Password</label>
-                                        <input type="password" class="password-change" id="re_typepassword">
-                                        <input class="submit-useracct" type="submit" value="Save Changes">
-                                    </div>
+                            <?php
+
+
+                                        if (isset($_POST['picture_submit'])){
+                                            $userrr = htmlspecialchars($_POST['we']);
+
+                                        // Handle file upload
+                                        $file = $_FILES['pic'];
+                                        $fileName = $file['name'];
+                                        $fileTmpName = $file['tmp_name'];
+                                        $fileSize = $file['size'];
+                                        $fileError = $file['error'];
+
+                                        if ($fileError === 0) {
+                                            $imageData = file_get_contents($fileTmpName);
+
+                                            // Database connection settings
+                                            $localhost = "localhost";
+                                            $username = "root";
+                                            $password = "";
+                                            $dbbname = "multi_bussines_system";
+
+                                            try {
+                                                $pdo = new PDO("mysql:host=$localhost;dbname=$dbbname", $username, $password);
+                                                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                                                // Prepare and execute the SQL query to insert image data
+                                                $stmt = $pdo->prepare("UPDATE owener_acct SET Image=? WHERE Username=?");
+                                                $stmt->execute([$imageData, $userrr]);
+                                            } catch (Exception $e) {
+                                                echo $e->getMessage();
+                                            }
+                                        } else {
+                                            echo "File upload error: " . $fileError;
+                                        }
+
+                                        }
+
+                                    ////////////////////////////////////////// change pass
+                            if (isset($_POST['changepass'])){
+                            $old = htmlspecialchars($_POST['old']);
+                            $new = htmlspecialchars($_POST['new']);
+                            $retype  = htmlspecialchars($_POST['re_type']);
+                            $userr = htmlspecialchars($_POST['w']);
+                            
+
+                            $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
+                                $verify_username = mysqli_query($con,"SELECT * FROM owener_acct WHERE Password ='$old'");
+                                if(mysqli_num_rows( $verify_username ) == 0) {
+                                echo '<div style="postion:absolute; top:20px; padding:5px; height:40px" class="alert alert-danger" role="alert">
+                                The please check the old password
+                                <button style="margin-left:770px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">x</button>
+                            </div>';
+                                        $con -> close();
+                                }else{
+                                    /* this code not detect the existing id and username will be insert in database*/
+                                    if ($new != $retype) {
+                                        echo '<div style="postion:absolute; top:20px; padding:5px; height:40px" class="alert alert-danger" role="alert">
+                                The new and re-type password are not same
+                                <button style="margin-left:770px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>';
+                                    } else{
+                                        $localhost = "localhost";
+                                        $username = "root";
+                                        $pass = "";
+                                        $dbname = "multi_bussines_system";
+                                    
+                                            //connection database
+                            try {
+                                $pdo = new PDO ("mysql:host=$localhost;dbname=$dbname", $username, $pass);
+                                // Set the PDO error mode to exception
+                                $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+                        
+                                        // // Prepare and execute the SQL query to insert data
+                                        $stmt = $pdo->prepare("UPDATE owener_acct SET Password= ? WHERE Username=?");
+                                        $stmt->execute ([$new, $userr]);
+                                        echo '<script>window.location.href = "/Multi_business_system/landingpage/logout.php";</script>';
+                                        exit(); 
+                            }
+                            catch (PDOException $e){
+                                echo "Not inserted". $e->getMessage();
+                            }
+                                    }  
+                                }
+                                
+                            }
+      // change pass
+                            ?>
+                                <form action="#" method="post">
+                                <input type="text" name="w"  hidden class="middlee" value="<?php  echo $c ['Username']?>" id="mi">
+                              
+                                <div class="container-password">
+                                    <label for="password_change">Current Password</label>
+                                    <input type="password" name="old" class="password-change" id="password_change">
+                                </div>
+                                <div class="container-password">
+                                    <label for="new_passwordchange">New Password</label>
+                                    <input type="password" name="new" class="password-change" id="new_passwordchange">
+                                </div>
+                                <div class="container-password">
+                                    <label for="re_typepassword">Re-type Password</label>
+                                    <input type="password" name="re_type" class="password-change" id="re_typepassword">
+                                    <input class="submit-useracct" name="changepass" type="submit" value="Save Changes">
+                                </div>
+                                    <?php }?>
                                 </form>
                               </div>
                         </div>
                 </div>
       <!--bootstarp js-->
       <?php include('footer.php');?>
+            <script>
+                   const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
 
+                                        const appendAlert = (message, type) => {
+                            const wrapper = document.createElement('div');
+                            wrapper.innerHTML = [
+                                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                                `   <div>${message}</div>`,
+                                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                                '</div>'
+                            ].join('');
+
+                            alertPlaceholder.append(wrapper);
+                        };
+            </script>
      
                         </div>
                     </div>

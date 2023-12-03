@@ -238,8 +238,7 @@
                                                     $usner = 'root';
                                                     $pass= '';
                                                     $dbname = 'multi_bussines_system';
-                                                    $query = " SELECT * FROM product WHERE Branch = '$branch'";
-               
+                                                    
                                                     $con = mysqli_connect($server, $usner, $pass,$dbname);
                                                     $category = mysqli_query($con,"SELECT * FROM business WHERE Business_name = '$branch'");
                                                     while ($c = mysqli_fetch_array($category)) {

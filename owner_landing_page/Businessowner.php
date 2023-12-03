@@ -1,3 +1,11 @@
+<?php
+ session_start();
+ ?>
+
+<?php 
+  $fname = $_SESSION ["ffname"];
+  $lname = $_SESSION ["lname"];
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,7 +31,7 @@
         </div>
 
         <div class="sidenav" id="a">
-            <div class="companyname">Shirly Bansil</div>
+            <div class="companyname"><?php echo $fname ." ". $lname?></div>
                 <div class="owner">Owner</div >
                    <a href="Dashboardowner.php" target="_top" class="nav"><i class="fa-solid fa-house"></i> Dash Board</a>
                    <a href="Ownersale.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Sales</a>
@@ -31,7 +39,7 @@
                    <a href="product.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Products</a>
                    <a href="employee.php" target="_top" class="nav"><i class="fa-solid fa-users"></i> Employee</a>
                    
-               <a href="/Multi_business_systemy/landingpage/landingpage.php"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+               <a href="/Multi_business_system/landingpage/logout.php"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
         </div>
         
           <div class="main" id="a">

@@ -19,7 +19,7 @@ session_start();
         <!--------------------This is for font awesome css------------------->
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <link rel="icon" type="image/x-icon" href="/Sad-Activity/picture/logo.png">
+        <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/sts.png">
        
     </head>
     <body onload="renderTime();">
