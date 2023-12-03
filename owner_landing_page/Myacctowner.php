@@ -111,6 +111,7 @@
                                         <option hidden value="<?php  echo $c ['Secret_Question']?>"> <?php  echo $c ['Secret_Question']?></option>
                                             <option value="First pet name">First pet name</option>
                                             <option value="First pet name">First love</option>
+                                            <option value="First pet name">Mothers Maiden Name</option>
                                         </Select>
                                         <input type="text" class="userr" name ="ans" placeholder=""  value="<?php  echo $c ['Ans_Sec_Question']?> ">
                                       
@@ -127,7 +128,7 @@
     
                               <div id="Change-Avatar" class="acctinfo" style="display:none" >
                             
-                               <img class="addpicture" id="imagePreview" src="/picture/dropimage.png" alt=""  >
+                               <img class="addpicture" id="imagePreview" src="/Multi_business_system/picture/dropimage.png" alt=""  >
                                       <form action="#" method="post"enctype="multipart/form-data">
                                       <input type="text" name="we" hidden class="middlee" value="<?php  echo $c ['Username']?>" id="mi">
                            
