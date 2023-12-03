@@ -10,12 +10,12 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-       <link rel="stylesheet" href="dashboardManager.css">
+       <link rel="stylesheet" href="DashboardManager.css">
        <link rel="preconnect" href="https://fonts.googleapis.com">
         <title>Dashboard - B-MO</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="DashboardManager.js" defer></script>
-        <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/logo.png">
+        <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/sts.png">
                                          <!-- Google Font Link for Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     </head>
@@ -113,19 +113,72 @@ session_start();
     </div>
     <!--Calendar-->
     <?php include('header.php'); ?> 
-       <!------------------------------top sale---------------------------->
-       <div class="Topsale" id="scrollableDiv">
-    <caption>Top Product</caption>
-    <table class="table table-bordered table-hover">          
-        <thead>
-            <tr>
-                <th scope="col">Branch</th>
-                <th scope="col">Product name</th>
-                <th scope="col">Quantity Sold</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php 
+                        <!------------------------------top sale product---------------------------->
+                        <div class="Topsale" id="scrollableDiv">
+                        <label class="topprod">Top Product</label>
+                    
+                        <table class="table table-bordered table-hover" id="topProductTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Branch</th>
+                                    <th scope="col">Product name</th>
+                                    <th scope="col">Quantity Sold</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $host = "localhost";
+                                $dbname = "multi_bussines_system";
+                                $username = "root";
+                                $password = "";
+
+                                try {
+                                    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                                    // SQL query with GROUP BY and SUM
+                                    $query = "SELECT branch, product_name, SUM(quantity_sold) AS total_quantity_sold FROM top_product WHERE branch = '$branch' GROUP BY branch, product_name";
+                                    $statement = $pdo->prepare($query);
+                                    $statement->execute();
+
+                                    // Fetch all rows
+                                    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+                                    if ($result) {
+                                        foreach ($result as $row) {
+                                ?>
+                                            <tr>
+                                                <td class="user_id"><?= $row['branch']; ?></td>
+                                                <td><?= $row['product_name']; ?></td>
+                                                <td><?= $row['total_quantity_sold']; ?></td>
+                                            </tr>
+                                <?php
+                                        }
+                                    }
+                                } catch (PDOException $e) {
+                                    echo $e->getMessage();
+                                }
+
+                                $pdo = null;
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+ <!--------------------------------------sales----------------------------------------------------------->
+      <!--sales-->
+      <div class="sales" id="scrollableDiv">
+    <label class="topprod">Sales</label>
+    <table class="customers">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Branch</th>
+                    <th scope="col">Sales</th>
+                    <th scope="col">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
                 $host = "localhost";
                 $dbname = "multi_bussines_system";
                 $username = "root";
@@ -135,89 +188,34 @@ session_start();
                     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
                     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     
-                    // SQL query with GROUP BY and SUM
-                    $query = " SELECT * FROM top_product WHERE branch = '$branch'";
+                    // Fetch and aggregate sales for a specific branch and date
+                    $query = "SELECT branch, SUM(sales) AS total_sales, sale_date FROM sales WHERE branch = '$branch' GROUP BY branch, sale_date";
                     $statement = $pdo->prepare($query);
-                   $statement->execute();
+                    $statement->execute();
 
-                    // Fetch all rows
+                    // Display the results
                     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
                     if ($result) {
                         foreach ($result as $row) {
-                            ?>
+                ?>
                             <tr>
-                                <td class="user_id"><?= $row['branch']; ?></td>
-                                <td><?= $row['product_name']; ?></td>
-                                <td><?= $row['quantity_sold']; ?></td>
+                                <td><?= $row['branch']; ?></td>
+                                <td><?= $row['total_sales'] ?></td>
+                                <td><?= $row['sale_date'] ?></td>
                             </tr>
-                            <?php
+                <?php
                         }
                     }
-
                 } catch (PDOException $e) {
                     echo $e->getMessage();
                 }
-
                 $pdo = null;
-            ?>
-        </tbody>
+                ?>
+            </tbody>
+        </table>
     </table>
 </div>
-      <!--sales-->
-      <div class="sales" id="scrollableDiv">
-      <caption class="topsale">Sales</caption>
-      <table class="table table-bordered table-hover">
-        <thead>
-          <tr>
-              <th scope="col">Branch</th>
-              <th scope="col">Sale</th>
-              <th scope="col">Date</th>
-          </tr>
-        </thead>
-        <tbody>
-              <?php 
-               $host = "localhost";
-               $dbname = "multi_bussines_system";
-               $username = "root";
-               $password = "";
-            
-
-              try{
-                  $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-                   $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-                  // prepare and execute a query
-
-                 $statement->execute();
-                 $query = " SELECT * FROM sales WHERE branch ='$branch'";
-                 $statement = $pdo->prepare($query);
-                 $statement->execute();
-
-                 // to desplay fetch all of data
-                 $result = $statement->fetchALL(PDO::FETCH_ASSOC);
-
-                 if( $result){
-                  foreach ($result as $row){
-                      ?>
-                      <tr>
-                          <td class="user_id"><?= $row['branch'];?></td>
-                          <td><?= $row['sales']?></td>
-                          <td><?= $row['sale_date']?></td>
-                      </tr>
-                      <?php
-                  }
-                 }
-
-              }catch(PDOException $e){
-                  echo $e->getMessage();
-              }
-              $pdo=null;
-              ?>
-            
-          </tbody>
-          
-        </table>
-       </div>
       <!--sales-->
 
  </div>

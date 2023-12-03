@@ -115,7 +115,7 @@
     </div>
     <!--Calendar-->
     <?php include('header.php'); ?> 
-       <!---------------------------top sale------------------------------------------------->
+       <!---------------------------top sale product------------------------------------------------->
      <div class="Topsale" id="scrollableDiv">
     <caption>Top Product</caption>
     <table class="table table-bordered table-hover">          
@@ -192,9 +192,9 @@
                   $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
                    $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
                   // prepare and execute a query
-                 $query = " SELECT * FROM sales";
-                 $statement = $pdo->prepare($query);
-                 $statement->execute();
+                  $query = "SELECT branch, SUM(sales) AS total_sales, sale_date FROM sales GROUP BY branch, sale_date";
+                  $statement = $pdo->prepare($query);
+                  $statement->execute();
 
                  // to desplay fetch all of data
                  $result = $statement->fetchALL(PDO::FETCH_ASSOC);
@@ -203,9 +203,9 @@
                   foreach ($result as $row){
                       ?>
                       <tr>
-                          <td class="user_id"><?= $row['branch'];?></td>
-                          <td><?= $row['sales']?></td>
-                          <td><?= $row['sale_date']?></td>
+                               <td><?= $row['branch']; ?></td>
+                                <td><?= $row['total_sales'] ?></td>
+                                <td><?= $row['sale_date'] ?></td>
                       </tr>
                       <?php
                   }

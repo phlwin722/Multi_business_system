@@ -125,54 +125,55 @@
 
                 <!--------------------------------------------------------sales------------------------------------->
                 <div class="sales" id="scrollableDiv">
-                    <label class="topprod">Sales</label>
-                    <table class="customers">
-                
-                        <table class="table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Branch</th>
-                                    <th scope="col">Sales</th>
-                                    <th scope="col">Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $host = "localhost";
-                                $dbname = "multi_bussines_system";
-                                $username = "root";
-                                $password = "";
+    <label class="topprod">Sales</label>
+    <table class="customers">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Branch</th>
+                    <th scope="col">Sales</th>
+                    <th scope="col">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $host = "localhost";
+                $dbname = "multi_bussines_system";
+                $username = "root";
+                $password = "";
 
-                                try {
-                                    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-                                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                    // prepare and execute a query
-                                    $query = " SELECT * FROM sales";
-                                    $statement = $pdo->prepare($query);
-                                    $statement->execute();
+                try {
+                    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    
+                    // Fetch total sales for each branch on a particular date
+                    $query = "SELECT branch, SUM(sales) AS total_sales, sale_date FROM sales GROUP BY branch, sale_date";
+                    $statement = $pdo->prepare($query);
+                    $statement->execute();
 
-                                    // to display fetch all of the data
-                                    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                    // Display the results
+                    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                                    if ($result) {
-                                        foreach ($result as $row) {
-                                ?>
-                                            <tr>
-                                                <td class="user_id"><?= $row['branch']; ?></td>
-                                                <td><?= $row['sales'] ?></td>
-                                                <td><?= $row['sale_date'] ?></td>
-                                            </tr>
-                                <?php
-                                        }
-                                    }
-                                } catch (PDOException $e) {
-                                    echo $e->getMessage();
-                                }
-                                $pdo = null;
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
+                    if ($result) {
+                        foreach ($result as $row) {
+                ?>
+                            <tr>
+                                <td><?= $row['branch']; ?></td>
+                                <td><?= $row['total_sales'] ?></td>
+                                <td><?= $row['sale_date'] ?></td>
+                            </tr>
+                <?php
+                        }
+                    }
+                } catch (PDOException $e) {
+                    echo $e->getMessage();
+                }
+                $pdo = null;
+                ?>
+            </tbody>
+        </table>
+    </table>
+</div>
                     <!--------------------------------sales--=====0--------------------------------------->
 
                     <!-- <table class="customers">
