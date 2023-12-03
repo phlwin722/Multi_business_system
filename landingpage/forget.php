@@ -6,6 +6,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">    
         <link rel="stylesheet" href="Forget.css">
+        <title>Forget - B-MO</title>
+        <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/sts.png">
+     
+       
     </head>
     <body>
         <div class="l-form">
@@ -31,16 +35,12 @@
                         $_SESSION ["username"] = $roww["Username"];
                         header ("Location: forgetnewpassword.php");
                     }else {
-                        echo '<div style="postion:absolute; top:-5px; padding:10px; height:50px" class="alert alert-success" role="alert">
-                    Please Insert Correct Answer
-                    <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>';
+                        echo '<script>alert("Please Insert Correct Answer")</script>';
+                    
                     }
                 }else{
-                    echo '<div style="postion:absolute; top:-5px; padding:10px; height:50px" class="alert alert-success" role="alert">
-                    Please Insert Correct Username
-                    <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>';
+                    echo '<script>alert("Please Insert Correct Username")</script>';
+                    
                 }
 
             }
@@ -49,7 +49,7 @@
           <form action="" method="post" class="form">
             <h1>Forget Password</h1>
             <div class="form_div">
-                <input type="text" name="username" class="form_input" placeholder=" ">
+                <input required type="text" name="username" class="form_input" placeholder=" ">
                 <label for="" class="form_label">Username</label>
             </div>
             <div class="select" >
@@ -59,7 +59,7 @@
                     <option value="First pet name">First love</option>
                     <option value="First pet name">Mothers Maiden Name</option>
                     </select>
-                    <input type="text" name="type" class="aa" placeholder="Type here">
+                    <input type="text" required name="type" class="aa" placeholder="Type here">
               
                 </div>
                     <input type="submit" name="submit" class="form_continue" value="Continue">

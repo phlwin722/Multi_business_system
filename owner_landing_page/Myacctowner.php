@@ -79,7 +79,7 @@
                             </div>
 
                               <div id="User-account" class="acctinfo">
-                                 <form action="macctdatabase.php" method="post">
+                                 <form action="#" method="post">
                                     <div class="user-acct">
                                        <label for="lastname">Last name</label>
 
@@ -142,6 +142,39 @@
                               
                               <div id="Change-Password" class="acctinfo" style="display:none">
                             <?php
+                            ob_start();
+
+                            //////////////////////////update info//////////////////////////////////////////
+                            if (isset($_POST['savechanges'])) {
+                                $fnamee = htmlspecialchars($_POST['fname']);
+                                $lnamee = htmlspecialchars($_POST['lname']);
+                                $mii = htmlspecialchars($_POST['mi']);
+                                $sec = htmlspecialchars($_POST['sec']);
+                                $ans = htmlspecialchars($_POST['ans']);
+                                $userr = htmlspecialchars($_POST['usernameee']);
+                            
+                             
+                                    // Database connection settings
+                                    $host = "localhost";
+                                    $dbname = "multi_bussines_system";
+                                    $username = "root";
+                                    $password = "";
+
+                                    try {
+                                        // Create a PDO instance
+                                        $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                                         $stmt = $pdo->prepare("UPDATE owener_acct SET Last_name=?, First_name=?, Mi=?, Secret_Question=?, Ans_Sec_Question=? WHERE Username=?");
+                                         $stmt->execute([$lnamee, $fnamee, $mii, $sec, $ans, $userr]);
+                                         echo'<script>alert("Successfull Edit")</script>';
+                                         echo '<script>window.location.href = "/Multi_business_system/landingpage/logout.php";</script>';
+                                            
+                                         exit();
+                                    }catch (Exception $e) {
+                                        echo 'Not connected'.$e->getMessage();
+                                    }
+                                }                        
+
+                            /////////////////////////////////////////////////////////////////////
                             /////////////// insert image //////////////////
                                         if (isset($_POST['insert'])){
 
@@ -161,6 +194,9 @@
                                                 // Prepare and execute the SQL query to insert image data
                                                 $stmt = $pdo->prepare("UPDATE owener_acct SET Image=? WHERE Username=?");
                                                 $stmt->execute([$file, $userrr]);
+                                                echo'<script>alert("Successfull Uploaded")</script>';
+                                                echo '<script>window.location.href = "/Multi_business_system/landingpage/logout.php";</script>';
+                                             
                                             } catch (Exception $e) {
                                                 echo $e->getMessage();
                                             }
@@ -206,9 +242,9 @@
                                         // // Prepare and execute the SQL query to insert data
                                         $stmt = $pdo->prepare("UPDATE owener_acct SET Password= ? WHERE Username=?");
                                         $stmt->execute ([$new, $userr]);
+                                        echo'<script>alert("Successfull Change")</script>';
                                         echo '<script>window.location.href = "/Multi_business_system/landingpage/logout.php";</script>';
-                                        exit(); 
-                            }
+                                       }
                             catch (PDOException $e){
                                 echo "Not inserted". $e->getMessage();
                             }
@@ -217,6 +253,7 @@
                                 
                             }
       // change pass
+      ob_end_flush();
                             ?>
                                 <form action="#" method="post">
                                 <input type="text" name="w"  hidden class="middlee" value="<?php  echo $c ['Username']?>" id="mi">

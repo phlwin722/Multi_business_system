@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-       <link rel="stylesheet" href="businesowner.css">
+       <link rel="stylesheet" href="busnesowner.css">
        <link rel="preconnect" href="https://fonts.googleapis.com">
         <title>Business - B-MO</title>
         <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/sts.png">

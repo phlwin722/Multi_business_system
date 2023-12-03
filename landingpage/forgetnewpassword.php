@@ -6,17 +6,20 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">    
         <link rel="stylesheet" href="forgetnewpassword.css">
+        <title>Forget - B-MO</title>
+        <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/sts.png">
+     
     </head>
     <body>
         <div class="l-form">
           <form action="" method="post" class="form">
             <h1>New Password</h1>
             <div class="form_div">
-                <input type="password" name="new" class="form_input" placeholder=" ">
+                <input type="password" required name="new" class="form_input" placeholder=" ">
                 <label for=""  class="form_label">New Password</label>
             </div>
             <div class="form_div">
-                <input type="password" name="retype" class="form_input" placeholder=" ">
+                <input type="password" required name="retype" class="form_input" placeholder=" ">
                 <label for=""  class="form_label">Re-type Password</label>
             </div>
                     <input type="submit" name="submit" class="form_continue" value="Submit">
@@ -47,10 +50,8 @@
                             echo 'eeror'. $e->getMessage ();
                          }
                     }else{
-                        echo '<div style="postion:absolute; top:-5px; padding:10px; height:50px" class="alert alert-success" role="alert">
-                    Please correct username or password
-                    <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>';
+                        echo '<script>alert("Please Check New Password and Re-type Password")</script>';
+                    
                     }
                 }
             ?>
