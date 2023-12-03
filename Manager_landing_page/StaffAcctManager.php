@@ -394,15 +394,6 @@ $pdo = null;
                     <script> 
                              const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
 
-<?php
-if (isset($_POST["submit"])) {
-    // Check if ID or username messages were set in PHP
-    if (mysqli_num_rows($verify_query) != 0 || mysqli_num_rows($verify_username) != 0) {
-        echo 'appendAlert("The ID or Username was already taken", "danger");';
-    }
-}
-?>
-
                         const appendAlert = (message, type) => {
                             const wrapper = document.createElement('div');
                             wrapper.innerHTML = [
