@@ -62,15 +62,11 @@
                                 $dname ="multi_bussines_system";
  
                                 $con = mysqli_connect($server, $user, $pass, $dname);
-                                $category = mysqli_query($con,"SELECT * FROM owener_acct");
+                                $category = mysqli_query($con,"SELECT * FROM owener_acct ORDER BY Username DESC" );
                                 while ( $c = mysqli_fetch_array($category)){
-                                    $imageData = $c['Image']; //  'Image' is the column name in your database
-
-                                    //  the image data is stored as a base64-encoded string in the database
-                                    $imageSrc = 'data:image/jpeg;base64,' . base64_encode($imageData);
-                            ?>
-                            <img class="picture" src="<?php echo  $imageSrc; ?>" alt="">
-                            <?php } $con->close()?>
+                                    echo ' <img class="picture" src="data:image/jpeg;base64,'.base64_encode($c['Image']).'"/>';
+                             ?>
+                             <?php } $con->close()?>
                             <h1><?php echo $fname ." ". $lname?></h1>
                             <h4>Owner</h4>
                         </div>
@@ -132,33 +128,21 @@
                               <div id="Change-Avatar" class="acctinfo" style="display:none" >
                             
                                <img class="addpicture" id="imagePreview" src="/picture/dropimage.png" alt=""  >
-                                      <form action="#" method="post" enctype="multipart/form-data">
+                                      <form action="#" method="post"enctype="multipart/form-data">
                                       <input type="text" name="we" hidden class="middlee" value="<?php  echo $c ['Username']?>" id="mi">
                            
                                         <label for="fileInput" class="labelchoosefile">Choose File</label>
-                                        <input  class="file" name="pic" type="file" id="fileInput">
+                                        <input  class="file" name="image" type="file" id="fileInput">
                                          <br>
-                                         <input class="submit-useracct" name="picture_submit"type="submit" value="Save Changes">
+                                         <input class="submit-useracct" id="insert" name="insert"type="submit" value="Save Changes">
                                       </form>
                                       <div>NOTE! Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only</div>
                               </div>
                               
                               <div id="Change-Password" class="acctinfo" style="display:none">
                             <?php
-
-
-                                        if (isset($_POST['picture_submit'])){
-                                            $userrr = htmlspecialchars($_POST['we']);
-
-                                        // Handle file upload
-                                        $file = $_FILES['pic'];
-                                        $fileName = $file['name'];
-                                        $fileTmpName = $file['tmp_name'];
-                                        $fileSize = $file['size'];
-                                        $fileError = $file['error'];
-
-                                        if ($fileError === 0) {
-                                            $imageData = file_get_contents($fileTmpName);
+                            /////////////// insert image //////////////////
+                                        if (isset($_POST['insert'])){
 
                                             // Database connection settings
                                             $localhost = "localhost";
@@ -166,19 +150,20 @@
                                             $password = "";
                                             $dbbname = "multi_bussines_system";
 
+                                            $file = addslashes (file_get_contents($_FILES["image"]["tmp_name"]));
+                                            $userrr = htmlspecialchars($_POST['we']);
+
                                             try {
                                                 $pdo = new PDO("mysql:host=$localhost;dbname=$dbbname", $username, $password);
                                                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                                                 // Prepare and execute the SQL query to insert image data
                                                 $stmt = $pdo->prepare("UPDATE owener_acct SET Image=? WHERE Username=?");
-                                                $stmt->execute([$imageData, $userrr]);
+                                                $stmt->execute([$file, $userrr]);
                                             } catch (Exception $e) {
                                                 echo $e->getMessage();
                                             }
-                                        } else {
-                                            echo "File upload error: " . $fileError;
-                                        }
+                                    
 
                                         }
 
@@ -269,6 +254,19 @@
 
                             alertPlaceholder.append(wrapper);
                         };
+
+                    ///// image 
+                    $(document).ready(function(){
+                        $('#insert').click(function(){
+                            var image_name =$ ('#fileInput').val();
+                            var extension =$('#fileInput').val ().split('.').pop().toLowerCase();
+                            if (jQuery.inArray(extension ,['gif','png','jpg','jpeg']) == -1){
+                                alert('Invalid Image');
+                                $('#fileInput').val ('');
+                                return false;
+                            }
+                        });
+                    });
             </script>
      
                         </div>

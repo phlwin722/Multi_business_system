@@ -20,6 +20,8 @@
         <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/sts.png">
    </head>
     <body>
+           <!--bootstarp table html-->
+           <?php include('header.php'); ?> 
         <div class="left">
         <img src="/Multi_business_system/picture/sts.png" style="height:60px; width: 80px;position:absolute; top:-4px; left:50px;" alt="">
                 
@@ -54,9 +56,7 @@
                         <div class="busin-left">
                             
                         <div id="mooove">
-                             <!--------------------Insert modal---------------------->
-                     
-                       </div>
+                           </div>
                        <div id="bot">
                              <!--------------------Insert modal---------------------->
                        <button type="button"  class="btn btn-primary move " data-bs-toggle="modal"  data-bs-target="#exampleModal">
@@ -72,10 +72,9 @@
         $username = htmlspecialchars($_POST["usernaame"]);
             $verify_username = mysqli_query($con,"SELECT Username FROM employee WHERE Username ='$username'");
          if(mysqli_num_rows( $verify_username ) != 0) {
-            echo '<div style="postion:absolute; top:50px; padding:5px; height:40px" class="alert alert-danger" role="alert">
+            echo '<div style="postion:absolute; top:50px; padding:10px; height:50px" class="alert alert-danger" role="alert">
             The Username was already taken
-            <button style="margin-left:760px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    
+            <button style="margin-left:720px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>';
                     $con -> close();
             }else{
@@ -123,7 +122,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     
-                    <form action="" method="post">
+                    <form action="" method="post"  enctype="multipart/form-data">
                             <div class="modal-body">
                                         
                                                 <Label for="lastname">Last Name</Label>
@@ -223,8 +222,8 @@
                                                     while ($c = mysqli_fetch_array($category)) {
                                                 ?>
                                                     <option value="<?php echo $c ['Business_name']?>"><?php echo $c['Business_name']?></option>
-                                                    $con->close();
-                                                    <?php }?>
+                                                   
+                                                    <?php } $con->close();?>
                                                 </select>
                                                        <!--Chose business name-->
 
@@ -272,8 +271,6 @@
                    <!----- delete Modal ------->
 
                         <div class="product"  id="scrollableDiv" id="tableee">
-                              <!--bootstarp table html-->
-                        <?php include('header.php'); ?> 
                         <table class="table table-bordered table-hover" >          
                         <thead>
                             <tr>
@@ -346,15 +343,6 @@
     <script>
         const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
 
-        <?php
-        if (isset($_POST["submit"])) {
-            // Check if ID or username messages were set in PHP
-            if (mysqli_num_rows($verify_query) != 0 || mysqli_num_rows($verify_username) != 0) {
-                echo 'appendAlert("The ID or Username was already taken", "danger");';
-            }
-        }
-        ?>
-
         const appendAlert = (message, type) => {
             const wrapper = document.createElement('div');
             wrapper.innerHTML = [
@@ -369,9 +357,6 @@
 
                     <script> 
                     
-
-
-
                                    $(document).ready(function () {
                                     // Get references to your scrollable div and the div to be synchronized
                                     var scrollableDiv = $("#scrollableDiv");
