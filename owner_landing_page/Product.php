@@ -23,142 +23,7 @@
   
     </head>
     <body>
-          <!-----------------------------mo dal-------------------------------------------------->
-   
-
-        <!--Insert------------------------>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog " >
-                    <div class="modal-content  modal-dialog-scrollable" >
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Product</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="ProductDataBase.php" method="post">
-                            <div class="modal-body">
-                             <label for="product_code" class="small">Product Code</label>
-                             <input type="text" name="productcode" id="product_code" class="nameofproduct" required placeholder="Product Code">
-                                 <br>
-                             <label for="" class="small">Product name  </liabel>
-                             <input type="text" name="nameproduct" id="product_name" class="nameofproduct" required placeholder="Name of Product">
-                                                <br>
-                           <label for="" class="small">Price: </label>
-                           <input type="text" name="priceproduct" id="price" class="nameofproduct" required placeholder="Price of Product">
-                             <label for="" class="small">Choose Branch: </label>
-
-                           <!--Chose business name-->
-                             <select class="nameofproduct" name="businessname" id="category-business">]
-                              <option hidden>Select Branch</option>
-                                <?php
-                                       $usner = 'root';
-                                       $pass= '';
-                                       $dbname = 'multi_bussines_system';
-
-                                                    $con = mysqli_connect($server, $usner, $pass,$dbname);
-                                                    $category = mysqli_query($con,'SELECT * FROM business');
-                                                    while ($c = mysqli_fetch_array($category)) {
-                                                ?>
-                                                    <option value="<?php echo $c ['Business_name']?>"><?php echo $c['Business_name']?></option>
-                                                    $con->close();
-                                                    <?php }?>
-                                                </select>
-                                                       <!--Chose business name-->
-
-                
-                                                    <label for="" class="">Quantity: </label>
-                                                    <input class="nameofproduct" name="quantity" required type="number">
-                                                <br>
-                                                  
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <input class="btn btn-primary" type="submit" name="upload" value="Save">                          
-                    </div>
-                    </form>
-                    </div>
-                </div>
-                </div>
-                  <!--Insert------------------------>
-                 
-                    <!--Edit------------------------>
-                    <div class="modal fade" id="editdata" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog " >
-                    <div class="modal-content  modal-dialog-scrollable" >
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Product</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="ProductDatabase.php" method="post">
-                            <div class="modal-body">
-                            <label for="product_code" class="small">Product Code</label>
-                                                <input type="text"  name="productcode" id="productcode" class="nameofproduct" required placeholder="Product Code">
-                                                <br>
-                                                <label for="" class="small">Product name</label>
-                                                <input type="text" name="nameproduct" id="productname" class="nameofproduct" required placeholder="Name of Product">
-                                                <br>
-                                                <label for="" class="small">Price: </label>
-                                                <input type="text" id="pricee" name="priceproduct" class="nameofproduct" required placeholder="Price of Product">
-                                                 
-                                                <label for="" class="small" >Choose Branch: </label>
-                                                  <!--Chose business name-->
-                                                  <select class="nameofproduct" id="branchh" name="businessname" >]
-                                                <option hidden>Select Branch</option>
-                                                <?php
-                                                    $server = 'localhost';
-                                                    $usner = 'root';
-                                                    $pass= '';
-                                                    $dbname = 'multi_bussines_system';
-
-                                                    $con = mysqli_connect($server, $usner, $pass,$dbname);
-                                                    $category = mysqli_query($con,'SELECT * FROM business');
-                                                    while ($c = mysqli_fetch_array($category)) {
-                                                ?>
-                                          <option value="<?php echo $c ['Business_name']?>"><?php echo $c['Business_name']?></option>
-                                         $con->close();
-                                 <?php }?>
-                         </select>
-                                   <!--Chose business name-->
-
-                          <label for="" class=""  id="quantity">Quantity </label>
-                        <input class="nameofproduct" name="quantity" id="quantityy" required type="number">
-                                           
-                                
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <input class="btn btn-primary" type="submit" name="savechanges" value="Save changes">                          
-                    </div>
-                    </form>
-                    </div>
-                </div>
-                </div>
-                  <!--Edit------------------------>
-                 
-                 <!-- delete Modal -->
-                 <div class="modal fade" id="deletedata" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog " >
-                    <div class="modal-content  modal-dialog-scrollable" >
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Business</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="ProductDataBase.php" method="post">
-                            <div class="modal-body">
-                                <h5>Are you sure Do you want delete</h5>
-                                <input hidden id="product_codee" name="ID"></input>                
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <input class="btn btn-primary btn-danger" type="submit" name="delete_employee" value="Delete">                          
-                    </div>
-                    </form>
-                    </div>
-                </div>
-                </div>
-                   <!----- delete Modal ------->
-                  
-    <!-----------------------------mo dal-------------------------------------------------->
-        <div class="left">
+         <div class="left">
         <img src="/Multi_business_system/picture/sts.png" style="height:60px; width: 80px;position:absolute; top:-4px; left:50px;" alt="">
              <div class="dropdown">
                   <button onclick="myFunction()" class="dropbtn"><i class="fa-solid fa-circle-user"></i></button>
@@ -218,6 +83,236 @@
                 </button>
                            <div class="List_of_product">
                         <p>List of Product</p>
+                        <!--------------------------data base--------------------------------------------------------->
+                                    
+                                        <?php
+                        ///////////////////// insert //////////////////////////////////
+                                        if (isset($_POST["submitt"])) {     
+                                                $nameproduct = htmlspecialchars($_POST["nameproduct"]);
+                                            $priceproduct = htmlspecialchars($_POST["priceproduct"]);
+                                        $businessname = htmlspecialchars($_POST["businessname"]);
+                                        $quantity = htmlspecialchars($_POST["quantity"]);
+                                                $host = "localhost";
+                                                $dbname = "multi_bussines_system";
+                                                $username = "root";
+                                                $password = "";
+
+                                                try {
+                                                    // Create a PDO instance
+                                                    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                                                    
+                                                    // Set the PDO error mode to exception
+                                                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                                                    // Prepare and execute the SQL query to insert data
+                                                    $stmt = $pdo->prepare("INSERT INTO product ( Product_name, Price, Quantity, Branch) VALUES ( ?, ?, ? ,?)");
+                                                    $stmt->execute([ $nameproduct, $priceproduct, $quantity, $businessname]);
+                                                    echo '<div style="postion:absolute; top:-5px; padding:10px; height:50px" class="alert alert-success" role="alert">
+                                                Successfull Insert
+                                                <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>';
+                                                } catch (PDOException $e) {
+                                                    echo "Error inserting data: " . $e->getMessage();
+                                                }
+                                                // Close the database connection
+                                                $pdo = null;
+                                            }
+                                        //insert data
+
+                                        //edit data
+                                        if (isset($_POST["savechanges"])) {
+                                        $product = htmlspecialchars($_POST['productcode']);
+                                        $productname = htmlspecialchars    ($_POST['nameproduct']);
+                                        $price= htmlspecialchars ($_POST['priceproduct']);
+                                        $quantity = htmlspecialchars  ($_POST['quantity']);
+                                        $branch = htmlspecialchars($_POST['businessname']);
+                                        
+                                            // Database connection settings
+                                            $host = "localhost";
+                                            $dbname = "multi_bussines_system";
+                                            $username = "root";
+                                            $password = "";
+
+                                            try {
+                                                // Create a PDO instance
+                                                $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                                                
+                                                // Set the PDO error mode to exception
+                                                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                $stmt = $pdo->prepare("UPDATE product SET Product_name= ?, Price= ? , Quantity = ? ,Branch = ?  WHERE Product_code=?");
+                                                $stmt->execute ([$productname, $price, $quantity ,$branch, $product]);
+                                                echo '<div style="postion:absolute; top:-5px; padding:10px; height:50px" class="alert alert-success" role="alert">
+                                                Successfull Edited
+                                                <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>';
+                                            } catch (PDOException $e) {
+                                                echo "Error inserting data: " . $e->getMessage();
+                                            }
+
+                                            // Close the database connection
+                                            $pdo = null;
+                                        }
+                                        // edit data
+
+                                        if (isset($_POST["delete_employee"])){
+                                        $local ="localhost";
+                                        $username = "root";
+                                        $pass ="";
+                                        $dbnamee = "multi_bussines_system";
+                                        $ID = htmlspecialchars($_POST["ID"]);
+
+                                        try{
+                                            $pdo = new PDO("mysql:host=$local;dbname=$dbnamee", $username, $pass);
+                                            $pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                            $sql = "DELETE FROM product WHERE Product_code = :ID";
+                                                $stmt = $pdo->prepare($sql);
+                                                $stmt->bindParam(':ID', $ID);
+                                                $stmt->execute();
+                                                echo '<div style="postion:absolute; top:-5px; padding:10px; height:50px" class="alert alert-danger" role="alert">
+                                                Successfull Delete
+                                                <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>';
+                                        }catch (PDOException $e) {
+                                            echo " ". $e->getMessage();
+                                        }
+                                        $pdo = null;
+                                        } //////delete data  product
+                                        ?>
+                        <!-----------------------------data base-------------------------------------------------->
+                          <!-----------------------------mo dal-------------------------------------------------->
+   
+
+        <!-------------------------------------------Insert------------------------>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog " >
+                    <div class="modal-content  modal-dialog-scrollable" >
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Product</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="#" method="post">
+                            <div class="modal-body">
+                                  
+                             <label for="" class="small">Product name  </liabel>
+                             <input type="text" name="nameproduct" id="product_name" class="nameofproduct" required placeholder="Name Product">
+                                                <br>
+                           <label for="" class="small">Price </label>
+                           <input type="text" name="priceproduct" id="price" class="nameofproduct" value="0.00" required placeholder="Price Product">
+                             <label for="" class="small">Choose Branch </label>
+
+                           <!--Chose business name-->
+                             <select class="nameofproduct" name="businessname" id="category-business">]
+                              <option hidden>Select Branch</option>
+                                <?php
+                                       $usner = 'root';
+                                       $pass= '';
+                                       $dbname = 'multi_bussines_system';
+
+                                                    $con = mysqli_connect($server, $usner, $pass,$dbname);
+                                                    $category = mysqli_query($con,'SELECT * FROM business');
+                                                    while ($c = mysqli_fetch_array($category)) {
+                                                ?>
+                                                    <option value="<?php echo $c ['Business_name']?>"><?php echo $c['Business_name']?></option>
+                                                    $con->close();
+                                                    <?php }?>
+                                                </select>
+                                                       <!--Chose business name-->
+
+                
+                                                    <label for="" class="">Quantity: </label>
+                                                    <input class="nameofproduct" name="quantity" value="1" required type="number">
+                                                <br>
+                                                  
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input class="btn btn-primary" type="submit" name="submitt" value="Save">                          
+                    </div>
+                    </form>
+                    </div>
+                </div>
+                </div>
+                  <!-----------------------------------------Insert------------------------>
+                 
+                    <!----------------------------------Edit------------------------>
+                    <div class="modal fade" id="editdata" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog " >
+                    <div class="modal-content  modal-dialog-scrollable" >
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Product</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="#" method="post">
+                            <div class="modal-body">
+  
+                                                <input type="text" hidden name="productcode" id="productcode" class="nameofproduct" required placeholder="Product Code">
+                                               
+                                                <label for="" class="small">Product name</label>
+                                                <input type="text" name="nameproduct" id="productname" class="nameofproduct" required placeholder="Name of Product">
+                                                <br>
+                                                <label for="" class="small">Price: </label>
+                                                <input type="text" id="pricee" name="priceproduct" class="nameofproduct" required placeholder="Price of Product">
+                                                 
+                                                <label for="" class="small" >Choose Branch: </label>
+                                                  <!--Chose business name-->
+                                                  <select class="nameofproduct" id="branchh" name="businessname" >]
+                                                <option hidden>Select Branch</option>
+                                                <?php
+                                                    $server = 'localhost';
+                                                    $usner = 'root';
+                                                    $pass= '';
+                                                    $dbname = 'multi_bussines_system';
+
+                                                    $con = mysqli_connect($server, $usner, $pass,$dbname);
+                                                    $category = mysqli_query($con,'SELECT * FROM business');
+                                                    while ($c = mysqli_fetch_array($category)) {
+                                                ?>
+                                          <option value="<?php echo $c ['Business_name']?>"><?php echo $c['Business_name']?></option>
+                                         $con->close();
+                                 <?php }?>
+                         </select>
+                                   <!--Chose business name-->
+
+                          <label for="#" class=""  id="quantity">Quantity </label>
+                        <input class="nameofproduct" name="quantity" id="quantityy" required type="number">
+                                           
+                                
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input class="btn btn-primary" type="submit" name="savechanges" value="Save changes">                          
+                    </div>
+                    </form>
+                    </div>
+                </div>
+                </div>
+                  <!---------------------------------Edit------------------------>
+                 
+                 <!------------------------------ delete Modal ----------------->
+                 <div class="modal fade" id="deletedata" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog " >
+                    <div class="modal-content  modal-dialog-scrollable" >
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Business</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="" method="post">
+                            <div class="modal-body">
+                                <h5>Are you sure Do you want delete</h5>
+                                <input hidden id="product_codee" name="ID"></input>                
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input class="btn btn-primary btn-danger" type="submit" name="delete_employee" value="Delete">                          
+                    </div>
+                    </form>
+                    </div>
+                </div>
+                </div>
+                   <!----- ============== delete Modal ------------------------->
+                  
+    <!-----------------------------mo dal-------------------------------------------------->
+       
                         <div class="product">
                         <?php include('header.php'); ?> 
 
