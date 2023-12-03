@@ -52,7 +52,7 @@ body{
     cursor: pointer;
     outline: none;
   }
-  
+ 
   /* On mouse-over */
   .sidenav a:hover, .dropdown-btn:hover {
     color: #ffffff;
@@ -177,6 +177,17 @@ div.busin-right{
 }
 
 /* The Modal (background) */
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+#trr{
+  margin-top: -50px;
+}
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -189,16 +200,19 @@ div.busin-right{
   overflow: none; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  margin-top:-50x;;
 }
 
-/* The Close Button */
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0px 40px;
+  border: 1px solid #888;
+  width: 35%;
+  height: 420px;
+  position: relative;
 }
-
 .close:hover,
 .close:focus {
   color: #000;
@@ -206,16 +220,8 @@ div.busin-right{
   cursor: pointer;
 }
 /* Modal Content */
-.modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 10px 15px 0px 40px;
-  border: 1px solid #888;
-  width: 30%;
-  height: 620px;
-  position: relative;
-  top: -100px;
-
+#hello{
+  margin-top: 70px;
 }
 
 div.container1{ 

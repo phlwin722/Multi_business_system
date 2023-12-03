@@ -10,95 +10,6 @@
    $position = $_SESSION['position'];
 ?>
 
-<?php 
-  // Validate form data
-  $errors = [];
-  // insert data
-  if (isset($_POST["upload"])) {     
-          $productcode = htmlspecialchars($_POST["productcode"]);
-          $nameproduct = htmlspecialchars($_POST["nameproduct"]);
-        $priceproduct = htmlspecialchars($_POST["priceproduct"]);
-     $businessname = htmlspecialchars($_POST["businessname"]);
-     $quantity = htmlspecialchars($_POST["quantity"]);
-          $host = "localhost";
-          $dbname = "multi_bussines_system";
-          $username = "root";
-          $password = "";
-  
-          try {
-              // Create a PDO instance
-              $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-              
-              // Set the PDO error mode to exception
-              $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  
-              // Prepare and execute the SQL query to insert data
-              $stmt = $pdo->prepare("INSERT INTO product (Product_code	, Product_name, Price, Quantity, Branch) VALUES (?, ?, ?, ? ,?)");
-              $stmt->execute([$productcode, $nameproduct, $priceproduct, $quantity, $businessname]);
-  
-              header ('Location: ProductManager.php');
-          } catch (PDOException $e) {
-              echo "Error inserting data: " . $e->getMessage();
-          }
-          // Close the database connection
-          $pdo = null;
-      }
-  //insert data
-
-  //edit data
-  if (isset($_POST["savechanges"])) {
-   $product = htmlspecialchars($_POST['productcode']);
-   $productname = htmlspecialchars    ($_POST['nameproduct']);
-   $price= htmlspecialchars ($_POST['priceproduct']);
-   $quantity = htmlspecialchars  ($_POST['quantity']);
-   $branch = htmlspecialchars($_POST['businessname']);
-   
-      // Database connection settings
-      $host = "localhost";
-      $dbname = "multi_bussines_system";
-      $username = "root";
-      $password = "";
-
-      try {
-          // Create a PDO instance
-          $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-          
-          // Set the PDO error mode to exception
-          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-           $stmt = $pdo->prepare("UPDATE product SET Product_name= ?, Price= ? , Quantity = ? ,Branch = ?  WHERE Product_code=?");
-           $stmt->execute ([$productname, $price, $quantity ,$branch, $product]);
-
-          header ('Location: ProductManager.php');
-      } catch (PDOException $e) {
-          echo "Error inserting data: " . $e->getMessage();
-      }
-
-      // Close the database connection
-      $pdo = null;
-}
-  // edit data
-
-  if (isset($_POST["delete_employee"])){
-   $local ="localhost";
-   $username = "root";
-   $pass ="";
-     $dbnamee = "multi_bussines_system";
-   $ID = htmlspecialchars($_POST["ID"]);
-
-   try{
-       $pdo = new PDO("mysql:host=$local;dbname=$dbnamee", $username, $pass);
-       $pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-       $sql = "DELETE FROM product WHERE Product_code = :ID";
-           $stmt = $pdo->prepare($sql);
-           $stmt->bindParam(':ID', $ID);
-           $stmt->execute();
-           header ('Location: ProductManager.php');
-   }catch (PDOException $e) {
-       echo " ". $e->getMessage();
-   }
-   $pdo = null;
-} //////delete data  product
-?>
 
 <!DOCTYPE html>
 <html>
@@ -117,6 +28,7 @@
   
     </head>
     <body>
+   
         <div class="left">
         <img src="/Multi_business_system/picture/sts.png" style="height:60px; width: 80px;position:absolute; top:-4px; left:50px;" alt="">
             
@@ -156,12 +68,113 @@
                          </div>
 
                             <!-- Button trigger modal -->   
-                            <!--Insert------------------------>
+                         
                     <!--Insert------------------------>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="moove" data-bs-target="#exampleModal">
                 Add Product
                 </button>
+                             <!----- php Modal and database connection ------->
+                             <?php include('header.php'); ?> 
+                             <?php 
+            // Validate form data
+            $errors = [];
+            // insert data
+            if (isset($_POST["upload"])) {     
+                 
+                    $nameproduct = htmlspecialchars($_POST["nameproduct"]);
+                    $priceproduct = htmlspecialchars($_POST["priceproduct"]);
+                $businessname = htmlspecialchars($_POST["businessname"]);
+                $quantity = htmlspecialchars($_POST["quantity"]);
+                    $host = "localhost";
+                    $dbname = "multi_bussines_system";
+                    $username = "root";
+                    $password = "";
+            
+                    try {
+                        // Create a PDO instance
+                        $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                        
+                        // Set the PDO error mode to exception
+                        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+                        // Prepare and execute the SQL query to insert data
+                        $stmt = $pdo->prepare("INSERT INTO product (Product_name, Price, Quantity, Branch) VALUES ( ?, ?, ? ,?)");
+                        $stmt->execute([ $nameproduct, $priceproduct, $quantity, $businessname]);
+                        echo '<div style="postion:absolute; top:8px; padding:5px; height:40px" class="alert alert-success" role="alert">
+                        Successfull Inserted
+                        <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
+                    } catch (PDOException $e) {
+                        echo "Error inserting data: " . $e->getMessage();
+                    }
+                    // Close the database connection
+                    $pdo = null;
+                }
+            //insert data
 
+            //edit data
+            if (isset($_POST["savechanges"])) {
+            $product = htmlspecialchars($_POST['productcode']);
+            $productname = htmlspecialchars    ($_POST['nameproduct']);
+            $price= htmlspecialchars ($_POST['priceproduct']);
+            $quantity = htmlspecialchars  ($_POST['quantity']);
+            $branch = htmlspecialchars($_POST['businessname']);
+            
+                // Database connection settings
+                $host = "localhost";
+                $dbname = "multi_bussines_system";
+                $username = "root";
+                $password = "";
+
+                try {
+                    // Create a PDO instance
+                    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                    
+                    // Set the PDO error mode to exception
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    $stmt = $pdo->prepare("UPDATE product SET Product_name= ?, Price= ? , Quantity = ? ,Branch = ?  WHERE Product_code=?");
+                    $stmt->execute ([$productname, $price, $quantity ,$branch, $product]);
+
+                    echo '<div style="postion:absolute; top:8px; padding:5px; height:40px" class="alert alert-success" role="alert">
+                    Successfull Edit
+                    <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>';
+                } catch (PDOException $e) {
+                    echo "Error inserting data: " . $e->getMessage();
+                }
+
+                // Close the database connection
+                $pdo = null;
+            }
+            // edit data
+
+            if (isset($_POST["delete_employee"])){
+            $local ="localhost";
+            $username = "root";
+            $pass ="";
+                $dbnamee = "multi_bussines_system";
+            $ID = htmlspecialchars($_POST["ID"]);
+
+            try{
+                $pdo = new PDO("mysql:host=$local;dbname=$dbnamee", $username, $pass);
+                $pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $sql = "DELETE FROM product WHERE Product_code = :ID";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->bindParam(':ID', $ID);
+                    $stmt->execute();
+                    echo '<div style="postion:absolute; top:8px; padding:5px; height:40px" class="alert alert-danger" role="alert">
+                    Successfull Delete  
+                    <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>';
+            }catch (PDOException $e) {
+                echo " ". $e->getMessage();
+            }
+            $pdo = null;
+            } //////delete data  product
+            ?>
+                           <!----- php  Modal and database connection ------->
+                          <!------------------------------------------------------>
+                             <!--Insert------------------------>
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog " >
                     <div class="modal-content  modal-dialog-scrollable" >
@@ -211,7 +224,7 @@
                     </div>
                 </div>
                 </div>
-                  <!--Insert------------------------>
+                  <!--Insert ,------------------------>
                  
                     <!--Edit------------------------>
                     <div class="modal fade" id="editdata" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -272,10 +285,11 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Business</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="ProductDataBase.php" method="post">
-                            <div class="modal-body">
+                    <form action="" method="post">
+                            <div class="modal-body hell">
                                 <h5>Are you sure Do you want delete</h5>
-                                <input hidden id="product_codee" name="ID"></input>                
+                                <input hidden id="product_codee" name="ID"></input>
+                                
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -285,11 +299,15 @@
                     </div>
                 </div>
                 </div>
-                   <!----- delete Modal ------->
-                                <div class="List_of_product">
-                       
+
+
+                            <!----- delete Modal ------->
+
+                          <!-------------------------------------------------------->
+                                            <div class="List_of_product">
+                    
                         <div class="product" id="scrollableDiv" id="tableee">
-                        <?php include('header.php'); ?> 
+                   
 
      <table class="table table-bordered table-hover" id="productTable">          
           <thead>

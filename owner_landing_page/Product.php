@@ -23,66 +23,11 @@
   
     </head>
     <body>
-        <div class="left">
-        <img src="/Multi_business_system/picture/sts.png" style="height:60px; width: 80px;position:absolute; top:-4px; left:50px;" alt="">
-             <div class="dropdown">
-                  <button onclick="myFunction()" class="dropbtn"><i class="fa-solid fa-circle-user"></i></button>
-                  <div id="myDropdown" class="dropdown-content">
-                  <a href="Myacctowner.php" target="_top">My account</a>
-                 </div>
-              </div>
-        </div>
+          <!-----------------------------mo dal-------------------------------------------------->
+   
 
-        <div class="sidenav" id="a">
-            <div class="companyname"><?php echo $fname ." ". $lname?></div>
-                <div class="owner">Owner</div >
-                   <a href="Dashboardowner.php" target="_top" class="nav"><i class="fa-solid fa-house"></i> Dash Board</a>
-                   <a href="ownersale.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Sales</a>
-                   <a href="Businessowner.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Business</a>
-                   <a href="product.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Products</a>
-                   <a href="employee.php" target="_top" class="nav"><i class="fa-solid fa-users"></i> Employee</a>
-                  <a href="/Multi_business_system/landingpage/logout.php" target="_top"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
-        </div>
-        
-          <div class="main" id="a">
-
-            <div class="frame" src="" name="iframe">
-                <div class="addbusines">
-                    <div class="product-top" id="scrollableDiv" id="tableee">Product</div>
-                    </div>
-                 
-                    <div class="busin-right">
-                        <div class="busin-left">
-                        <select class="business-selection" name="businessname" id="branchSelection">
-                            <option value="allproducts">All</option>
-                            <?php
-                                $server = 'localhost';
-                                $user = 'root';
-                                $pass = '';
-                                $dbname = 'multi_bussines_system';
-                                $con = mysqli_connect($server, $user, $pass, $dbname);
-                                $category = mysqli_query($con, 'SELECT * FROM business');
-                                while ($c = mysqli_fetch_array($category)) {
-                                    ?>
-                                    <option value="<?php echo $c['Business_name'] ?>"><?php echo $c['Business_name'] ?></option>
-                                <?php }
-                                $con->close();
-                            ?>
-                        </select>
-
-                            <div class="search-container">
-                                <input type="text" id="myinput" class="myInput" onkeyup="searchFunction()" placeholder="Search for names.." title="Type in a name">
-                            </div>
-
-                         </div>
-
-                            <!-- Button trigger modal -->   
-                            <!--Insert------------------------>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="moove" data-bs-target="#exampleModal">
-                Add Product
-                </button>
-
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!--Insert------------------------>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog " >
                     <div class="modal-content  modal-dialog-scrollable" >
                     <div class="modal-header">
@@ -211,7 +156,67 @@
                 </div>
                 </div>
                    <!----- delete Modal ------->
-                                <div class="List_of_product">
+                  
+    <!-----------------------------mo dal-------------------------------------------------->
+        <div class="left">
+        <img src="/Multi_business_system/picture/sts.png" style="height:60px; width: 80px;position:absolute; top:-4px; left:50px;" alt="">
+             <div class="dropdown">
+                  <button onclick="myFunction()" class="dropbtn"><i class="fa-solid fa-circle-user"></i></button>
+                  <div id="myDropdown" class="dropdown-content">
+                  <a href="Myacctowner.php" target="_top">My account</a>
+                 </div>
+              </div>
+        </div>
+
+        <div class="sidenav" id="a">
+            <div class="companyname"><?php echo $fname ." ". $lname?></div>
+                <div class="owner">Owner</div >
+                   <a href="Dashboardowner.php" target="_top" class="nav"><i class="fa-solid fa-house"></i> Dash Board</a>
+                   <a href="ownersale.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Sales</a>
+                   <a href="Businessowner.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Business</a>
+                   <a href="product.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Products</a>
+                   <a href="employee.php" target="_top" class="nav"><i class="fa-solid fa-users"></i> Employee</a>
+                  <a href="/Multi_business_system/landingpage/logout.php" target="_top"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+        </div>
+        
+          <div class="main" id="a">
+
+            <div class="frame" src="" name="iframe">
+                <div class="addbusines">
+                    <div class="product-top" id="scrollableDiv" id="tableee">Product</div>
+                    </div>
+                 
+                    <div class="busin-right">
+                        <div class="busin-left">
+                        <select class="business-selection" name="businessname" id="branchSelection">
+                            <option value="allproducts">All</option>
+                            <?php
+                                $server = 'localhost';
+                                $user = 'root';
+                                $pass = '';
+                                $dbname = 'multi_bussines_system';
+                                $con = mysqli_connect($server, $user, $pass, $dbname);
+                                $category = mysqli_query($con, 'SELECT * FROM business');
+                                while ($c = mysqli_fetch_array($category)) {
+                                    ?>
+                                    <option value="<?php echo $c['Business_name'] ?>"><?php echo $c['Business_name'] ?></option>
+                                <?php }
+                                $con->close();
+                            ?>
+                        </select>
+
+                            <div class="search-container">
+                                <input type="text" id="myinput" class="myInput" onkeyup="searchFunction()" placeholder="Search for names.." title="Type in a name">
+                            </div>
+
+                         </div>
+
+                            <!-- Button trigger modal -->   
+                         
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="moove" data-bs-target="#exampleModal">
+                Add Product
+                </button>
+                           <div class="List_of_product">
                         <p>List of Product</p>
                         <div class="product">
                         <?php include('header.php'); ?> 

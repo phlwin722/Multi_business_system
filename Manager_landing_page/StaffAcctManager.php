@@ -70,7 +70,7 @@
          if(mysqli_num_rows( $verify_username ) != 0) {
             echo '<div style="postion:absolute; top:20px; padding:5px; height:40px" class="alert alert-danger" role="alert">
             The username has already taken
-            <button style="margin-left:770px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>';
                     $con -> close();
             }else{
@@ -98,7 +98,7 @@
         $stmt->execute([ $userrname,  $password,  $branch,  $employee_category, $lastname,  $firstname, $middle_name  ]);
                 echo '<div style="postion:absolute; top:20px; padding:5px; height:40px" class="alert alert-success" role="alert">
                 Successfull Inserted
-                <button style="margin-left:760px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>';
        }
        catch (PDOException $e){
@@ -137,7 +137,7 @@
                 $stmt->execute ([$usern, $passw, $branche ,$employeecategory ,$lastname , $firstname , $middle_name, $id]);
                 echo '<div style="postion:absolute; top:20px; padding:5px; height:40px" class="alert alert-success" role="alert">
                 Successfull Edit
-                <button style="margin-left:890px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>';
            } catch (PDOException $e) {
                echo "Error inserting data: " . $e->getMessage();
@@ -179,7 +179,7 @@
                         
                     <br>
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog " >
+                <div class="modal-dialog " id="trr">
                     <div class="modal-content  modal-dialog-scrollable" >
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Add Staff</h1>
@@ -237,7 +237,7 @@
 
                        <!------- edit Modal ---------->
                 <div class="modal fade" id="editdata" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog " >
+                <div class="modal-dialog " id="trr" >
                     <div class="modal-content  modal-dialog-scrollable" >
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Employee</h1>
@@ -300,14 +300,14 @@
                     <!-- delete Modal -->
                 <div class="modal fade" id="deletedata" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog " >
-                    <div class="modal-content  modal-dialog-scrollable" >
+                    <div class="modal-content modal-dialog-scrollable" id="hello" >
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Business</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="" method="post">
                             <div class="modal-body">
-                                <h5>Are you sure Do you want delete</h5>
+                                <h5>Are you sure do you want delete</h5>
                                 <input hidden id="employee_id" name="ID"></input>
                                 
                     </div>
@@ -341,48 +341,48 @@
                         </thead>
                         <tbody>
                         <?php
-$host = "localhost";
-$dbname = "multi_bussines_system";
-$username = "root";
-$password = "";
-$staff = "Staff";
+                        $host = "localhost";
+                        $dbname = "multi_bussines_system";
+                        $username = "root";
+                        $password = "";
+                        $staff = "Staff";
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                        try {
+                            $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // prepare and execute a query
-    $sql = "SELECT * FROM employee WHERE Branch = :branch AND Position = :position";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(":branch", $branch);
-    $stmt->bindParam(":position", $staff);
-    $stmt->execute();
+                            // prepare and execute a query
+                            $sql = "SELECT * FROM employee WHERE Branch = :branch AND Position = :position";
+                            $stmt = $pdo->prepare($sql);
+                            $stmt->bindParam(":branch", $branch);
+                            $stmt->bindParam(":position", $staff);
+                            $stmt->execute();
 
-    // to display fetch all of the data
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        ?>
-        <tr>
-            <td class="user_id"><?= $row['ID']; ?></td>
-            <td><?= $row['Username'] ?></td>
-            <td><?= $row['Password'] ?></td>
-            <td><?= $row['Branch'] ?></td>
-            <td><?= $row['Position'] ?></td>
-            <td><?= $row['Last_name'] ?></td>
-            <td><?= $row['First_name'] ?></td>
-            <td><?= $row['Middle_name'] ?></td>
-            <td>
-                <a href="#" class="btn btn-success btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i> </a>
-                <a href="#" class="btn btn-danger btn-sm delete-data"> <i class="fa-solid fa-trash" style="color: #ffffff;"></i> </a>
-            </td>
-        </tr>
-        <?php
-    }
-} catch (PDOException $e) {
-    echo $e->getMessage();
-}
+                            // to display fetch all of the data
+                            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                ?>
+                                <tr>
+                                    <td class="user_id"><?= $row['ID']; ?></td>
+                                    <td><?= $row['Username'] ?></td>
+                                    <td><?= $row['Password'] ?></td>
+                                    <td><?= $row['Branch'] ?></td>
+                                    <td><?= $row['Position'] ?></td>
+                                    <td><?= $row['Last_name'] ?></td>
+                                    <td><?= $row['First_name'] ?></td>
+                                    <td><?= $row['Middle_name'] ?></td>
+                                    <td>
+                                        <a href="#" class="btn btn-success btn-sm edit-data"> <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i> </a>
+                                        <a href="#" class="btn btn-danger btn-sm delete-data"> <i class="fa-solid fa-trash" style="color: #ffffff;"></i> </a>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                        } catch (PDOException $e) {
+                            echo $e->getMessage();
+                        }
 
-$pdo = null;
-?>
+                        $pdo = null;
+                        ?>
                           
                         </tbody>
             

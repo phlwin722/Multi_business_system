@@ -55,67 +55,133 @@
                     <div class="busin-right" id="">
                         <div class="busin-left">
                             
-                        <div id="mooove">
-                           </div>
+                        
                        <div id="bot">
-                             <!--------------------Insert modal---------------------->
+               
                        <button type="button"  class="btn btn-primary move " data-bs-toggle="modal"  data-bs-target="#exampleModal">
                 New Employee
                 </button>
                         <label class="listemplo">List of Employee</label>
    <?php 
-   if (isset($_POST["submit"])) {
-    $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
- 
-        /* this code is check if user name was existing*/
-        $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
-        $username = htmlspecialchars($_POST["usernaame"]);
-            $verify_username = mysqli_query($con,"SELECT Username FROM employee WHERE Username ='$username'");
-         if(mysqli_num_rows( $verify_username ) != 0) {
-            echo '<div style="postion:absolute; top:50px; padding:10px; height:50px" class="alert alert-danger" role="alert">
-            The Username was already taken
-            <button style="margin-left:720px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>';
-                    $con -> close();
-            }else{
-                /* this code not detect the existing id and username will be insert in database*/
-                $localhost = "localhost";
-                $username = "root";
-                $pass = "";
-                $dbname = "multi_bussines_system";
-        
-             
-                $userrname = htmlspecialchars($_POST["usernaame"]);
-                $password = htmlspecialchars($_POST["password"]);  
-                $branch = htmlspecialchars($_POST["branchh"]);
-                $employee_category = htmlspecialchars($_POST["employee-category"]);
-                $lastname = htmlspecialchars($_POST["Lastname"]);
-                $firstname = htmlspecialchars($_POST["Firstname"]);
-                $middle_name = htmlspecialchars($_POST["middle_name"]);
-            
-                      //connection database
-                try {
-                    $pdo = new PDO ("mysql:host=$localhost;dbname=$dbname", $username, $pass);
-                    // Set the PDO error mode to exception
-                    $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-        
-                         // // Prepare and execute the SQL query to insert data
-                   $stmt = $pdo->prepare("INSERT INTO employee (ID, Username, Password, Branch, Position, Last_name, First_name, Middle_name ) VALUES (?, ? , ? , ? , ? , ? , ?, ?)");
-                 $stmt->execute([$id, $userrname,  $password,  $branch,  $employee_category, $lastname,  $firstname, $middle_name  ]);
-                    header ("location: employee.php");
-                }
-                catch (PDOException $e){
-                    echo "Not inserted". $e->getMessage();
-                }
-            }
-            $pdo = null;
-        }
-?>
+                    if (isset($_POST["submit"])) {
+                        $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
+                    
+                            /* this code is check if user name was existing*/
+                            $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
+                            $username = htmlspecialchars($_POST["usernaame"]);
+                                $verify_username = mysqli_query($con,"SELECT Username FROM employee WHERE Username ='$username'");
+                            if(mysqli_num_rows( $verify_username ) != 0) {
+                                echo '<div style="postion:absolute; top:50px; padding:5px; height:40px" class="alert alert-danger" role="alert">
+                                The Username was already taken
+                                <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>';
+                                        $con -> close();
+                                }else{
+                                    /* this code not detect the existing id and username will be insert in database*/
+                                    $localhost = "localhost";
+                                    $username = "root";
+                                    $pass = "";
+                                    $dbname = "multi_bussines_system";
+                            
+                                
+                                    $userrname = htmlspecialchars($_POST["usernaame"]);
+                                    $password = htmlspecialchars($_POST["password"]);  
+                                    $branch = htmlspecialchars($_POST["branchh"]);
+                                    $employee_category = htmlspecialchars($_POST["employee-category"]);
+                                    $lastname = htmlspecialchars($_POST["Lastname"]);
+                                    $firstname = htmlspecialchars($_POST["Firstname"]);
+                                    $middle_name = htmlspecialchars($_POST["middle_name"]);
+                                
+                                        //connection database
+                                    try {
+                                        $pdo = new PDO ("mysql:host=$localhost;dbname=$dbname", $username, $pass);
+                                        // Set the PDO error mode to exception
+                                        $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+                            
+                                            // // Prepare and execute the SQL query to insert data
+                                    $stmt = $pdo->prepare("INSERT INTO employee (Username, Password, Branch, Position, Last_name, First_name, Middle_name ) VALUES ( ? , ? , ? , ? , ? , ?, ?)");
+                                    $stmt->execute([ $userrname,  $password,  $branch,  $employee_category, $lastname,  $firstname, $middle_name  ]);
+                                    echo '<div style="postion:absolute; top:50px; padding:5px; height:40px" class="alert alert-success" role="alert">
+                                    Successful Inserted
+                                    <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>';
+                                    }
+                                    catch (PDOException $e){
+                                        echo "Not inserted". $e->getMessage();
+                                    }
+                                }
+                                $pdo = null;
+                            }
+
+                              ///// editdata /////////////////////////
+                        if (isset($_POST['savechnge'])){
+                            $id = htmlspecialchars($_POST['id']);
+                            $usern = htmlspecialchars    ($_POST['username']);
+                            $passw= htmlspecialchars ($_POST['password']);
+                            $branche = htmlspecialchars  ($_POST['branchp']);
+                            $employeecategory = htmlspecialchars($_POST['employee_category']);
+                            $lastname = htmlspecialchars($_POST['lastname']);
+                            $firstname = htmlspecialchars($_POST['firstname']);
+                            $middle_name = htmlspecialchars($_POST['middle_name']);
+                            
+                            // Database connection settings
+                            $host = "localhost";
+                            $dbname = "multi_bussines_system";
+                            $username = "root";
+                            $password = "";
+                    
+                            try {
+                                // Create a PDO instance
+                                $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                                
+                                // Set the PDO error mode to exception
+                                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                    $stmt = $pdo->prepare("UPDATE employee SET Username= ?, Password= ? , Branch = ? ,Position = ? ,Last_name = ?,First_name= ? ,Middle_name = ?  WHERE ID=?");
+                                    $stmt->execute ([$usern, $passw, $branche ,$employeecategory ,$lastname , $firstname , $middle_name, $id]);
+                                    echo '<div style="postion:absolute; top:50px; padding:5px; height:40px" class="alert alert-success" role="alert">
+                                    Successful Edited
+                                    <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>';
+                            } catch (PDOException $e) {
+                                echo "Error inserting data: " . $e->getMessage();
+                            }
+                    
+                            // Close the database connection
+                            $pdo = null;
+                        }
+                        /// // editdata  /////////////
+
+                           ///////////// delete employee /////////////////////
+                        if (isset($_POST["delete_employee"])){
+                            $local ="localhost";
+                            $username = "root";
+                            $pass ="";
+                            $dbnamee = "multi_bussines_system";
+                            $ID = htmlspecialchars($_POST["ID"]);
+
+                            try{
+                                $pdo = new PDO("mysql:host=$local;dbname=$dbnamee", $username, $pass);
+                                $pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $sql = "DELETE FROM employee WHERE ID = :ID";
+                                    $stmt = $pdo->prepare($sql);
+                                    $stmt->bindParam(':ID', $ID);
+                                    $stmt->execute();
+                                    echo '<div style="postion:absolute; top:50px; padding:5px; height:40px" class="alert alert-danger" role="alert">
+                                    Successful delete
+                                    <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>';
+                            }catch (PDOException $e) {
+                                echo " ". $e->getMessage();
+                            }
+                            $pdo = null;
+                        }
+                    /////////////////////delete data /////////////////
+                                        ?>
 
                     <div class="List_of_product" id="List_of_product"  id="">
                     <br>
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog " >
+                <div class="modal-dialog "  >
                     <div class="modal-content  modal-dialog-scrollable" >
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Add Employee</h1>
@@ -187,10 +253,10 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Employee</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="EmoployeeDatabase.php" method="post">
+                    <form action="" method="post">
                             <div class="modal-body">
-                                                    <Label for="id">ID</Label>
-                                                <input type="text" name="id" id="idd" required readonly class="cc" id="id">
+                                                 
+                                                <input hidden type="text" name="id" id="idd" required readonly class="cc" id="id">
                                     
                                                 <Label for="lastname">Last Name</Label>
                                                 <input type="text" name="lastname" id="lname" class="cc"required>
@@ -248,13 +314,13 @@
                    
                     <!-- delete Modal -->
                 <div class="modal fade" id="deletedata" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog " >
+                <div class="modal-dialog " id="deletemove" >
                     <div class="modal-content  modal-dialog-scrollable" >
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Business</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="EmoployeeDatabase.php" method="post">
+                    <form action="" method="post">
                             <div class="modal-body">
                                 <h5>Are you sure Do you want delete</h5>
                                 <input hidden id="employee_id" name="ID"></input>
