@@ -76,7 +76,7 @@ session_start();
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                 // SQL query with GROUP BY and SUM
-                $query = "SELECT branch, product_name, SUM(quantity_sold) AS total_quantity_sold FROM top_product WHERE branch = '$branch' GROUP BY branch, product_name";
+                $query = "SELECT branch, product_name, SUM(quantity_sold) AS total_quantity_sold FROM top_product WHERE branch = '$branch' GROUP BY branch, product_name ORDER BY quantity_sold DESC";
                 $statement = $pdo->prepare($query);
                 $statement->execute();
 
@@ -107,56 +107,58 @@ session_start();
                 <!---------------------------top sale product------------------------------------------------->
 
                 <!--------------------------------------------------------sales------------------------------------->
-                                <div class="sales" id="scrollableDiv">
-                    <label class="topprod">Sales</label>
-                    <table class="customers">
-                        <table class="table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Branch</th>
-                                    <th scope="col">Sales</th>
-                                    <th scope="col">Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $host = "localhost";
-                                $dbname = "multi_bussines_system";
-                                $username = "root";
-                                $password = "";
+                <div class="sales" id="scrollableDiv">
+    <label class="topprod">Sales</label>
+    <table class="customers">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Branch</th>
+                    <th scope="col">Sales</th>
+                    <th scope="col">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $host = "localhost";
+                $dbname = "multi_bussines_system";
+                $username = "root";
+                $password = "";
 
-                                try {
-                                    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-                                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                    
-                                    // Fetch and aggregate sales for a specific branch and date
-                                    $query = "SELECT branch, SUM(sales) AS total_sales, sale_date FROM sales WHERE branch = '$branch' GROUP BY branch, sale_date";
-                                    $statement = $pdo->prepare($query);
-                                    $statement->execute();
+                try {
+                    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    
+                    // Fetch total sales for each branch on a particular date
+                    $query = "SELECT branch, SUM(sales) AS total_sales, sale_date FROM sales WHERE branch = '$branch' GROUP BY branch, sale_date ORDER BY sale_date DESC";
+                    $statement = $pdo->prepare($query);
+                    $statement->execute();
 
-                                    // Display the results
-                                    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                    // Display the results
+                    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-                                    if ($result) {
-                                        foreach ($result as $row) {
-                                ?>
-                                            <tr>
-                                                <td><?= $row['branch']; ?></td>
-                                                <td><?= $row['total_sales'] ?></td>
-                                                <td><?= $row['sale_date'] ?></td>
-                                            </tr>
-                                <?php
-                                        }
-                                    }
-                                } catch (PDOException $e) {
-                                    echo $e->getMessage();
-                                }
-                                $pdo = null;
-                                ?>
-                            </tbody>
-                        </table>
-                    </table>
-                </div>
+                    if ($result) {
+                        foreach ($result as $row) {
+                ?>
+                            <tr>
+                                <td><?= $row['branch']; ?></td>
+                                <td><?= $row['total_sales'] ?></td>
+                                <td><?= $row['sale_date'] ?></td>
+                            </tr>
+                <?php
+                        }
+                    }
+                } catch (PDOException $e) {
+                    echo $e->getMessage();
+                }
+                $pdo = null;
+                ?>
+            </tbody>
+        </table>
+    </table>
+</div>
+
+
                     <!--------------------------------sales--=====0--------------------------------------->
 
                     <!-- <table class="customers">

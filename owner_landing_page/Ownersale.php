@@ -94,7 +94,7 @@
                                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                                 // SQL query with GROUP BY and SUM
-                                $query = "SELECT branch, product_name, SUM(quantity_sold) AS total_quantity_sold FROM top_product GROUP BY branch, product_name";
+                                $query = "SELECT branch, product_name, SUM(quantity_sold) AS total_quantity_sold FROM top_product GROUP BY branch, product_name ORDER BY quantity_sold DESC";
                                 $statement = $pdo->prepare($query);
                                 $statement->execute();
 
@@ -147,7 +147,7 @@
                     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     
                     // Fetch total sales for each branch on a particular date
-                    $query = "SELECT branch, SUM(sales) AS total_sales, sale_date FROM sales GROUP BY branch, sale_date";
+                    $query = "SELECT branch, SUM(sales) AS total_sales, sale_date FROM sales GROUP BY branch, sale_date ORDER BY sale_date DESC";
                     $statement = $pdo->prepare($query);
                     $statement->execute();
 
