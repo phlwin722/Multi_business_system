@@ -41,7 +41,8 @@
                    <a href="Businessowner.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Business</a>
                    <a href="product.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Products</a>
                    <a href="employee.php" target="_top" class="nav"><i class="fa-solid fa-users"></i> Employee</a>
-                  <a href="/Multi_business_system/landingpage/logout.php" target="_top"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+                   <a href="Settings.php" target="_top" class="nav"><i class="fa-solid fa-gear" style="color: #fcfcfc;"></i> Setting</a>
+                   <a href="/Multi_business_system/landingpage/logout.php" target="_top"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
         </div>
         
           <div class="main" id="a">
@@ -56,12 +57,10 @@
                        <!--------------------------data base--------------------------------------------------------->
                                     
                        <?php
-                        ///////////////////// insert //////////////////////////////////
-                                        if (isset($_POST["submitt"])) {     
-                                                $nameproduct = htmlspecialchars($_POST["nameproduct"]);
-                                            $priceproduct = htmlspecialchars($_POST["priceproduct"]);
-                                        $businessname = htmlspecialchars($_POST["businessname"]);
-                                        $quantity = htmlspecialchars($_POST["quantity"]);
+                        ///////////////////// delete staff //////////////////////////////////
+                                        if (isset($_POST["delete_staff"])) {     
+                                                $Staff = 'Staff';
+
                                                 $host = "localhost";
                                                 $dbname = "multi_bussines_system";
                                                 $username = "root";
@@ -75,10 +74,11 @@
                                                     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                                                     // Prepare and execute the SQL query to insert data
-                                                    $stmt = $pdo->prepare("INSERT INTO product ( Product_name, Price, Quantity, Branch) VALUES ( ?, ?, ? ,?)");
-                                                    $stmt->execute([ $nameproduct, $priceproduct, $quantity, $businessname]);
+                                                    $stmt = $pdo->prepare("DELETE FROM employee WHERE Position= :Staff");
+                                                    $stmt->bindParam(':Staff',$Staff);
+                                                    $stmt->execute();
                                                     echo '<div style="postion:absolute; top:-5px; padding:10px; height:50px" class="alert alert-success" role="alert">
-                                                Successfull Insert
+                                                Successfull delete
                                                 <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                             </div>';
                                                 } catch (PDOException $e) {
@@ -87,15 +87,11 @@
                                                 // Close the database connection
                                                 $pdo = null;
                                             }
-                                        //insert data
+                                       ///////////////// //delelte staff ///////////////////////////////
 
-                                        //edit data
-                                        if (isset($_POST["savechanges"])) {
-                                        $product = htmlspecialchars($_POST['productcode']);
-                                        $productname = htmlspecialchars    ($_POST['nameproduct']);
-                                        $price= htmlspecialchars ($_POST['priceproduct']);
-                                        $quantity = htmlspecialchars  ($_POST['quantity']);
-                                        $branch = htmlspecialchars($_POST['businessname']);
+                                        /////////////////////// delte Manager /////////////////
+                                        if (isset($_POST["delete_manager"])) {
+                                        $manager = 'Manager';
                                         
                                             // Database connection settings
                                             $host = "localhost";
@@ -109,10 +105,11 @@
                                                 
                                                 // Set the PDO error mode to exception
                                                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                                $stmt = $pdo->prepare("UPDATE product SET Product_name= ?, Price= ? , Quantity = ? ,Branch = ?  WHERE Product_code=?");
-                                                $stmt->execute ([$productname, $price, $quantity ,$branch, $product]);
+                                               $stmt = $pdo->prepare("DELETE FROM employee WHERE Position = :manager");
+                                               $stmt -> bindParam("manager", $manager);
+                                               $stmt -> execute();
                                                 echo '<div style="postion:absolute; top:-5px; padding:10px; height:50px" class="alert alert-success" role="alert">
-                                                Successfull Edited
+                                                Successfull Delete
                                                 <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                             </div>';
                                             } catch (PDOException $e) {
@@ -122,23 +119,22 @@
                                             // Close the database connection
                                             $pdo = null;
                                         }
-                                        // edit data
+                                        //////////////// delete manager ////////////////////////////
+                                            //////////////// delete employee ////////////////////////////
 
                                         if (isset($_POST["delete_employee"])){
                                         $local ="localhost";
                                         $username = "root";
                                         $pass ="";
                                         $dbnamee = "multi_bussines_system";
-                                        $ID = htmlspecialchars($_POST["ID"]);
 
                                         try{
                                             $pdo = new PDO("mysql:host=$local;dbname=$dbnamee", $username, $pass);
                                             $pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                            $sql = "DELETE FROM product WHERE Product_code = :ID";
-                                                $stmt = $pdo->prepare($sql);
-                                                $stmt->bindParam(':ID', $ID);
+                                            $sql = "DELETE FROM employee";
+                                            $stmt = $pdo->prepare($sql);
                                                 $stmt->execute();
-                                                echo '<div style="postion:absolute; top:-5px; padding:10px; height:50px" class="alert alert-danger" role="alert">
+                                                echo '<div style="postion:absolute; top:-5px; padding:10px; height:50px" class="alert alert-success" role="alert">
                                                 Successfull Delete
                                                 <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                             </div>';
@@ -146,7 +142,140 @@
                                             echo " ". $e->getMessage();
                                         }
                                         $pdo = null;
-                                        } //////delete data  product
+                                        } 
+                                        //////delete employee //////////////////////////
+
+                                        ///////////////////// delete sales //////////////////// 
+                                        if (isset($_POST["delete_sales"])){
+                                            $local ="localhost";
+                                            $username = "root";
+                                            $pass ="";
+                                            $dbnamee = "multi_bussines_system";
+                                            try{
+                                                $pdo = new PDO("mysql:host=$local;dbname=$dbnamee", $username, $pass);
+                                                $pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                $sql = "DELETE FROM sales";
+                                                $stmt = $pdo->prepare($sql);
+                                                    $stmt->execute();
+                                                    echo '<div style="postion:absolute; top:-5px; padding:10px; height:50px" class="alert alert-success" role="alert">
+                                                    Successfull Delete
+                                                    <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                </div>';
+                                            }catch (PDOException $e) {
+                                                echo " ". $e->getMessage();
+                                            }
+                                            $pdo = null;
+                                            } 
+                                         ///////////////////// delete sale ///////////////////////////////////
+
+                                         //////////////////////// delete top product ////////////////////////////
+                                         if (isset($_POST["delete_topproduct"])){
+                                            $local ="localhost";
+                                            $username = "root";
+                                            $pass ="";
+                                            $dbnamee = "multi_bussines_system";
+                                            try{
+                                                $pdo = new PDO("mysql:host=$local;dbname=$dbnamee", $username, $pass);
+                                                $pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                $sql = "DELETE FROM top_product";
+                                                $stmt = $pdo->prepare($sql);
+                                                    $stmt->execute();
+                                                    echo '<div style="postion:absolute; top:-5px; padding:10px; height:50px" class="alert alert-success" role="alert">
+                                                    Successfull Delete
+                                                    <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                </div>';
+                                            }catch (PDOException $e) {
+                                                echo " ". $e->getMessage();
+                                            }
+                                            $pdo = null;
+                                            } 
+                                          //////////////////////// delete top product ////////////////////////////
+                                       
+                                          /////////////////////// delete product //////////////////////
+                                          if (isset($_POST["delete_product"])){
+                                            $local ="localhost";
+                                            $username = "root";
+                                            $pass ="";
+                                            $dbnamee = "multi_bussines_system";
+                                            try{
+                                                $pdo = new PDO("mysql:host=$local;dbname=$dbnamee", $username, $pass);
+                                                $pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                $sql = "DELETE FROM product";
+                                                $stmt = $pdo->prepare($sql);
+                                                    $stmt->execute();
+                                                    echo '<div style="postion:absolute; top:-5px; padding:10px; height:50px" class="alert alert-success" role="alert">
+                                                    Successfull Delete
+                                                    <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                </div>';
+                                            }catch (PDOException $e) {
+                                                echo " ". $e->getMessage();
+                                            }
+                                            $pdo = null;
+                                            
+                                          }
+                                          ////////////////////// delete product//////////////////////////////////
+
+                                          //////////////////////////// clear all data /////////////////////////
+                                          if (isset($_POST["clear"])){
+                                            $local ="localhost";
+                                            $username = "root";
+                                            $pass ="";
+                                            $dbnamee = "multi_bussines_system";
+                                            try{
+                                                $pdo = new PDO("mysql:host=$local;dbname=$dbnamee", $username, $pass);
+                                                $pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                               // DELETE FROM product
+                                                $stmtProduct = $pdo->prepare("DELETE FROM product");
+                                                $stmtProduct->execute();
+
+                                                // DELETE FROM employee
+                                                $stmtEmployee = $pdo->prepare("DELETE FROM employee");
+                                                $stmtEmployee->execute();
+
+                                                // DELETE FROM sales
+                                                $stmtSales = $pdo->prepare("DELETE FROM sales");
+                                                $stmtSales->execute();
+
+                                                // DELETE FROM business
+                                                $stmtBusiness = $pdo->prepare("DELETE FROM business");
+                                                $stmtBusiness->execute();
+
+                                                // DELETE FROM top_product
+                                                $stmtTopProduct = $pdo->prepare("DELETE FROM top_product");
+                                                $stmtTopProduct->execute();
+                                                
+                                                    echo '<div style="postion:absolute; top:-5px; padding:10px; height:50px" class="alert alert-success" role="alert">
+                                                    Successfull Delete
+                                                    <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                </div>';
+                                            }catch (PDOException $e) {
+                                                echo " ". $e->getMessage();
+                                            }
+                                            $pdo = null;
+                                            
+                                          }
+                                          ///////////////// delete business //////////////////////////
+                                          if (isset($_POST["delete_business"])){
+                                            $local ="localhost";
+                                            $username = "root";
+                                            $pass ="";
+                                            $dbnamee = "multi_bussines_system";
+                                            try{
+                                                $pdo = new PDO("mysql:host=$local;dbname=$dbnamee", $username, $pass);
+                                                $pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                                $sql = "DELETE FROM business";
+                                                $stmt = $pdo->prepare($sql);
+                                                    $stmt->execute();
+                                                    echo '<div style="postion:absolute; top:-5px; padding:10px; height:50px" class="alert alert-success" role="alert">
+                                                    Successfull Delete
+                                                    <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                </div>';
+                                            }catch (PDOException $e) {
+                                                echo " ". $e->getMessage();
+                                            }
+                                            $pdo = null;
+                                            } 
+                                          //////////////////// delete business
                                         ?>
                         <!-----------------------------data base-------------------------------------------------->
                      
@@ -154,16 +283,28 @@
                             <!-- Button trigger modal -->   
                          
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#deletetopproducts">
-                Delele Top Product
+                Delete Top Product
                 </button>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#deleteproduct">
-                Delele Product
+                Delete Product
                 </button>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#deletesale">
-                Delele Sale
+                Delete Sale
                 </button>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#employee">
-                Delele Employee
+                Delete Employee
+                </button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#manager">
+                Delete manager
+                </button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#staff">
+                Delete staff
+                </button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#business">
+                Delete Business
+                </button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#clear">
+                Clear All Data
                 </button>
                            <div class="List_of_product">
                        
@@ -172,6 +313,53 @@
                         <!-----------------------------mo dal-------------------------------------------------->
    
                           <?php include('header.php'); ?> 
+   <!------------------------- delete  business---------------------------------->
+   <div class="modal fade" id="business" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog " >
+                    <div class="modal-content  modal-dialog-scrollable" >
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Top Product</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="" method="post">
+                            <div class="modal-body">
+                                <h5>Are you sure do you want delete all business </h5>
+                                <input hidden id="product_codee" name="ID"></input>                
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input class="btn btn-primary btn-danger" type="submit" name="delete_business" value="Delete">                          
+                    </div>
+                    </form>
+                    </div>
+                </div>
+                </div>
+                    <!------------------------- delete business ---------------------------------->
+
+
+                          <!------------------------- clear all data ---------------------------------->
+                   <div class="modal fade" id="clear" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog " >
+                    <div class="modal-content  modal-dialog-scrollable" >
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Top Product</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="" method="post">
+                            <div class="modal-body">
+                                <h5>Are you sure do you want clear all data </h5>
+                                <input hidden id="product_codee" name="ID"></input>                
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input class="btn btn-primary btn-danger" type="submit" name="clear" value="Delete">                          
+                    </div>
+                    </form>
+                    </div>
+                </div>
+                </div>
+                    <!------------------------- clear all data ---------------------------------->
+      
         <!-------------------------------------------top product ------------------------>
         <div class="modal fade" id="deletetopproducts" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog " >
@@ -187,7 +375,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <input class="btn btn-primary btn-danger" type="submit" name="delete_employee" value="Delete">                          
+                        <input class="btn btn-primary btn-danger" type="submit" name="delete_topproduct" value="Delete">                          
                     </div>
                     </form>
                     </div>
@@ -210,7 +398,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <input class="btn btn-primary btn-danger" type="submit" name="delete_employee" value="Delete">                          
+                        <input class="btn btn-primary btn-danger" type="submit" name="delete_product" value="Delete">                          
                     </div>
                     </form>
                     </div>
@@ -233,7 +421,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <input class="btn btn-primary btn-danger" type="submit" name="delete_employee" value="Delete">                          
+                        <input class="btn btn-primary btn-danger" type="submit" name="delete_sales" value="Delete">                          
                     </div>
                     </form>
                     </div>
@@ -263,6 +451,52 @@
                 </div>
                 </div>
                   <!-----------------------------------------Employee------------------------>
+                
+                                     <!-------------------------------------------staff ------------------------>
+        <div class="modal fade" id="staff" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog " >
+                    <div class="modal-content  modal-dialog-scrollable" >
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Employee</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="" method="post">
+                            <div class="modal-body">
+                                <h5>Are you sure Do you want delete all staff</h5>
+                                <input hidden id="product_codee" name="ID"></input>                
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input class="btn btn-primary btn-danger" type="submit" name="delete_staff" value="Delete">                          
+                    </div>
+                    </form>
+                    </div>
+                </div>
+                </div>
+                  <!-----------------------------------------staff------------------------>
+                 
+                                     <!-------------------------------------------manager ------------------------>
+        <div class="modal fade" id="manager" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog " >
+                    <div class="modal-content  modal-dialog-scrollable" >
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Employee</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="" method="post">
+                            <div class="modal-body">
+                                <h5>Are you sure Do you want delete all manager</h5>
+                                <input hidden id="product_codee" name="ID"></input>                
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input class="btn btn-primary btn-danger" type="submit" name="delete_manager" value="Delete">                          
+                    </div>
+                    </form>
+                    </div>
+                </div>
+                </div>
+                  <!-----------------------------------------manager------------------------>
                  
     <!-----------------------------mo dal-------------------------------------------------->
        
