@@ -76,7 +76,7 @@ session_start();
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                 // SQL query with GROUP BY and SUM
-                $query = "SELECT branch, product_name, SUM(quantity_sold) AS total_quantity_sold FROM top_product WHERE branch = '$branch' GROUP BY branch, product_name ORDER BY quantity_sold DESC";
+                $query = "SELECT branch, product_name, SUM(quantity_sold) AS total_quantity_sold FROM top_product WHERE branch = '$branch' GROUP BY branch, product_name ORDER BY total_quantity_sold DESC";
                 $statement = $pdo->prepare($query);
                 $statement->execute();
 
