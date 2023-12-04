@@ -1,0 +1,316 @@
+body{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+*{
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+}
+.left{
+  background-color: #1d2f92;
+    width: 100%;
+    margin: 0px;
+    height: 50px;
+}
+.companyname{
+    text-align: center;
+    font-size: 24px;
+    color: #ffffff;
+}
+.owner{
+    text-align: center;
+    font-size: 14px;
+    color: #fffbfb;
+    margin-bottom: 30px;
+}
+/* Fixed sidenav, full height */
+.sidenav {
+  width: 20%;
+  z-index: 1;
+  background-color: #333a66;
+ overflow-x: hidden;
+ padding-top: 20px;
+  }
+  
+  /* Style the sidenav links and the dropdown button */
+  .sidenav a, .dropdown-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #dadada;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  /* On mouse-over */
+  .sidenav a:hover, .dropdown-btn:hover {
+    color: #ffffff;
+  }
+  
+  /* Main content */
+  .main {
+    width: 80%;
+    background-color: #f1f1f1;
+  }
+  
+  #a{
+    float: left;
+    height: 610px;
+  }
+  /* Add an active class to the active dropdown button */
+  .active {
+    background-color:#061983;
+    color: white;
+  }
+  
+  *{
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+/*click dropdown to my acct*/
+
+.dropbtn {
+  background-color: transparent;
+  color: white;
+  padding: 10px;
+  font-size: 25px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  display: inline-block;
+  position: absolute;
+  top: 0px;
+  left: 1245px;
+  width: 40px;
+  height: 40px;
+}
+
+.dropdown-content {
+  display: none;
+  right: 2px;
+  top: 45px;
+  position: absolute;
+  background-color: #f1f1f1;
+  width: 102px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 5px 10px;
+  text-decoration: none;
+  float: center;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+ .frame{
+    padding: 8px;
+    width: 100%;
+    height: 99%;
+    box-sizing: border-box;
+    border: none;
+  }
+    /*click dropdown to my acct*/
+
+.addbusines{
+  background-color: white;
+  padding: 10px;
+  font-size: 20px;
+}
+.search-container{
+  position: absolute;
+  top: 10px;
+  left: 200px;
+  width: 50%;
+  }
+.search{
+  height: 35px;
+  width: 70%;
+  padding: 10px;
+}
+
+.busin-left{
+  height: 50px;
+}
+div.busin-right{
+  height: 520px;
+  background-color: white;
+  margin-top: 10px;
+  padding: 8px;
+  position: relative;
+}
+
+.business-selection{
+  width: 120px;
+  padding: 11px 5px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+}
+.myInput {
+  background-image: url('/Multi_business_system/picture/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 10px 20px 10px 40px;
+  border: 1px solid #c5c5c5;
+  margin-bottom: 12px;
+}
+.new{
+  padding: 10px 20px;
+  background-color: rgb(6, 80, 241);
+  color: white;
+  border: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+ 
+  padding: 20px;
+  border: 1px solid #888;
+  width: 35%;
+  height: 420px;
+  position: relative;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/*add product css
+.addpicture{
+  width: 300px;
+  height: 150px;
+}
+
+.file,.nameofproduct{
+  margin: 5px;
+  padding: 5px;
+  width: 240px;
+}
+.container1-1 input[type='file']{
+  display: none;
+}
+.labelchoosefile{
+  background-color: rgb(187, 187, 187);
+  padding: 5px 5px;
+  display: block;
+  margin: 5px;
+border-radius: 5px;
+  text-align: center;
+}
+.labelchoosefile:hover, .labelchoosefile:active{
+  background-color: rgb(180, 180, 180);
+}*/
+div.container1, div.container1-1{
+ display: inline-block;
+}
+div.container1-1{
+  position: absolute;
+  text-align: center;
+}
+.nameofproduct{
+  margin: 5px;
+  padding: 5px;
+  width: 410px;
+  font-size: 15px;
+}
+div.container1{
+  position: relative;
+ background-color: white;
+ justify-content: center;
+ align-items: center;
+ width: 380px;
+ position: absolute;
+ top: 40px;
+ left: 40px;
+}
+.upload{
+  background-color: rgb(40, 40, 206);
+  border: none;
+  color:white;
+  font-weight: bold;
+  padding: 10px 30px;
+  margin: 10px 10px;
+  border-radius: 10px;
+  margin-left: 140px;
+}
+.upload:hover{
+  background-color: rgb(64, 64, 241);
+}
+*{
+  font-family: 'Roboto', sans-serif;
+}
+
+.small{
+  font-size: 14px;
+  margin-left:0px;
+}
+.add-product{
+  font-size:25px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+.Company{
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 15px;
+  font-weight: bold;
+  left: 60px;
+}
+#moove{
+  position: absolute;
+  right: 10px;
+  top: 20px;
+}
+.List_of_product{
+  height: 450px;
+}
+.product{
+  border: 1px solid #d1d1d1;
+  height: 400px;
+  overflow-y: auto;
+}
+/*
+
+  /* Some media queries for responsiveness */
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
