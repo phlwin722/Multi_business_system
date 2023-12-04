@@ -12,13 +12,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-       <link rel="stylesheet" href="product.css">
+       <link rel="stylesheet" href="Sttings.css">
        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <title>Product</title>
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         
         <script src="product.js" defer></script>
-        <title>Product - B-MO</title>
+        <title>Setting - B-MO</title>
         <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/sts.png">
   
     </head>
@@ -281,33 +281,43 @@
                      
 
                             <!-- Button trigger modal -->   
-                         
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#deletetopproducts">
-                Delete Top Product
-                </button>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#deleteproduct">
-                Delete Product
-                </button>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#deletesale">
-                Delete Sale
-                </button>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#employee">
-                Delete Employee
-                </button>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#manager">
-                Delete manager
-                </button>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#staff">
-                Delete staff
-                </button>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#business">
-                Delete Business
-                </button>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#clear">
-                Clear All Data
-                </button>
-                           <div class="List_of_product">
-                       
+                           <table class="hiiii">
+                           <tr>
+                           
+                           <td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#deletetopproducts">
+               Delete Top Product
+               </button></td>
+                           <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#deleteproduct">
+               Delete Product
+               </button></td>
+                           <td>
+               <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#deletesale">
+               Delete Sale
+               </button></td>
+                           </tr>
+                           <tr>
+                           <td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#employee">
+               Delete Employee
+               </button></td>
+                           <td>
+               <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#manager">
+               Delete manager
+               </button></td>
+                           <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#staff">
+               Delete staff
+               </button></td>
+                           </tr>
+                           <tr>
+                           <td>
+               <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#business">
+               Delete Business
+               </button></td>
+                           <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" id="" data-bs-target="#clear">
+               Clear All Data
+               </button></td>
+                          
+                           </tr>
+                           </table>
                        
                      
                         <!-----------------------------mo dal-------------------------------------------------->
