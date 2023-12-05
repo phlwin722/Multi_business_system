@@ -166,7 +166,7 @@
                                         $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
                                          $stmt = $pdo->prepare("UPDATE owener_acct SET Last_name=?, First_name=?, Mi=?, Secret_Question=?, Ans_Sec_Question=? WHERE Username=?");
                                          $stmt->execute([$lnamee, $fnamee, $mii, $sec, $ans, $userr]);
-                                         echo'<script>alert("Successfull Edit")</script>';
+                                         echo'<script>alert("Successfull Update")</script>';
                                          echo '<script>window.location.href = "/Multi_business_system/landingpage/logout.php";</script>';
                                             
                                          exit();
