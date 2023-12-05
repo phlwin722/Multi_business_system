@@ -7,6 +7,12 @@ body{
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
 }
+td{
+  font-size: 15px;
+}
+table{
+  text-align: center;
+}
 .left{
   background-color: #1d2f92;
     width: 100%;

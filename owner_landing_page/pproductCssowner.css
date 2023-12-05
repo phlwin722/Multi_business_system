@@ -354,7 +354,12 @@ div.container1{
   }
   .customers tr:hover {background-color: #ddd;}
 /*topsale*/
-
+td{
+  font-size: 15px;
+}
+table{
+  text-align: center;
+}
 
 /*list_business*/
 .list_business{

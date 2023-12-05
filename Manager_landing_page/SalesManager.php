@@ -10,7 +10,7 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-       <link rel="stylesheet" href="saleManager.css">
+       <link rel="stylesheet" href="SaleManager.css">
        <link rel="preconnect" href="https://fonts.googleapis.com">
         <title>Sales - B-MO</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

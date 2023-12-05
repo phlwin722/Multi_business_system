@@ -8,6 +8,12 @@ body{
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
 }
+td{
+  font-size: 15px;
+}
+table{
+  text-align: center;
+}
 .left{
   background-color: #1d2f92;
     width: 100%;
@@ -478,6 +484,7 @@ ul{
   position: absolute;
   right: 5px;
   padding: 10px;
+  width: 163px;
   border: 1px solid #d1d1d1;
 }
 .topprod{

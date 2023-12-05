@@ -146,6 +146,12 @@ body{
 .busin-left{
   height: 50px;
 }
+td{
+  font-size: 15px;
+}
+table{
+  text-align: center;
+}
 div.busin-right{
   height: 520px;
   background-color: white;

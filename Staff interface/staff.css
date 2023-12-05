@@ -78,8 +78,8 @@ border-radius: 5px;
 }
 .Branchname{
     color: black;
-    font-size: 45px;
-    margin-top: 190px;
+    font-size: 30px;
+    margin-top: 199px;
     font-weight: bold;
 }
 .container-3,.container-2{
@@ -130,7 +130,7 @@ table {
 .tot{
     position: absolute;
     text-align: left;
-    bottom: 170px;
+    bottom: 145px;
     width: 96%;
 }
 

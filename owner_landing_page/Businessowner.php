@@ -64,7 +64,7 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Add Business</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="Businessownerdatabase.php" method="post">
+                    <form action="" method="post">
                             <div class="modal-body">
                                 <label for="">Name of Business</label>
                                 <input class="in" type="text" name="name_business" required>
@@ -89,7 +89,7 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Business</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="Businessownerdatabase.php" method="post">
+                    <form action="" method="post">
                             <div class="modal-body">
                                 <label for="">Name of Business</label>
                                 <input class="in" type="text" id="name_business"name="name_business" required>
@@ -116,7 +116,7 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Business</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="Businessownerdatabase.php" method="post">
+                    <form action="" method="post">
                             <div class="modal-body">
                                 <h5>Are you sure Do you want delete</h5>
                                 <input hidden id="pesoniddd" name="business_id"></input>
@@ -131,8 +131,103 @@
                 </div>
                 </div>
                    <!-- delete Modal -->
+                   <?php
+   // Validate form data
+   // insert data
+    if(isset($_POST['save'])) {
+           $name = htmlspecialchars($_POST["name_business"]);
+           $location = htmlspecialchars($_POST["location"]);
+      
+           // Database connection settings
+           $host = "localhost";
+           $dbname = "multi_bussines_system";
+           $username = "root";
+           $password = "";
+   
+           try {
+               // Create a PDO instance
+               $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+               
+               // Set the PDO error mode to exception
+               $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+   
+               // Prepare and execute the SQL query to insert data
+               $stmt = $pdo->prepare("INSERT INTO business (Business_name, location) VALUES (?, ?)");
+               $stmt->execute([$name, $location]);
+               echo '<div style="postion:absolute; top:5px; padding:10px; height:50px" class="alert alert-success" role="alert">
+               Successfull Save
+               <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+           </div>';
+           } catch (PDOException $e) {
+               echo "Error inserting data: " . $e->getMessage();
+           }
+   
+           // Close the database connection
+           $pdo = null;
+      // insert data
+   }
+    // editdata
+     if (isset($_POST['savechanges'])){
+        $businessname = htmlspecialchars($_POST['name_business']);
+        $location = htmlspecialchars($_POST['location']);   
+        $personid = htmlspecialchars($_POST['pesonidd']);
+           // Database connection settings
+           $host = "localhost";
+           $dbname = "multi_bussines_system";
+           $username = "root";
+           $password = "";
+   
+           try {
+               // Create a PDO instance
+               $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+               
+               // Set the PDO error mode to exception
+               $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $stmt = $pdo->prepare("UPDATE business SET Business_name = ? , location=? WHERE Business_ID=?");
+                $stmt->execute ([$businessname, $location,$personid]);
+                echo '<div style="postion:absolute; top:5px; padding:10px; height:50px" class="alert alert-success" role="alert">
+                                                Successfull Save Change
+                                                <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>';
+           } catch (PDOException $e) {
+               echo "Error inserting data: " . $e->getMessage();
+           }
+   
+           // Close the database connection
+           $pdo = null;
+    }
+      // editdata
 
+    //delete data
+    if (isset($_POST['delete'])){
+        $local ="localhost";
+        $username = "root";
+        $pass ="";
+          $dbnamee = "multi_bussines_system";
+
+        $business_id = htmlspecialchars($_POST["business_id"]);
+
+        try{
+            $pdo = new PDO("mysql:host=$local;dbname=$dbnamee", $username, $pass);
+            $pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = "DELETE FROM business WHERE Business_ID = :business_id";
+                $stmt = $pdo->prepare($sql);
+                $stmt->bindParam(':business_id', $business_id);
+                $stmt->execute();
+                echo '<div style="postion:absolute; top:5px; padding:10px; height:50px" class="alert alert-success" role="alert">
+                Successfull Delete
+                <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>';
+
+        }catch (PDOException $e) {
+            echo " ". $e->getMessage();
+        }
+        $pdo = null;
+    }
+ //delete data
+   ?>
       <div class="list_business"> 
+   
           <div class="card-body">
 
           

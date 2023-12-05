@@ -276,6 +276,12 @@ div.container1{
   display: flex;
   padding-top: 30px;
 }
+td{
+  font-size: 15px;
+}
+table{
+  text-align: center;
+}
 .s{
   font-size: 30px;
   color: rgb(64, 64, 241);

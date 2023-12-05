@@ -16,7 +16,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-       <link rel="stylesheet" href="staffacctmanager.css">
+       <link rel="stylesheet" href="Staffacctmanager.css">
        <link rel="preconnect" href="https://fonts.googleapis.com">
         <title>Staff - B-MO</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -97,7 +97,7 @@
           $stmt = $pdo->prepare("INSERT INTO employee ( Username, Password, Branch, Position, Last_name, First_name, Middle_name ) VALUES ( ? , ? , ? , ? , ? , ?, ?)");
         $stmt->execute([ $userrname,  $password,  $branch,  $employee_category, $lastname,  $firstname, $middle_name  ]);
                 echo '<div style="postion:absolute; top:20px; padding:5px; height:40px" class="alert alert-success" role="alert">
-                Successfull Inserted
+                Successfull Save
                 <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>';
        }
@@ -136,7 +136,7 @@
                 $stmt = $pdo->prepare("UPDATE employee SET Username= ?, Password= ? , Branch = ? ,Position = ? ,Last_name = ?,First_name= ? ,Middle_name = ?  WHERE ID=?");
                 $stmt->execute ([$usern, $passw, $branche ,$employeecategory ,$lastname , $firstname , $middle_name, $id]);
                 echo '<div style="postion:absolute; top:20px; padding:5px; height:40px" class="alert alert-success" role="alert">
-                Successfull Edit
+                Successfull Save Change
                 <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>';
            } catch (PDOException $e) {
@@ -163,7 +163,7 @@
                 $stmt = $pdo->prepare($sql);
                 $stmt->bindParam(':ID', $ID);
                 $stmt->execute();
-                echo '<div style="postion:absolute; top:20px; padding:5px; height:40px" class="alert alert-danger" role="alert">
+                echo '<div style="postion:absolute; top:20px; padding:5px; height:40px" class="alert alert-success" role="alert">
                 Successfull Delete
                 <button style="margin-left:870px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>';

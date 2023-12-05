@@ -11,7 +11,7 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/sts.png">
-        <link rel="stylesheet" href="sstaff.css">
+        <link rel="stylesheet" href="staff.css">
         <script src="staff.js" defer></script>
         <title>Cashier - B-MO</title>
          <!--------------------This is for------------------->

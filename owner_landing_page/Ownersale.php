@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="ownersale.css">
+    <link rel="stylesheet" href="Ownersale.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <title>Sales - B-MO</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -43,7 +43,7 @@
         <a href="Businessowner.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Business</a>
         <a href="product.php" target="_top" class="nav"><i class="fa-solid fa-chart-simple"></i> Products</a>
         <a href="employee.php" target="_top" class="nav"><i class="fa-solid fa-users"></i> Employee</a>
-        <a href="Settings.php" target="_top" class="nav"><i class="fa-solid fa-gear" style="color: #fcfcfc;"></i> Setting</a>
+        <a href="Settings.php" target="_top" class="nav"><i class="fa-solid fa-gear" style="color: #fcfcfc;"></i> Settings</a>
         <a href="/Multi_business_system/landingpage/logout.php" target="_top"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
     </div>
 
@@ -127,6 +127,23 @@
                 <!--------------------------------------------------------sales------------------------------------->
                 <div class="sales" id="scrollableDiv">
     <label class="topprod">Sales</label>
+    <select class="filter_product">
+                        <option value="">All </option>
+                        <!--to get data connect of business branch-->
+                        <?php
+                        $server = 'localhost';
+                        $user = 'root';
+                        $pass = '';
+                        $dbname = 'multi_bussines_system';
+
+                        $con = mysqli_connect($server, $user, $pass, $dbname);
+                        $category = mysqli_query($con, 'SELECT * FROM business');
+                        while ($c = mysqli_fetch_array($category)) {
+                        ?>
+                            <option value="<?php echo $c['Business_name'] ?>"><?php echo $c['Business_name'] ?></option>
+                        <?php }
+                        $con->close(); ?>
+                    </select>
     <table class="customers">
         <table class="table table-bordered table-hover">
             <thead>
