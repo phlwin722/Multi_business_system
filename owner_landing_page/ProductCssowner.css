@@ -367,6 +367,7 @@ div.container1{
   right: 40px;
   padding: 5px;
   border-radius: 10px;
+  overflow-y: auto;
 }
 
 /*list business*/

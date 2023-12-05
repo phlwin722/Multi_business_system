@@ -148,6 +148,7 @@ div.busin-right{
   z-index: 1; /* Sit on top */
   padding-top: 100px; /* Location of the box */
   left: 0;
+  margin-top: -3.25rem;
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */

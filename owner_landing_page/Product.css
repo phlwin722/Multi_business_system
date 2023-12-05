@@ -155,7 +155,8 @@ div.busin-right{
 }
 
 .business-selection{
-  width: 120px;
+  width: 180px;
+  font-size: 16px;
   padding: 11px 5px;
   position: absolute;
   top: 10px;

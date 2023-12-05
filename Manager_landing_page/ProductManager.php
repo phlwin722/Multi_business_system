@@ -17,7 +17,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-       <link rel="stylesheet" href="productManage.css">
+       <link rel="stylesheet" href="ProductManage.css">
        <link rel="preconnect" href="https://fonts.googleapis.com">
         <title>Product</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -101,7 +101,7 @@
                         $stmt = $pdo->prepare("INSERT INTO product (Product_name, Price, Quantity, Branch) VALUES ( ?, ?, ? ,?)");
                         $stmt->execute([ $nameproduct, $priceproduct, $quantity, $businessname]);
                         echo '<div style="postion:absolute; top:8px; padding:5px; height:40px" class="alert alert-success" role="alert">
-                        Successfull Inserted
+                        Successfull Save
                         <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>';
                     } catch (PDOException $e) {
