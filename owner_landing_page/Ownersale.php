@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="Ownersale.css">
+    <link rel="stylesheet" href="OwEnersale.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <title>Sales - B-MO</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -127,25 +127,24 @@
                 <!--------------------------------------------------------sales------------------------------------->
                 <div class="sales" id="scrollableDiv">
     <label class="topprod">Sales</label>
-    <select class="filter_product">
-                        <option value="">All </option>
-                        <!--to get data connect of business branch-->
-                        <?php
-                        $server = 'localhost';
-                        $user = 'root';
-                        $pass = '';
-                        $dbname = 'multi_bussines_system';
+    <select class="filter_sale" id="branchFilter">
+        <option value="">All</option>
+        <?php
+        $server = 'localhost';
+        $user = 'root';
+        $pass = '';
+        $dbname = 'multi_bussines_system';
 
-                        $con = mysqli_connect($server, $user, $pass, $dbname);
-                        $category = mysqli_query($con, 'SELECT * FROM business');
-                        while ($c = mysqli_fetch_array($category)) {
-                        ?>
-                            <option value="<?php echo $c['Business_name'] ?>"><?php echo $c['Business_name'] ?></option>
-                        <?php }
-                        $con->close(); ?>
-                    </select>
+        $con = mysqli_connect($server, $user, $pass, $dbname);
+        $category = mysqli_query($con, 'SELECT * FROM business');
+        while ($c = mysqli_fetch_array($category)) {
+            ?>
+            <option value="<?php echo $c['Business_name'] ?>"><?php echo $c['Business_name'] ?></option>
+        <?php }
+        $con->close(); ?>
+    </select>
     <table class="customers">
-        <table class="table table-bordered table-hover">
+        <table class="table table-bordered table-hover" id="salesTableBody">
             <thead>
                 <tr>
                     <th scope="col">Branch</th>
@@ -253,6 +252,37 @@
                             }
                         });
                     });
+
+                    //// filter salesss 
+                    
+                    $(document).ready(function () {
+    // Function to fetch sales data based on selected branch
+    function fetchSalesData(selectedBranch) {
+        $.ajax({
+            url: 'fetch_sales.php', // Update the PHP file name accordingly
+            method: 'POST',
+            data: {
+                branch: selectedBranch
+            },
+            success: function (response) {
+                $('#salesTableBody tbody').html(response);
+            }
+        });
+    }
+
+    // Event listener for the filter_sales select dropdown
+    $('.filter_sale').change(function () {
+        var selectedBranch = $(this).val();
+
+        // If the selected value is not empty, fetch and update sales data
+        if (selectedBranch !== "") {
+            fetchSalesData(selectedBranch);
+        } else {
+            // If the selected value is empty, show all sales data
+            fetchSalesData('All');
+        }
+    });
+});
                 </script>
             </div>
         </div>

@@ -483,8 +483,8 @@ ul{
 .filter_product, .filter_sale {
   position: absolute;
   right: 5px;
+  width: 200px;
   padding: 10px;
-  width: 163px;
   border: 1px solid #d1d1d1;
 }
 .topprod{
