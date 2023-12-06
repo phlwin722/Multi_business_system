@@ -144,7 +144,7 @@
                                                 $stmt = $pdo->prepare("UPDATE product SET Product_name= ?, Price= ? , Quantity = ? ,Branch = ?  WHERE Product_code=?");
                                                 $stmt->execute ([$productname, $price, $quantity ,$branch, $product]);
                                                 echo '<div style="postion:absolute; top:-5px; padding:10px; height:50px" class="alert alert-success" role="alert">
-                                                Successfull Save Change
+                                                Successfull Change
                                                 <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                             </div>';
                                             } catch (PDOException $e) {

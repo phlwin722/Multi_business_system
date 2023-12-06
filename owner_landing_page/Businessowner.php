@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-       <link rel="stylesheet" href="busnesowner.css">
+       <link rel="stylesheet" href="businesscss.css">
        <link rel="preconnect" href="https://fonts.googleapis.com">
         <title>Business - B-MO</title>
         <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/sts.png">
@@ -186,7 +186,7 @@
                 $stmt = $pdo->prepare("UPDATE business SET Business_name = ? , location=? WHERE Business_ID=?");
                 $stmt->execute ([$businessname, $location,$personid]);
                 echo '<div style="postion:absolute; top:5px; padding:10px; height:50px" class="alert alert-success" role="alert">
-                                                Successfull Save Change
+                                                Successfull Change
                                                 <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                             </div>';
            } catch (PDOException $e) {

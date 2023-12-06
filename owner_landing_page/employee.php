@@ -102,8 +102,8 @@
                                             // // Prepare and execute the SQL query to insert data
                                     $stmt = $pdo->prepare("INSERT INTO employee (Username, Password, Branch, Position, Last_name, First_name, Middle_name ) VALUES ( ? , ? , ? , ? , ? , ?, ?)");
                                     $stmt->execute([ $userrname,  $password,  $branch,  $employee_category, $lastname,  $firstname, $middle_name  ]);
-                                    echo '<div style="postion:absolute; top:50px; padding:5px; height:40px" class="alert alert-success" role="alert">
-                                    Successful Save
+                                    echo '<div style="postion:absolute; top:50px; padding:10px; height:50px" class="alert alert-success" role="alert">
+                                    Successfull Save
                                     <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>';
                                     }
@@ -139,8 +139,8 @@
                                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                     $stmt = $pdo->prepare("UPDATE employee SET Username= ?, Password= ? , Branch = ? ,Position = ? ,Last_name = ?,First_name= ? ,Middle_name = ?  WHERE ID=?");
                                     $stmt->execute ([$usern, $passw, $branche ,$employeecategory ,$lastname , $firstname , $middle_name, $id]);
-                                    echo '<div style="postion:absolute; top:50px; padding:5px; height:40px" class="alert alert-success" role="alert">
-                                    Successful Save Change
+                                    echo '<div style="postion:absolute; top:50px;  padding:10px; height:50px" class="alert alert-success" role="alert">
+                                    Successfull Change
                                     <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>';
                             } catch (PDOException $e) {
@@ -167,8 +167,8 @@
                                     $stmt = $pdo->prepare($sql);
                                     $stmt->bindParam(':ID', $ID);
                                     $stmt->execute();
-                                    echo '<div style="postion:absolute; top:50px; padding:5px; height:40px" class="alert alert-success" role="alert">
-                                    Successful delete
+                                    echo '<div style="postion:absolute; top:50px;  padding:10px; height:50px" class="alert alert-success" role="alert">
+                                    Successfull Delete
                                     <button style="position:absolute; right:10px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>';
                             }catch (PDOException $e) {
@@ -346,8 +346,8 @@
                             <th scope="col">Password</th>
                             <th scope="col">Branch</th>
                             <th scope="col">Position</th>
-                            <th scope="col">Lastname</th>
-                            <th scope="col">Firstname</th>
+                            <th scope="col">Last name</th>
+                            <th scope="col">First name</th>
                             <th scope="col">Middle initial</th>
                             <th scope="col">Action</th>
                             </tr>

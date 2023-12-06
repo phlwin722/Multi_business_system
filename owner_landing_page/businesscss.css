@@ -6,6 +6,11 @@ body{
 *{
   font-family: 'Roboto', sans-serif;
 }
+table {
+  caption-side: bottom;
+  text-align: center;
+  border-collapse: collapse;
+}
 #moove{
  position: absolute;
  right: 10px;

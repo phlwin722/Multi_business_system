@@ -15,8 +15,8 @@ if (isset($_POST['business'])) {
 
         // SQL query with WHERE clause to filter by selected business
         $query = ($selectedBusiness === 'All') 
-            ? "SELECT branch, product_name, SUM(quantity_sold) AS total_quantity_sold FROM top_product GROUP BY branch, product_name"
-            : "SELECT branch, product_name, SUM(quantity_sold) AS total_quantity_sold FROM top_product WHERE branch = :business GROUP BY branch, product_name";
+            ? "SELECT branch, product_name, SUM(quantity_sold) AS total_quantity_sold FROM top_product GROUP BY branch, product_name DESC"
+            : "SELECT branch, product_name, SUM(quantity_sold) AS total_quantity_sold FROM top_product WHERE branch = :business GROUP BY branch, product_name DESC";
 
         $statement = $pdo->prepare($query);
         if ($selectedBusiness !== 'All') {
