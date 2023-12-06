@@ -153,6 +153,7 @@ table{
   text-align: center;
 }
 div.busin-right{
+  overflow-y: auto;
   height: 520px;
   background-color: white;
   margin-top: 10px;

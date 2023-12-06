@@ -65,7 +65,7 @@
                                 $con = mysqli_connect($server, $user, $pass, $dname);
                                 $category = mysqli_query($con,"SELECT * FROM owener_acct ORDER BY Username DESC" );
                                 while ( $c = mysqli_fetch_array($category)){
-                                    echo ' <img class="picture" src="data:image/jpeg;base64,'.base64_encode($c['Image']).'"/>';
+                                    echo ' <img class="picture" src="/Multi_business_system/picture/no-image-icon-md.png"/>';
                              ?>
                              <?php } $con->close()?>
                             <h1><?php echo $fname ." ". $lname?></h1>

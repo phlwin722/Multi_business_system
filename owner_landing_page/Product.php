@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-       <link rel="stylesheet" href="Product.css">
+       <link rel="stylesheet" href="product.css">
        <link rel="preconnect" href="https://fonts.googleapis.com">
         <title>Product</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -196,7 +196,7 @@
                             <div class="modal-body">
                                   
                              <label for="" class="small">Product name  </liabel>
-                             <input type="text" name="nameproduct" id="product_name" class="nameofproduct" required placeholder="Name Product">
+                             <input type="text" name="nameproduct" id="product_name" class="nameofproduct" required placeholder="Product Name">
                                                 <br>
                            <label for="" class="small">Price </label>
                            <input type="text" name="priceproduct" id="price" class="nameofproduct" value="0.00" required placeholder="Price Product">
