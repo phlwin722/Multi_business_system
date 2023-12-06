@@ -56,8 +56,8 @@
                     <label class="choose" for="cars">Choose Secret Question:</label>
                     <select class="chose" name="choose" name="cars" id="cars">
                     <option value="First pet name">First pet name</option>
-                    <option value="First pet name">First love</option>
-                    <option value="First pet name">Mothers Maiden Name</option>
+                     <option value="First love">First love</option>
+                  <option value="Mothers Maiden Name">Mothers Maiden Name</option>
                     </select>
                     <input type="text" required name="type" class="aa" placeholder="Type here">
               
