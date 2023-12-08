@@ -5,6 +5,7 @@
 <?php 
   $fname = $_SESSION ["ffname"];
   $lname = $_SESSION ["lname"];
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -378,7 +379,14 @@
 
         </div>
       </table>
-
+      <?php
+        // this code check if session is click will be destroy and if click logout the user did not back previos page  ..
+        if (!isset ($_SESSION ["ffname"])) {
+        session_destroy ();
+        header("Cache-Control: no-store, no-cache, must-revalidate");
+        header('Location: /Multi_business_system/landingpage/landingpage.php');
+        }
+        ?>
       <!--bootstarp js-->
       <?php include('footer.php');?>
 

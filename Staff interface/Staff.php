@@ -89,7 +89,7 @@ session_start();
             <div class="total_label">Total</div>
             <input class="total_input"  type="text" id="total-price"  readonly>
             <form id="sales-form">
-            <button id="purchase-btn" class="purchase"><i class="fa-solid fa-cart-shopping" style="color: #e6e6e6;"></i> Purchase</button>
+            <button id="purchase-btn" class="purchase"><i class="fa-solid fa-cart-shopping" style="color: #e6e6e6;"></i> Submit</button>
     </form>
          </div>
         </div>

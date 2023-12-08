@@ -8,6 +8,8 @@
     $branch = $_SESSION ['branch'];
     $position =$_SESSION ['position'];
     $id = $_SESSION ['id'];
+
+   
 ?>
 
 <!DOCTYPE html>
