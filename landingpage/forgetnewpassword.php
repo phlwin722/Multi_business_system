@@ -45,7 +45,10 @@
                             $pdo->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                             $stmt = $pdo->prepare ("UPDATE owener_acct SET Password =? WHERE Username=?");
                             $stmt->execute ([$new,$user]);
-                            header ("Location: logout.php");
+                            echo'<script>alert("Successfull Update")</script>';
+                            echo '<script>window.location.href = "/Multi_business_system/landingpage/logout.php";</script>';
+                          
+                         
                          } catch (PDOException $e){
                             echo 'eeror'. $e->getMessage ();
                          }

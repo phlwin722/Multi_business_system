@@ -65,7 +65,7 @@
                                 $con = mysqli_connect($server, $user, $pass, $dname);
                                 $category = mysqli_query($con,"SELECT * FROM owener_acct ORDER BY Username DESC" );
                                 while ( $c = mysqli_fetch_array($category)){
-                                    echo ' <img class="picture" src="data:image/jpeg;base64,'.base64_encode($c['Image']).'"/>';
+                                    echo ' <img class="picture" src="/Multi_business_system/picture/no-image-icon-md.png"/>';
                              ?>
                              <?php } $con->close()?>
                             <h1><?php echo $fname ." ". $lname?></h1>
@@ -111,8 +111,8 @@
                                         <Select class="secret_questt" name="sec">
                                         <option hidden value="<?php  echo $c ['Secret_Question']?>"> <?php  echo $c ['Secret_Question']?></option>
                                             <option value="First pet name">First pet name</option>
-                                            <option value="First pet name">First love</option>
-                                            <option value="First pet name">Mothers Maiden Name</option>
+                                            <option value="First love">First love</option>
+                                            <option value="Mothers Maiden Name">Mothers Maiden Name</option>
                                         </Select>
                                         <input type="text" class="userr" name ="ans" placeholder=""  value="<?php  echo $c ['Ans_Sec_Question']?> ">
                                       
