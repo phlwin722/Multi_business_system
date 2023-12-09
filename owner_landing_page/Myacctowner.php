@@ -216,18 +216,14 @@
                             $con = mysqli_connect("localhost","root","","multi_bussines_system") or die("Could connect");
                                 $verify_username = mysqli_query($con,"SELECT * FROM owener_acct WHERE Password ='$old'");
                                 if(mysqli_num_rows( $verify_username ) == 0) {
-                                echo '<div style="postion:absolute; top:20px; padding:5px; height:40px" class="alert alert-danger" role="alert">
-                                The please check the old password
-                                <button style="margin-left:770px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">x</button>
-                            </div>';
+                                    echo'<script>alert("Please Check Old Password")</script>';
+                                 
                                         $con -> close();
                                 }else{
                                     /* this code not detect the existing id and username will be insert in database*/
                                     if ($new != $retype) {
-                                        echo '<div style="postion:absolute; top:20px; padding:5px; height:40px" class="alert alert-danger" role="alert">
-                                The new and re-type password are not same
-                                <button style="margin-left:770px" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>';
+                                        echo'<script>alert("Please Check the new password and retype password")</script>';
+                                      
                                     } else{
                                         $localhost = "localhost";
                                         $username = "root";
@@ -279,11 +275,11 @@
                 </div>
                 <?php
             // this code check if session is click will be destroy and if click logout the user did not back previos page  ..
-            if (!isset ($_SESSION ["ffname"])) {
+           /* if (!isset ($_SESSION ["ffname"])) {
             session_destroy ();
             header("Cache-Control: no-store, no-cache, must-revalidate");
             header('Location: /Multi_business_system/landingpage/landingpage.php');
-            }
+            }*/
             ?>
       <!--bootstarp js-->
       <?php include('footer.php');?>

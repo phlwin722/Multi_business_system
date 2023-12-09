@@ -13,11 +13,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <script src="https://kit.fontawesome.com/8400d4cb4c.js" crossorigin="anonymous"></script>
-<<<<<<< HEAD
+
        <link rel="stylesheet" href="Businesscss.css">
-=======
+
        <link rel="stylesheet" href="businesscss.css">
->>>>>>> 5ebfa89043f848c2e90cda733ab63bb4f90d1a6e
+
        <link rel="preconnect" href="https://fonts.googleapis.com">
         <title>Business - B-MO</title>
         <link rel="icon" type="image/x-icon" href="/Multi_business_system/picture/sts.png">
@@ -299,14 +299,14 @@
                     <!--bootstarp js-->
                     <?php include('footer.php');?>
 
-                    <?php
+                  <?php
                     
                 // this code check if session is click will be destroy and if click logout the user did not back previos page  ..
-                if (!isset($_SESSION ["ffname"])){
+               /* if (!isset($_SESSION ["ffname"])){
                     session_destroy();
                     header("Cache-Control: no-store, no-cache, must-relavidate");
                     header("Location: /Multi_business_system/landingpage/landingpage.php");
-                }
+                }*/
                     ?>
                  <script> 
                     //edit update data display modal
